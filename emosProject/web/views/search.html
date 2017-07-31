@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>E Mobile Menu Order System.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="/emos/css/style.css"> </head>
+
+<body>
+    <header id="header02"> <a href="/emos/index.html">
+        <img id="logo2" src="/emos/image/logo/logo.png"></a>
+        <div class="w3-display-right" style="margin-right:20px"> <button href="#" class="w3-button" style="border: solid 1px white; border-radius :3px" onclick="document.getElementById('id02').style.display='block'">로그인</button> <a href="#" class="w3-button w3-yellow" style="border-radius :3px">회원가입</a> </div>
+        
+                            <div id="id02" class="w3-modal">
+                        <div class="w3-modal-content w3-animate-top">
+                            <div class="w3-container"> 
+                                <span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                                
+                                
+                                
+                                
+                                <form id="login01" class="w3-display-topmiddle">
+                                    <input type="text" id="id" class="w3-display-topleft" value="아이디 입력">
+                                    
+                                    <input type="password" id="pw" class="w3-display-bottomleft"
+                                      >
+                                    
+                                    <a href="#" class="w3-button w3-display-right">로그인</a>
+                                </form>                               <div class="w3-display-bottommiddle" id="loginservice">
+                                <a href="#" class="w3-button w3-indigo">기업회원가입</a>
+                                <a href="#" class="w3-button w3-green">아이디 찾기</a>
+                                <a href="#" class="w3-button w3-teal">비밀번호 찾기</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                     
+
+    </header>
+    <section id="searchsec01">
+        <div id="searchAD">
+            <div class="w3-display-container">
+                <img class="mySlides" src="/emos/image/AD/2222.jpg" style="width:100%">
+                <img class="mySlides" src="/emos/image/AD/3333.jpg" style="width:100%">
+                <img class="mySlides" src="/emos/image/AD/4444.jpg" style="width:100%">
+
+            <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+            <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+            </div>
+
+            <script>
+                var slideIndex = 1;
+                showDivs(slideIndex);
+
+                function plusDivs(n) {
+                    showDivs(slideIndex += n);
+                }
+
+                function showDivs(n) {
+                    var i;
+                    var x = document.getElementsByClassName("mySlides");
+                    if (n > x.length) {slideIndex = 1}    
+                    if (n < 1) {slideIndex = x.length}
+                    for (i = 0; i < x.length; i++) {
+                        x[i].style.display = "none";  
+                    }
+                    x[slideIndex-1].style.display = "block";  
+                }
+            </script>
+
+            
+        
+        
+        
+        </div>
+        <div id="searchbar">
+            <div class="input-group w3-display-bottommiddle" id="search">
+                <input type="text" class="form-control" placeholder="매장이름 지역명 을 입력하세요!!">
+                <span class="input-group-btn">
+                        <a href="views/search.html" class="btn btn-default" type="button">검색</a>
+                </span>
+            </div>
+        </div>
+    </section>
+
+    
+    
+    
+    <section id="searchsec02">
+        <div class="container">
+            <p style="color : black; font-size :20px">- 검색결과 -</p>
+            <a href="detail.html">
+            <div class="w3-third w3-section">
+                <div class="w3-card-4">
+                    <img src="/emos/image/store/search/3333.jpg" style="width:100%">
+                    <div class="w3-container w3-white">
+                        <h4>waffle benatto</h4>
+                        <p>업   종 : 디저트, 요식업, 카페 <br> 
+                           주   소 : 경기도 안양시 안양 1동<br>
+                           전화번호 : 010-6635-7088<br> 
+                           대표메뉴 : 플레인 와플 셋트, 베트남 커피</p>
+                    </div>
+                </div>
+            </div>
+            </a>
+
+            <a href="detail.html">
+            <div class="w3-third w3-section">
+                <div class="w3-card-4">
+                    <img src="/emos/image/store/search/1111.jpg" style="width:100%">
+                    <div class="w3-container w3-white">
+                        <h4>Island of player</h4>
+                        <p>업   종 : 한식, 퓨전 한식 <br> 
+                           주   소 : 경기도 의왕시 청계동 백운호수로<br>
+                           전화번호 : 010-6635-7777<br> 
+                           대표메뉴 : 영계백숙 오오오오 </p>
+                    </div>
+                </div>
+            </div>
+            </a>            
+                
+            <a href="detail.html">
+            <div class="w3-third w3-section">
+                <div class="w3-card-4">
+                    <img src="/emos/image/store/search/2222.jpg" style="width:100%">
+                    <div class="w3-container w3-white">
+                        <h4>은나무 숲</h4>
+                        <p>업   종 : 카페, 디저트, 케익 <br> 
+                           주   소 : 서울시 강남구 역삼동<br>
+                           전화번호 : 010-6635-7088<br> 
+                           대표메뉴 : 아메리카노, 조각케익, 레드벨벳케익</p>
+                    </div>
+                </div>
+            </div>
+             </a>               
+                
+            <a href="detail.html">
+            <div class="w3-third w3-section">
+                <div class="w3-card-4">
+                    <img src="/emos/image/store/search/4444.jpg" style="width:100%">
+                    <div class="w3-container w3-white">
+                        <h4>kaith wonder land</h4>
+                        <p>업   종 : 디저트, 요식업, 카페 <br> 
+                           주   소 : 경기도 시흥시 정왕동 <br>
+                           전화번호 : 010-6635-7088<br> 
+                           대표메뉴 : 구슬 아이스모카, 바닐라 라떼</p>
+                    </div>
+                </div>
+            </div>
+            </a>
+            
+        </div>
+    </section>
+
+    
+    
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12"> <a href="#">개인정보 처리방침</a> | <a href="#">저작권 정책</a> | <a href="#">관련
+						사이트</a>
+                    <br>
+                    <br>
+                    <p>(34055) 경기도 안양시 동안구 호계동 전화: 010-6635-7088, 팩스: 031-123-5678</p>
+                    <p>Copyright (C) 2017 KH Information & Security Institute. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
