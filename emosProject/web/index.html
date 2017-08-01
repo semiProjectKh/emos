@@ -48,7 +48,19 @@
                 <br>order
                 <br>system </p>
         </div>
+           
+        <div id="private">
+            <div class="navbar-collapse collapse ">
+                <ul class="nav navbar-nav">
+                    <li><span class="glyphicon glyphicon-lock w3-center" aria-hidden="true" onclick="document.getElementById('id02').style.display='block'"> 로그인</span></li>
+                        
+                    <li><span class="glyphicon glyphicon-plus w3-center" aria-hidden="true"> 회원가입 </span></li>
+                </ul>
+            </div>
+        </div>
+        
     </header>
+    
     <section id="main01">
         <div class="container">
             <div class="row">
@@ -56,26 +68,27 @@
                 <div class="col-sm-4">
                     
                     <!-- Trigger/Open the Modal -->                    
-                    <button onclick="document.getElementById('id01').style.display='block'" class="w3-button">
-                        <span class="glyphicon glyphicon-cutlery w3-display-middle" aria-hidden="true" ></span>    
-                    </button>
+                    <span id="mbtn01" class="glyphicon glyphicon-cutlery w3-display-middle mainbtn" aria-hidden="true" onclick="document.getElementById('id01').style.display='block'">
+                    <p style="font-size :15px;text-align:center"><b>매장검색</b></p>
+                    
+                    
+                    </span>
 
                     <!-- The Modal -->
                     <div id="id01" class="w3-modal ">
-                        <div class="w3-modal-content w3-animate-top">
-                            <div class="w3-container "> 
+                        <div class="w3-modal-content w3-animate-opacity" style="margin-top:200px" >
+                            <div class="w3-container"> 
                                 <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                                
-                                
-                                <div class="input-group w3-display-middle" id="search">
+                                    <div class="w3-display-middle w3-center">
+                                   <img src="image/AD/3333.JPG" width="345" height="100" style="margin-bottom:10px">
+                                   <img src="image/AD/3333.JPG" width="345" height="100" style="margin-bottom:10px">
+                                    <div class="input-group" id="search">
                                     <input type="text" class="form-control" placeholder="매장이름 지역명 을 입력하세요!!">
                                     <span class="input-group-btn">
                                         <a href="views/search.html" class="btn btn-default" type="button">검색</a>
                                     </span>
                                 </div><!-- /input-group -->
-                                
-                                
-                                
+                                </div>
                             </div>
                         </div>
                     </div> 
@@ -86,27 +99,25 @@
                 <div class="col-sm-4">  
                     
                     <!-- Trigger/Open the Modal -->                    
-                    <button onclick="document.getElementById('id02').style.display='block'" class="w3-button">
-                        <span class="glyphicon glyphicon-blackboard w3-display-middle" aria-hidden="true"></span>    
-                    </button>
+                        <span class="glyphicon glyphicon-blackboard w3-display-middle mainbtn" aria-hidden="true" onclick="document.getElementById('id02').style.display='block'">
+                            
+                            <p style="font-size :15px;text-align:center"><b>싸장님오피스</b></p>
+                            
+                        </span>    
 
                     <!-- The Modal -->
                     <div id="id02" class="w3-modal">
-                        <div class="w3-modal-content w3-animate-top">
+                        <div class="w3-modal-content w3-animate-opacity">
                             <div class="w3-container"> 
                                 <span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                                
-                                
-                                
-                                
                                 <form id="login01" class="w3-display-topmiddle">
                                     <input type="text" id="id" class="w3-display-topleft" value="아이디 입력">
                                     
-                                    <input type="password" id="pw" class="w3-display-bottomleft"
-                                      >
+                                    <input type="password" id="pw" class="w3-display-bottomleft">
                                     
-                                    <a href="#" class="w3-button w3-display-right">로그인</a>
-                                </form>                               <div class="w3-display-bottommiddle" id="loginservice">
+                                    <a href="#" class="w3-button w3-display-right" onclick="submit">로그인</a>
+                                </form>                               
+                                <div class="w3-display-bottommiddle" id="loginservice">
                                 <a href="#" class="w3-button w3-indigo">기업회원가입</a>
                                 <a href="#" class="w3-button w3-green">아이디 찾기</a>
                                 <a href="#" class="w3-button w3-teal">비밀번호 찾기</a>
