@@ -36,7 +36,9 @@
 			var pw = $('#pw').val();
 			var pw2 = $('#pw2').val();
 			var phone = $('#phone').val();
-			var 
+			var email 
+			var gender = $('input:radio[name=gender]:checked').val();
+			
 			if(!pw){
 				$('#pw').css("border-color", "red");
 			} else if(!pw2){
