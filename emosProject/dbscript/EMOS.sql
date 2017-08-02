@@ -52,16 +52,18 @@ create table customer(
   constraint fk_userNum foreign key(user_num) references member(user_num)
 );
 
--- 모든 상품의 정보 저장
+-- 메뉴 정보 저장
 create table menu(
   menu_num number constraint pk_menuNum primary key,
   store_num number constraint nn_storeMenuNum not null,
-  menu_name varchar2(30) constraint nn_menuName not null,
-  price int constraint nn_menuPrice not null,
+  menu_name varchar2(60) constraint nn_menuName not null,
+  price number constraint nn_menuPrice not null,
   menu_type varchar2(30) constraint nn_menuType not null,
-  dpn number,
+  
   constraint fk_storeMenuNum foreign key(store_num) references store(store_num)
 );
+
+create sequence seq_menu_num;
 
 -- 주문상품 내역 저장
 create table order_menu(
@@ -73,6 +75,8 @@ create table order_menu(
   constraint fk_orderNum foreign key(order_num) references customer(order_num),
   constraint fk_menuNum foreign key(menu_num) references menu(menu_num)
 );
+
+
 
 -- 댓글, 상품명 평점 후기글 내역 저장
 create table reply(

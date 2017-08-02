@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>메뉴 추가</title>
+    
+</head>
+<body>
+	<div><h1 align="center">메뉴 추가</h1></div>
+    <div class=" col-xs-3">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <input id="menuname" type="text" class="form-control" name="menuname" placeholder="메뉴이름">
+    </div> 
+    <div class="col-xs-3">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <input id="price" type="number" class="form-control" name="price" placeholder="메뉴가격" value="0" step="100">
+    </div>
+    <div class=" col-xs-3">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <select class="form-control" id="sel1">
+        <option>메인메뉴</option>
+        <option>사이드메뉴</option>
+        <option>음료</option>
+      </select>
+    </div>
+    <div class=" col-xs-3">
+        <input id="menuinsert" type="button" class="btn btn-primary btn-sm" value="추가">
+    </div>
+</body>
+    
+    
+</html>
