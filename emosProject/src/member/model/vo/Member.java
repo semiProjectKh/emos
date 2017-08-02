@@ -31,6 +31,19 @@ public class Member implements java.io.Serializable {
 		this.gender = gender;
 		this.verse = verse;
 	}
+	
+
+	public Member(String userId, String phone, String userName, String userPwd, String email, Date birth,
+			String gender) {
+		super();
+		this.userId = userId;
+		this.phone = phone;
+		this.userName = userName;
+		this.userPwd = userPwd;
+		this.email = email;
+		this.birth = birth;
+		this.gender = gender;
+	}
 
 	public int getUserNum() {
 		return userNum;

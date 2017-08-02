@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "member.model.vo.Member"%> 
+<%
+	Member member = (Member)session.getAttribute("member");
+%>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +15,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="css/style.css"> </head>
-
+<script type="text/javascript">
+</script>
 <body>
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
@@ -93,28 +98,49 @@
 
                     <!-- The Modal -->
                     <div id="id02" class="w3-modal">
+                    	<% if (member == null) { %>  
                         <div class="w3-modal-content w3-animate-top">
                             <div class="w3-container"> 
                                 <span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-display-topright">&times;</span>
                                 
                                 
-                                
-                                
-                                <form id="login01" class="w3-display-topmiddle">
-                                    <input type="text" id="id" class="w3-display-topleft" value="아이디 입력">
+                               
+                            <form id="login01" class="w3-display-topmiddle" action="elogin" method="post">
+                                    <input type="text" id="id" name="id" class="w3-display-topleft" placeholder="아이디 입력">
+                               
+                                    <input type="password" id="pw" name="pw" class="w3-display-bottomleft">
                                     
-                                    <input type="password" id="pw" class="w3-display-bottomleft"
-                                      >
+                                    <!-- <a href="#" class="w3-button w3-display-right">로그인</a> -->
+                                    <input type="submit" class="w3-button w3-display-right" value="로그인" >
+                                </form>                               
                                     
-                                    <a href="#" class="w3-button w3-display-right">로그인</a>
-                                </form>                               <div class="w3-display-bottommiddle" id="loginservice">
-                                <a href="#" class="w3-button w3-indigo">기업회원가입</a>
+                                <div class="w3-display-bottommiddle" id="loginservice">
+                                <a href="/emos/views/member/enroll.jsp" class="w3-button w3-indigo">기업회원가입</a>
                                 <a href="#" class="w3-button w3-green">아이디 찾기</a>
                                 <a href="#" class="w3-button w3-teal">비밀번호 찾기</a>
                                 </div>
                             </div>
                         </div>
-                    </div>                     
+                         <% } else { %>
+                         <div class="w3-modal-content w3-animate-top">
+                            <div class="w3-container"> 
+                                <span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                               
+                   
+                                    <div style= "color : black;"><%=member.getUserId()%> 님
+                                    	
+                                    </div>
+									<a href="/emos/elogout">로그아웃</a>
+                                    	
+                                    
+                          
+                                 
+                            </div>
+                        </div>
+                        <%} %>
+                    </div> 
+                   
+                                        
                     
                     
                     
