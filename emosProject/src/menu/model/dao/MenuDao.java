@@ -13,22 +13,24 @@ public class MenuDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 
-		String query = "INSERT ALL";
+		String query = "INSERT ALL ";
 		for (int i = 0; i < list.size(); i++) {
-			if (i != list.size())
-				query += "INTO MENU VALUES(seq_menu_num.nextval, 2, ?, ?, ?),";
+			if (i != list.size()-1)
+				query += "INTO MENU VALUES ((select max(menu_num) from menu) + " + (i+1) + ", 2, ?, ?, ?) ";
 			else
-				query += "INTO MENU VALUES(seq_menu_num.nextval, 2, ?, ?, ?)";
+				query += "INTO MENU VALUES ((select max(menu_num) from menu) + " + (i+1) + ", 2, ?, ?, ?) SELECT * FROM DUAL";
 		}
+		
 		try {
-
+			
 			pstmt = con.prepareStatement(query);
-			for (int j = 0, k = 1; j < list.size(); j++) {
+			int k =1;
+			for (int j = 0; j < list.size(); j++) {
 				pstmt.setString(k++, list.get(j).getMenuName());
 				pstmt.setInt(k++, list.get(j).getPrice());
 				pstmt.setString(k++, list.get(j).getMenuType());
-				result = pstmt.executeUpdate();
 			}
+			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
