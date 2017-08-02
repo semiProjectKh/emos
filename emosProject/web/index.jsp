@@ -115,7 +115,7 @@
                                 </form>                               
                                     
                                 <div class="w3-display-bottommiddle" id="loginservice">
-                                <a href="/emos/views/member/enroll.jsp" class="w3-button w3-indigo">기업회원가입</a>
+                                <a href="/emos/views/member/enroll.html" class="w3-button w3-indigo">기업회원가입</a>
                                 <a href="#" class="w3-button w3-green">아이디 찾기</a>
                                 <a href="#" class="w3-button w3-teal">비밀번호 찾기</a>
                                 </div>

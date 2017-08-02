@@ -48,7 +48,7 @@ public class InsertMemberServlet extends HttpServlet {
 				Date birth = Date.valueOf(request.getParameter("birth"));
 				
 				Member m = new Member(userId, phone, userName, userPwd, email, birth, gender);
-				System.out.println(m);
+				
 				//3. 비즈니스로직 처리용 모델 객체 생성과 메소드 호출 
 				//리턴값 받기
 				int result = new MemberService().insertMember(m);
