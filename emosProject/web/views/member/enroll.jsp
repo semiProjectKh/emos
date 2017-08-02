@@ -31,29 +31,22 @@
 		})
 		
 		$('#checkall').click(function(){
+			var name = $('#name').val();
+			var id = $('#userid').val();
 			var pw = $('#pw').val();
 			var pw2 = $('#pw2').val();
-			alert(pw+" "+pw2);
+			var phone = $('#phone').val();
+			var 
 			if(!pw){
 				$('#pw').css("border-color", "red");
-			} else {
-				$('#pw').css("border-color", "white");
-			}
-			
-			if(!pw2){
+			} else if(!pw2){
 				$('#pw2').css("border-color", "red");
-			} else {
-				$('#pw2').css("border-color", "white");
-			}
-			
-			if(pw&&pw2&&pw===pw2){
-				$('#pw2').css("border-color", "white");
-			} else {
+			} else if(pw&&pw2&&pw !==pw2){
 				$('#pw2').css("border-color", "red");
 				$('#pw2').attr('title', '암호가 일치하지 않습니다.')
+			} else {
+				$('#test').submit();
 			}
-			
-			
 			
 		})
 		
@@ -67,18 +60,18 @@
 <body>
 	<h1 align="center">회원가입</h1>
 	<div align="center">
-	
-       <input type="text" name="username" placeholder="이름"><br>
+	<form action="../../ejoin" id="test" method="post">
+       <input type="text" name="username" id="username" placeholder="이름"><br>
        <input type="text" name="id" id="userid" placeholder="아이디"><button type="button" id="checkid">중복체크</button><br>
        <input type="password" name="pw" id="pw" placeholder="비밀번호"><br> 	
 	   <input type="password" name="pw2" id="pw2" placeholder="비밀번호 확인"><br>
-	   <input type="phone" name="phone" placeholder="핸드폰 번호"><br>
-	    <input type="email" name="email" placeholder="이메일"><br>
-	    생년월일	<input type="date" name="birth" value="생년월일"><br>
-	   <input type="radio" name="gender" value="m"> 남 <input type="radio" name="gender" value="f"> 여 <br>
-	   <input type="submit" value="가입하기" id="checkall"> &nbsp;
+	   <input type="tel" name="phone" placeholder="핸드폰 번호"><br>
+	    <input type="email" name="email" id="email" placeholder="이메일"><br>
+	    생년월일	<input type="date" name="birth" id="birth" value="생년월일"><br>
+	   <input type="radio" name="gender" class="gender" value="m"> 남 <input type="radio" name="gender" class="gender" value="f"> 여 <br>
+	   <button id="checkall">가입하기</button> &nbsp;
 	   <input type="reset" value="취소하기">
-	
+	</form>
 	</div>
 </body>
 </html>
