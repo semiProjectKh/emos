@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+	$(function(){
+		$('#checkBtn').click(function(){
+			event.preventDefault();
+			$.ajax({
+				url : "/emos/sidcheck",
+				data : {
+					storeId : $('#storeId').val()
+				},
+				type : "post",
+				dataType : "text",
+				success : function(data){
+					if(data == 1){
+						$('#checkDiv').text("사용가능한 아이디입니다.");
+						$('#storePwd').focus();
+					}else{
+						$('#checkDiv').text("이미 사용중입니다.").css("color", "red");
+						$('#storeId').select();
+					}
+				}
+			})
+		});
+		
+		//
+		$('#storePwd2').focusout(function(){
+			
+			var password1 = $('#storePwd1').val();
+			var password2 = $('#storePwd2').val();
+			
+			if(password2 == "" || password2 == null){
+				$('#checkpwd').text('필수입력');
+			}else if(password1 != password2){
+				$('#checkpwd').text('안 맞음');
+			}else if(password1 == password2){
+				$('#checkpwd').text('ㄱㄱ');
+			}
+		});
+		
+		$('#storeId').focusout(function(){
+			var value = $('#storeId').val();
+			var regex = /^[A-Za-z0-9+]{4,16}$/;
+			
+			if(value == "" || value == null){
+				$('#checkDiv').text("필수 입력").css("color", "red");
+				setInterval(function(){
+					$('#checkDiv').text('');
+				}, 5000);
+				// 필수 입력
+			}else if(!regex.test(value)){
+				// 4자리 이상 16자리 이하, 영문과 숫자만
+				$('#checkDiv').text("4자리 이상 16자리 이하, 영문과 숫자만 가능").css("color", "red");
+				setInterval(function(){
+					$('#checkDiv').text('');
+				}, 5000);
+				
+				// $('#storeId').select();
+			}else{
+				
+				// 확인
+			}
+			
+			
+			$('#storeId').focusout(function(){
+				var value = $('#storeId').val();
+				var regex = /^[A-Za-z0-9+]{4,16}$/;
+				
+				if(value == "" || value == null){
+					$('#checkDiv').text("필수 입력").css("color", "red");
+					setInterval(function(){
+						$('#checkDiv').text('');
+					}, 5000);
+					// 필수 입력
+				}else if(!regex.test(value)){
+					// 4자리 이상 16자리 이하, 영문과 숫자만
+					$('#checkDiv').text("4자리 이상 16자리 이하, 영문과 숫자만 가능").css("color", "red");
+					setInterval(function(){
+						$('#checkDiv').text('');
+					}, 5000);
+					
+					// $('#storeId').select();
+				}else{
+					
+					// 확인
+				}
+		});
+			
+		
+	});
+</script>
+
+<title>Store Resister</title>
+</head>
+<body>
+<br>
+<br>
+<br>
+<div class="container">
+	<form method="post" action="/emos/sinsert">
+		<!-- capslock 눌려있으면 자바스크립트로? -->	
+		<!-- 최대 몇 자 계산해서 더 이상 안써지게? -->
+		
+		<!-- storeNum, storeJoinDate 제외한 전부-->
+		(필수)<br>
+		<!-- ID -->
+		<input type="text" name="storeId" id="storeId" maxlength="20" autofocus="autofocus" tabindex="1" placeholder="아이디(영문 소, 대문자, 숫자 조합)" pattern="[A-Za-z0-9]{4,10}" required>
+		 &nbsp; <button type="button" id="checkBtn">중복확인</button> &nbsp; <div id="checkDiv"></div><br>
+		 
+		<!-- PASSWORD -->
+		<input type="password" name="storePwd1" id="storePwd1" maxlength="20" placeholder="비밀번호(영문 소, 대문자, 숫자 조합)" pattern="[A-Za-z0-9]{4,10}" required><br>
+		
+		<!-- PASSWORD CHECK -->
+		<input type="password" name="storePwd2" id="storePwd2" maxlength="20" placeholder="비밀번호 재확인" pattern="[A-Za-z0-9]{4,10}" required><br>
+		<div id="checkpwd"></div>
+		
+		<!-- STORE NAME -->
+		<input type="text" name="storeName" id="storeName" placeholder="상호명" required><br>
+		
+		<!-- STORE SERIAL -->
+		<input type="text" name="storeSerial" id="storeSerial" placeholder="사업자등록번호" required><br>
+		
+		<!-- CEO -->
+		<input type="text" name="ceo" id="ceo" placeholder="대표자명" required><br>
+		
+		<!-- PHONE -->
+		<input type="tel" name="phone" id="phone" placeholder="대표 전화번호" required><br>
+		
+		<!-- ADDRESS -->
+		<input type="text" id="postcode" name="postcode" placeholder="우편번호">
+		<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+		<input type="text" id="address" name="address" placeholder="주소">
+		<input type="text" id="address2" name="address2" placeholder="상세주소"><br>
+
+		<!-- CATEGORY -->
+		<select id="category" name="category">
+			<option value="피자">피자</option>
+			<option value="치킨">치킨</option>
+			<option value="분식">분식</option>
+			<option value="중국집">중국집</option>
+			<option value="양식">양식</option>
+			<option value="한식">한식</option>
+		</select><br>
+		
+		
+		<br>(선택)<br>
+		<!-- QR -->
+		<input type="text" name="qr" id="qr" placeholder="QR코드 주소?"><br>
+		
+		<!-- HOMEPAGE -->
+		<input type="url" name="homepage" id="homepage" placeholder="인터넷도메인"><br>
+		
+		<!-- STORE NOTICE -->
+		<input type="text" name="storeNotice" id="storeNotice" placeholder="공지사항"><br>
+		
+		<!-- STORE INTRO -->
+		<textarea rows="10" cols="50" name="storeIntro" id="storeIntro" placeholder="기업소개"></textarea><br>
+		
+		<!-- STORE ORIGIN INFO -->
+		<textarea rows="10" cols="50" name="storeOriginInfo" id="storeOriginInfo" placeholder="원산지정보"></textarea><br>
+		
+		<!-- STORE BUSINESSTIME -->
+		<input type="text" name="storeBusinessTime" id="storeBusinessTime" placeholder="운영시간"><br>
+		
+		<!-- STORE MIN PRICE -->
+		<input type="number" name="storeMinPrice" id="storeMinPrice" placeholder="최소주문가격" step="1000"><br>
+		
+		
+		<!-- confirm, cancel 으로 재확인 -->
+		<input type="submit" value="register" id="submitBtn">
+	</form>
+	
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- SCRIPT -->
+
+<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+<script>
+    function execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var fullAddr = ''; // 최종 주소 변수
+                var extraAddr = ''; // 조합형 주소 변수
+
+                // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    fullAddr = data.roadAddress;
+
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    fullAddr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+                if(data.userSelectedType === 'R'){
+                    //법정동명이 있을 경우 추가한다.
+                    if(data.bname !== ''){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있을 경우 추가한다.
+                    if(data.buildingName !== ''){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('postcode').value = data.zonecode;
+                document.getElementById('address').value = fullAddr;
+
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById('address2').focus();
+            }
+        }).open();
+    }
+</script>
+	
+	
+</body>
+</html>
