@@ -2,6 +2,7 @@ package menu.model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import menu.model.vo.Menu;
@@ -37,6 +38,61 @@ public class MenuDao {
 			close(pstmt);
 		}
 
+		return result;
+	}
+
+	public ArrayList<Menu> selectMenuList(Connection con, int storeNum) {
+		ArrayList<Menu> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "SELECT * FROM MENU WHERE STORE_NUM = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, storeNum);
+			rset = pstmt.executeQuery();
+			
+			if (rset != null) {
+				list = new ArrayList<Menu>();
+				while (rset.next()) {
+					Menu m = new Menu();
+					m.setMenuNum(rset.getInt("MENU_NUM"));
+					m.setStoreNum(rset.getInt("STORE_NUM"));
+					m.setMenuName(rset.getString("MENU_NAME"));
+					m.setPrice(rset.getInt("PRICE"));
+					m.setMenuType(rset.getString("MENU_TYPE"));
+					System.out.println(m.toString());
+					list.add(m);
+				}
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public int deleteMenu(Connection con, int menuNum) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "DELETE FROM MENU WHERE MENU_NUM = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, menuNum);
+			
+			result = pstmt.executeUpdate();
+			
+			System.out.println("dao result값 = " + result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
 		return result;
 	}
 

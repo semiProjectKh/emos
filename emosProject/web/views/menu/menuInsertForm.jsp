@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="menu.model.vo.Menu"%>
+
+<% Menu m = (Menu) (Menu) request.getAttribute("menu"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,8 +74,10 @@
 	<br>
 	<br>
 	<br>
-		<input type="submit" value="확인" onclick="add()">
+		<input type="submit" value="확인" class="btn btn-default">
 </form>
+<hr>
+<a href="/emos/mupview?storeNum=2" class="btn btn-default">수정/삭제</a>
 </body>
 
 
