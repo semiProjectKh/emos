@@ -130,7 +130,7 @@
                                     <div style= "color : black;"><%=member.getUserId()%> 님
                                     	
                                     </div>
-									<a href="/emos/elogout">로그아웃</a>
+									<a href="/emos/elogout">로그아웃</a> &nbsp; <a href="views/member/myinfo.jsp">내 정보</a>
                                     	
                                     
                           

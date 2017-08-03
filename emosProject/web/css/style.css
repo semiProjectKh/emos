@@ -451,7 +451,7 @@ label{
 }
 
 #genp{
-    width: 40%;
+    width: 50%;
     left: 9%;    
 }
 
@@ -465,4 +465,14 @@ label{
     border: 1px dotted black;
     overflow: auto;
     padding: 10px 100px;
+}
+
+/*
+            =====================
+            ==      mypage     ==
+            =====================
+            */
+            
+.none_li{
+	list-style-type:none;
 }

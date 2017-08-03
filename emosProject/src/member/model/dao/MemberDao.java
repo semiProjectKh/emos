@@ -27,7 +27,7 @@ public class MemberDao {
 				member = new Member();
 				member.setUserNum(rset.getInt("user_num"));
 				member.setUserId(userId);
-				member.setPhone(rset.getString("phone"));
+				member.setPhone(rset.getString("user_phone"));
 				member.setUserName(rset.getString("user_name"));
 				member.setUserPwd(userPwd);
 				member.setEmail(rset.getString("email"));
