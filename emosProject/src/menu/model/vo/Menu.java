@@ -10,13 +10,16 @@ public class Menu {
 	private double menu_height;
 	private int menu_modal;
 	private String menu_img;
+	private int menu_price;
 
 	public Menu() {
 		super();
 	}
-
+	
+	
+	
 	public Menu(String menu_name, int menu_num, int store_num, double menu_left, double menu_top, double menu_width,
-			double menu_height, int menu_modal, String menu_img) {
+			double menu_height, int menu_modal, String menu_img, int menu_price) {
 		super();
 		this.menu_name = menu_name;
 		this.menu_num = menu_num;
@@ -27,14 +30,34 @@ public class Menu {
 		this.menu_height = menu_height;
 		this.menu_modal = menu_modal;
 		this.menu_img = menu_img;
+		this.menu_price = menu_price;
 	}
-	
+
+
 	@Override
 	public String toString() {
 		return "Menu [menu_name=" + menu_name + ", menu_num=" + menu_num + ", store_num=" + store_num + ", menu_left="
 				+ menu_left + ", menu_top=" + menu_top + ", menu_width=" + menu_width + ", menu_height=" + menu_height
-				+ ", menu_modal=" + menu_modal + ", menu_img=" + menu_img + "]";
+				+ ", menu_modal=" + menu_modal + ", menu_img=" + menu_img + ", menu_price=" + menu_price + "]";
 	}
+	
+	
+	
+	
+
+
+
+	public int getMenu_price() {
+		return menu_price;
+	}
+
+
+
+	public void setMenu_price(int menu_price) {
+		this.menu_price = menu_price;
+	}
+
+
 
 	public double getMenu_height() {
 		return menu_height;
