@@ -1,0 +1,20 @@
+@CHARSET "UTF-8";
+
+        #side {
+            position: relative;
+            width: 80%;
+            height: inherit;
+            border: solid 3px green;
+        }
+        
+        img{
+            width: 100%;
+            height: auto;
+            position: absolute;
+        }
+        
+        .menu {
+            position: absolute;
+            border: solid 1px red;
+        }
+        
