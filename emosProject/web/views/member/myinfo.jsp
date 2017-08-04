@@ -49,6 +49,8 @@
 						<li>이메일 : <%=member.getEmail()%></li>
 						<li>전화번호 : <%=member.getPhone() %></li>
 						<li>생년월일 : <%= member.getBirth() %></li>
+						<li>경고횟수 : <%= member.getVerse() %></li>
+						<li>가입일 : <%= member.getEnrollDate() %></li>
 					</ul>
 					<button onclick="update();">수정</button>
 				</div>
@@ -107,8 +109,7 @@
 
 </body>
 <script type="text/javascript">
-var name = "<%=member.getUserId()%>
-	";
+var name = "<%=member.getUserId()%>";
 	$('#location').html(name + " 님 정보").css("color", "white")
 			.css("top", "20px").css("left", "60px");
 </script>

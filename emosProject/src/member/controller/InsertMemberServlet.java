@@ -44,7 +44,13 @@ public class InsertMemberServlet extends HttpServlet {
 				String userPwd = request.getParameter("pw");
 				String gender = request.getParameter("gender");
 				String email = request.getParameter("email");
-				String phone = request.getParameter("phone");
+				StringBuilder sb = new StringBuilder();
+				sb.append(request.getParameter("phonef") + "-");
+				sb.append(request.getParameter("phonem") + "-");
+				sb.append(request.getParameter("phonet"));
+				String phone = sb.toString();
+				
+				
 				Date birth = Date.valueOf(request.getParameter("birth"));
 				
 				Member m = new Member(userId, phone, userName, userPwd, email, birth, gender);

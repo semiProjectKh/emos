@@ -21,6 +21,8 @@
     function logout(){
     	location.href="/emos/elogout";
     }
+    
+
 </script>
 </head>
 
@@ -40,22 +42,24 @@
 <tr><td width="150">아이디</td>
 	<td width="450"><input type="text" name="userid" value="<%= member.getUserId() %>" readonly></td></tr>
 <tr><td>이 름</td><td><input type="text" name="name" value="<%= member.getUserName() %>" readonly></td></tr>
-<tr><td>생년월일</td><td><input type="text" name="birth" value="<%= member.getBirth()%>" readonly></td></tr>
-<tr><td>암 호</td><td><input type="password" name="userpwd" id="userpwd"></td></tr>
-<tr><td>암호확인</td><td><input type="password" name="userpwd2" id="userpwd2"></td></tr>
-<tr><td>성별</td>
-<td>
 <% if(member.getGender().equals("m")){%>
-<input type="radio" name="gender" value="m" checked> 남 <input type="radio" name="gender" value="f"> 여
-<% } else {%>
-<input type="radio" name="gender" value="m"> 남 <input type="radio" name="gender" value="f" checked> 여</td>
+<tr><td>생년월일 /성별</td><td><input type="text" name="birth" value="<%= member.getBirth()%> (남)" readonly></td></tr>
+<%} else {%>
+<tr><td>생년월일/성별 </td><td><input type="text" name="birth" value="<%= member.getBirth()%> (여)" readonly></td>
 <%} %>
 </tr>
+
+<tr><td>암 호</td><td><input type="password" name="userpwd" id="userpwd"></td></tr>
+<tr><td>암호확인</td><td><input type="password" name="userpwd2" id="userpwd2"></td></tr>
 <tr><td>이메일</td><td><input type="email" name="email" value=<%= member.getEmail() %>></td></tr>
 <tr><td>전화번호</td><td><input type="tel" name="phone" value=<%= member.getPhone() %>></td></tr>
 <tr><td colspan="2" align="center">
-	<input type="submit" value="수정하기"> &nbsp;
-	<a href="/first/mdelete?userid=<%= member.getUserId() %>">탈퇴하기</a>
-	
+	<input type="submit" class="btn btn-default" value="수정하기"> &nbsp;
+	<a href="/emos/edelete?userid=<%= member.getUserId() %>" class="btn btn-default">탈퇴하기</a>
+</td>
+</tr>
+</table>
+</form>
+
 </body>
 </html>

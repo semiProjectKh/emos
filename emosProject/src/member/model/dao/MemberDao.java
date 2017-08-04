@@ -78,14 +78,14 @@ public class MemberDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
-		String query = "update member set passwd = ?, email = ?, phone = ? where id = ?";
+		String query = "update member set user_pwd = ?, email = ?, user_phone = ? where user_id = ?";
 
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, m.getUserPwd());
 			pstmt.setString(2, m.getEmail());
-			pstmt.setString(4, m.getPhone());
-			pstmt.setString(6, m.getUserId());
+			pstmt.setString(3, m.getPhone());
+			pstmt.setString(4, m.getUserId());
 
 			result = pstmt.executeUpdate();
 
@@ -101,7 +101,7 @@ public class MemberDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
-		String query = "delete member where id = ?";
+		String query = "delete member where user_id = ?";
 
 		try {
 			pstmt = con.prepareStatement(query);

@@ -42,13 +42,7 @@ public class MemberUpdateServlet extends HttpServlet {
 				String email = request.getParameter("email");
 				String phone = request.getParameter("phone");
 				
-				StringBuilder sb = new StringBuilder();
-				sb.append(request.getParameter("post") + ",");
-				sb.append(request.getParameter("address1") + ",");
-				sb.append(request.getParameter("address2"));
-				String address = sb.toString();
-				
-				Member m = new Member(userId, userPwd, null, email, null, phone);
+				Member m = new Member(userId, phone, userPwd, email);
 				
 				//3. 비즈니스로직 처리용 모델 객체 생성과 메소드 호출 
 				//리턴값 받기
@@ -60,7 +54,7 @@ public class MemberUpdateServlet extends HttpServlet {
 					Member member = mservice.selectMember(userId, userPwd);
 					HttpSession session = request.getSession(false);
 					session.setAttribute("member", member);
-					response.sendRedirect("/first/index.jsp");
+					response.sendRedirect("/emos/index.jsp");
 				}else{//가입 실패
 					response.sendRedirect("views/member/memberError.jsp");
 				}
