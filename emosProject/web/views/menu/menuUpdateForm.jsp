@@ -29,10 +29,10 @@
 		int cnt = 1;
 		for (Menu m : list) {
 	%>
-	<div id="form<%=cnt++%>" class="menu_element_group">
-		<div id="form2" class="row div_menu_set">
+	<div id="form<%=cnt++%>" class="menu_element_group" name="1">
+		<div id="form2" class="row div_menu_set" name="2">
 			<input type="hidden" id="mNum<%=i%>" value="<%=m.getMenuNum()%>">
-			<div class=" col-xs-3">
+			<div class="col-xs-3">
 				<span class="input-group-addon"><i
 					class="glyphicon glyphicon-user"></i></span> <input id="menuname1"
 					type="text" class="form-control inMName" name="menuname<%=i%>"
@@ -66,8 +66,8 @@
 					%>
 				</select>
 			</div>
-			<div class=" col-xs-3">
-				<div>
+			<div class=" col-xs-3" name="3">
+				<div name="4">
 					<button id="up_btn<%=i%>" class="btn btn-default ubtn"
 						value=<%=m.getMenuNum()%>>수정</button>
 				</div>
@@ -105,17 +105,20 @@
 
 			})
 		})
-		$('.ubtn').click(function(){
-			console.log($(this).parent('input[type=text]').attr('name', 'menuname1').val());
+		
+		$('.ubtn').click(function(){			
+			var menuName = $(this).parent().parent().parent().children('div').children('input[type=text]').val();
 			var menuNum = $(this).val();
-			
-			
+			var menuPrice = $(this).parent().parent().parent().children('div').children('input[type=number]').val();
+			var menuType = $(this).parent().parent().parent().children('div').children('select').val();
 			$.ajax({
 				url : "mupdate",
 				type : "post",
 				data : {
-						menuNum : $(this).val(),
-						menuName : $(this).parent('#menuname1').val()
+						menuNum : menuNum,
+						menuName : menuName,
+						menuPrice : menuPrice,
+						menuType : menuType
 					},
 				dataType : "text",
 				success : function(value) {
@@ -127,7 +130,7 @@
 					console.log("실패함");
 				}
 			})	
-	})
+		})
 	</script>
 
 

@@ -78,6 +78,8 @@
 </form>
 <hr>
 <a href="/emos/mupview?storeNum=2" class="btn btn-default">수정/삭제</a>
+<hr>
+<a href="/emos/lmenuview?storeNum=2" class="btn btn-default">메뉴판</a>
 </body>
 
 

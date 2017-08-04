@@ -46,4 +46,42 @@ public class MenuService {
 		return result;
 	}
 
+	public Menu selectMenu(int menuNum) {
+		Connection con = getConnection();
+		Menu m = new MenuDao().selectMenu(con, menuNum);
+		close(con);
+		
+		return m;
+	}
+
+	public int updateMenu(Menu m) {
+		Connection con = getConnection();
+		
+		int result = new MenuDao().updateMenu(con, m);
+		
+		if (result > 0)
+			commit(con);
+		else
+			rollback(con);
+		
+		return result;
+			
+	}
+
+	public ArrayList typeList(int storeNum) {
+		Connection con = getConnection();
+		
+		ArrayList typeListArr = new MenuDao().typeList(con, storeNum);
+		
+		return typeListArr;
+	}
+
+	public ArrayList<Menu> selectMenuList(int storeNum, String mCategory) {
+		Connection con = getConnection();
+		ArrayList<Menu> list = new MenuDao().selectMenuList(con, storeNum, mCategory);
+
+		close(con);
+		return list;
+	}
+
 }

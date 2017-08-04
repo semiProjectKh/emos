@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import menu.model.service.MenuService;
+import menu.model.vo.Menu;
 
 /**
  * Servlet implementation class UpdateMenuServlet
@@ -34,13 +35,20 @@ public class UpdateMenuServlet extends HttpServlet {
 		response.setContentType("text/plain; utf-8");
 		int menuNum = Integer.parseInt(request.getParameter("menuNum"));
 		String menuName = request.getParameter("menuName");
+		int price = Integer.parseInt(request.getParameter("menuPrice"));
+		String menuType = request.getParameter("menuType");
 		
-		System.out.println(menuNum + menuName);
+		System.out.println(menuNum + menuName + price + menuType);
 		
+		/*Menu m = new MenuService().selectMenu(menuNum);
+		m.setMenuName(menuName);
+		m.setPrice(Price);
+		m.setMenuType(menuType);*/
 		
-		/*MenuService mservice = new MenuService();
+		Menu m = new Menu(menuNum, menuName, price, menuType);
 		
-		int result = new MenuService().deleteMenu(menuNum);
+		int result = new MenuService().updateMenu(m);
+		System.out.println(m.toString() + ", " + result);
 		
 		PrintWriter clientOut = response.getWriter();
 		
@@ -51,7 +59,7 @@ public class UpdateMenuServlet extends HttpServlet {
 			clientOut.append("0");
 			clientOut.flush();
 		}
-		clientOut.close();*/
+		clientOut.close();
 	}
 
 	/**
