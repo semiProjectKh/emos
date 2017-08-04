@@ -1,18 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
- <title>eMos 회원가입</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="../../css/style.css">
-
- 
    <script type="text/javascript">
 	$(function() {
 		$('#checkid').click(function(){
@@ -76,8 +68,9 @@ function myFunction(id) {
        
 </script>
 
-
 </head>
+
+
 
 <body>
 	<%@ include file="../../header.jsp" %>  
@@ -88,7 +81,7 @@ function myFunction(id) {
     <div class="tab-content">
         <ul class="nav nav-tabs" id="enrolltab">
             <li class="active"><a data-toggle="tab" href="#en1">개인회원</a></li>
-            <li><a data-toggle="tab" href="#en2">Menu 1</a></li>
+            <li><a data-toggle="tab" href="#en2">기업회원</a></li>
         </ul>
        
         <div id="en1" class="tab-pane fade in active">
@@ -99,10 +92,6 @@ function myFunction(id) {
    <input type="checkbox" value="check1">
 </span>
 
-   
-<div id="agree1" class="w3-hide w3-container">
-    <p>Some text..</p>
-</div>
 
 <span  class="w3-button w3-block w3-left-align">
    <label onclick="myFunction('agree2')" class="agreet">이용약관 동의(필수) </label> 

@@ -13,24 +13,17 @@ import javax.servlet.http.HttpSession;
 import member.model.service.MemberService;
 import member.model.vo.Member;
 
-/**
- * Servlet implementation class LoginMemberServlet
- */
 @WebServlet("/elogin")
 public class LoginMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoginMemberServlet() {
+
+	public LoginMemberServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
+
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1. 전송값에 한글이 있을 경우, 문자셋 인코딩 처리함
 				// 응답 보낼 값에도 한글이 있을 경우 인코딩 처리함
@@ -64,12 +57,7 @@ public class LoginMemberServlet extends HttpServlet {
 				}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }

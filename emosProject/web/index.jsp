@@ -52,7 +52,7 @@
             <div class="navbar-collapse collapse ">
                 <ul class="nav navbar-nav">
                     <li><span class="glyphicon glyphicon-lock w3-center" aria-hidden="true" onclick="document.getElementById('id02').style.display='block'"> 로그인</span></li>
-                    <li><span class="glyphicon glyphicon-plus w3-center" aria-hidden="true"> 회원가입 </span></li>
+                    <li><span class="glyphicon glyphicon-plus w3-center" aria-hidden="true"><a href="/emos/views/member/enroll/enroll.jsp" style="text-decoration:none"> 회원가입 </a></span></li>
                 </ul>
             </div>
         </div>
@@ -108,22 +108,21 @@
                         <div class="w3-modal-content w3-animate-opacity">
                             <div class="w3-container"> 
                                 <span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                                <form id="login01" class="w3-display-topmiddle">
+                                <form id="login01" class="w3-display-topmiddle" action="elogin" method="post">
                                     <input type="text" id="id" class="w3-display-topleft" placeholder="아이디 입력">
                                     
                                     <input type="password" id="pw" class="w3-display-bottomleft"  placeholder="비번 입력">
                                     
-                                    <a href="#" class="w3-button w3-display-right" onclick="submit">로그인</a>
+                                    <button class="w3-button w3-display-right" onclick="submit()" style="color:white;background: #0c0642;height: 60px;text-align: center;">로그인</button>
                                 </form>                               
                                 <div class="w3-display-bottommiddle" id="loginservice">
-                                <a href="#" class="w3-button w3-indigo">회원가입</a>
+                                <a href="views/member/enroll/enroll.jsp" class="w3-button w3-indigo">회원가입</a>
                                 <a href="#" class="w3-button w3-green">아이디 찾기</a>
                                 <a href="#" class="w3-button w3-teal">비밀번호 찾기</a>
                                 </div>
                             </div>
                         </div>
                     </div>                     
-                    
                     
                     
                 </div>
@@ -147,3 +146,5 @@
 </body>
 
 </html>
+
+
