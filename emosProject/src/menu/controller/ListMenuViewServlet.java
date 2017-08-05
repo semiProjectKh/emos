@@ -45,8 +45,8 @@ public class ListMenuViewServlet extends HttpServlet {
 		
 		System.out.println(mCategory);
 		
-		ArrayList<Menu> list = new MenuService().selectMenuList(storeNum, mCategory);
-		
+		ArrayList<Menu> list = new MenuService().selectMenuList(storeNum);
+		System.out.println(list);
 		
 		RequestDispatcher view = null;
 		
