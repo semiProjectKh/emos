@@ -39,20 +39,32 @@ public class ListMenuViewServlet extends HttpServlet {
 		
 		String mCategory = request.getParameter("menuType");
 		
+		if (mCategory == null) {
+			mCategory = (String) listType.get(0);
+		}
+		
+		System.out.println(mCategory);
+		
 		ArrayList<Menu> list = new MenuService().selectMenuList(storeNum, mCategory);
 		
 		
 		RequestDispatcher view = null;
 		
 		for (int i=0; i<listType.size(); i++) {
+			
 			if (listType.get(i) == null)
 				listType.remove(i);
 		}
+		
+		
+		
+		
 		
 		if (listType != null && listType.size() > 0) {
 			view = request.getRequestDispatcher("views/menu/menuOrder.jsp");
 			request.setAttribute("listType", listType);
 			request.setAttribute("list", list);
+			request.setAttribute("mCategory", mCategory);
 			
 			view.forward(request, response);
 		}
