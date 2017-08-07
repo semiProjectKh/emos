@@ -98,7 +98,7 @@ input[type=number]::-webkit-inner-spin-button {
 						
 					</tbody>
 				</table>
-			</form>
+				</form>
 			<hr>
 			<div id="totPrice">
 			
@@ -113,14 +113,14 @@ input[type=number]::-webkit-inner-spin-button {
 		var totPrice = 0;
 		var cloneTr = cart;
 		var cnt=0;
-		console.log(cloneTr.children('td:first').text());
+		
 		
 		var ii = 0;
 		var ff = false;
 		if(!$('#cartTable > tbody').has('tr').length) {
 			$('#cartTable > tbody').append(cloneTr).prop('onclick', null);
 			$('#cartTable > tbody > tr:last').append("<td><input type='number' min='1' value='1' style='width:40px'></td><td><a class='glyphicon glyphicon-remove' onclick='deleteTr(this);'></a></td>");
-			totPrice += $(this).parent().parent().children('td:even').text();
+			// totPrice += $(this).parent().parent().children('td:even').text();
 			
 		} else {
 			$('#cartTable > tbody > tr').each(function(index, element) {			
@@ -143,7 +143,16 @@ input[type=number]::-webkit-inner-spin-button {
 			}
 		}
 		
+		// 총 가격 처리하는 jquery
 		
+		totPrice();
+		/* $('#cartTable > tbody > tr').each(function(index, element) {
+			console.log($(element).children('td:eq(2) > input[type=number]').val());
+			totPrice = parseInt(totPrice) + (parseInt($(element).children('td:eq(1)').text())*$(element).children().children('input').val());
+			
+			$('#totPrice').html("총가격 : " + totPrice).attr('align','right');
+			console.log();
+		}) */
 		
 		/* if (cnt != 1) {
 			
@@ -166,13 +175,9 @@ input[type=number]::-webkit-inner-spin-button {
 	}
 	
 	function deleteTr(cartTr) {
-		var totPrice = 0;
+		var cntMenu = $('cartTable > tbody > tr > input').val();
 		$(cartTr).parent().parent().remove();
-		$('#cartTable > tbody > tr').each(function(index, element) {
-			totPrice = parseInt(totPrice) + parseInt($(element).children('td:eq(1)').text());
-			
-			$('#totPrice').html("총가격 : " + totPrice).attr('align','right');
-		})
+		totPrice;
 	}
 	
 	
@@ -189,6 +194,14 @@ input[type=number]::-webkit-inner-spin-button {
 			$('#cart').addClass('show');
 		}
 	});
+	
+	function totPrice() {
+		var totPrice = 0;
+		$('#cartTable > tbody > tr').each(function(index, element) {
+			totPrice = parseInt(totPrice) + parseInt($(element).children('td:eq(1)').text());
+			$('#totPrice').html("총가격 : " + totPrice).attr('align','right');
+		})
+	}
 </script>
 
 </html>
