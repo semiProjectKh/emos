@@ -41,7 +41,7 @@ public class InsertMemberServlet extends HttpServlet {
 				//2. 전송값 꺼내서 변수에 기록하기
 				String userName = request.getParameter("username");
 				String userId = request.getParameter("id");
-				String userPwd = request.getParameter("pw");
+				String userPwd = request.getParameter("pw1");
 				String gender = request.getParameter("gender");
 				String email = request.getParameter("email");
 				StringBuilder sb = new StringBuilder();
@@ -50,11 +50,16 @@ public class InsertMemberServlet extends HttpServlet {
 				sb.append(request.getParameter("phonet"));
 				String phone = sb.toString();
 				
+				StringBuilder sb2 = new StringBuilder();
+				sb2.append(request.getParameter("birthy") + "-");
+				sb2.append(request.getParameter("birthm") + "-");
+				sb2.append(request.getParameter("birthd"));
 				
-				Date birth = Date.valueOf(request.getParameter("birth"));
+				Date birth = Date.valueOf(sb2.toString());
 				
 				Member m = new Member(userId, phone, userName, userPwd, email, birth, gender);
 				
+				System.out.println(m);
 				//3. 비즈니스로직 처리용 모델 객체 생성과 메소드 호출 
 				//리턴값 받기
 				int result = new MemberService().insertMember(m);

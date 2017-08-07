@@ -9,72 +9,327 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="../../css/style.css">
+	<script type="text/javascript">
+	function myFunction(id) {
+		var x = document.getElementById(id);
+		if (x.className.indexOf("w3-show") == -1) {
+			x.className += " w3-show";
+			x.previousElementSibling.className = x.previousElementSibling.className
+					.replace("w3-black", "w3-red");
+		} else {
+			x.className = x.className.replace(" w3-show", "");
+			x.previousElementSibling.className = x.previousElementSibling.className
+					.replace("w3-red", "w3-black");
+		}
+	}
+	
+	function allCheckFunc( obj ) {
+		$("[name=checkone]").prop("checked", $(obj).prop("checked") );
+	}
+	
+	function oneCheckFunc( obj )
+	{
+		var allObj = $("[name=checkall]");
+		var objName = $(obj).attr("name");
 
- 
-   <script type="text/javascript">
-	$(function() {
-		$('#checkid').click(function(){
-			$.ajax({
-				url : "/web/edupid",
-				type : "post",
-				data : {userid : $('#userid').val()},
-				dataType : "text", //서블릿 서버에서 ajax 쪽으로 보내는 타입
-				success : function(data){
-					if(data === "ok"){
-					alert("사용 가능한 아이디 입니다.");
-					$('#username').focus();
-					}
-					else{
-						alert("아이디가 중복되었습니다.");
-						$('#userid').select();
-					}
-				},
-				error : function(data){
-					alert("서블릿 에러");
-				}
-			});
-		})
-		
-		$('#checkall').click(function(){
-			var name = $('#name').val();
-			var id = $('#userid').val();
-			var pw = $('#pw').val();
-			var pw2 = $('#pw2').val();
-			var phone = $('#phone').val();
-			var email 
-			var gender = $('input:radio[name=gender]:checked').val();
-			
-			if(!pw){
-				$('#pw').css("border-color", "red");
-			} else if(!pw2){
-				$('#pw2').css("border-color", "red");
-			} else if(pw&&pw2&&pw !==pw2){
-				$('#pw2').css("border-color", "red");
-				$('#pw2').attr('title', '암호가 일치하지 않습니다.')
+		if( $(obj).prop("checked") )
+		{
+			checkBoxLength = $("[name="+ objName +"]").length;
+			checkedLength = $("[name="+ objName +"]:checked").length;
+
+			if( checkBoxLength == checkedLength ) {
+				allObj.prop("checked", true);
 			} else {
-				$('#test').submit();
+				allObj.prop("checked", false);
 			}
+		}
+		else
+		{
+			allObj.prop("checked", false);
+		}
+	}
+	
+	function caps_lock(e) {
+        var keyCode = 0;
+        var shiftKey = false;
+        keyCode = e.keyCode;
+        shiftKey = e.shiftKey;
+        if (((keyCode >= 65 && keyCode <= 90) && !shiftKey)
+                || ((keyCode >= 97 && keyCode <= 122) && shiftKey)) {
+            show_caps_lock();
+            setTimeout("hide_caps_lock()", 3500);
+        } else {
+            hide_caps_lock();
+        }
+    }// caps_lock(e) close
+
+	function show_caps_lock() {
+	     $("#capslock").show();
+	}
+	
+	function hide_caps_lock() {
+	     $("#capslock").hide();
+	}
+
+	
+	function hidetext() {
+		$("#checkid").text("");
+	}
+
+	$(function() {
+		
+		var id = $('#userid').val();
+		var name = $('#username').val();
+		var pw = $('#pw1').val();
+		var pw2 = $('#pw2').val();
+		var phone1 = $('input[name=phonef]').val().lengh;
+		var phone2 = $('input[name=phonem]').val().lengh;
+		var phone3 = $('input[name=phonet]').val().lengh;
+		var phone4 = phone1 + phone2 + phone3;
+		var email = $('#email').val();
+		var birth1 = $('#birthy').val();
+		var birth2 = $('#birthm').val();
+		var birth3 = $('#birthd').val();
+		
+		$("[name=checkall]").click(function(){
+			allCheckFunc( this );
+		});
+		$("[name=checkone]").each(function(){
+			$(this).click(function(){
+				oneCheckFunc( $(this) );
+			});
+		});
+
+		
+		$('#userid').focusout(function() {
+					id = $('#userid').val();
+					var regex = /^[A-Za-z0-9+]{4,16}$/;
+					if (!id) {
+						$('#checkid').text('필수입력 사항입니다.').css("color", "red").css("font-size", "10pt");
+					} else if(!regex.test(id)){
+						// 4자리 이상 16자리 이하, 영문과 숫자만
+						$('#checkid').text("4자리 이상 16자리 이하, 영문과 숫자만 가능합니다.").css("font-size", "10pt").css("color", "red");
+					}
+					else {
+						$('#checkid').text('');
+
+						$.ajax({
+							url : "/emos/edupid",
+							type : "post",
+							data : {
+								userid : $('#userid').val()
+							},
+							dataType : "text", // 서블릿 서버에서 ajax 쪽으로 보내는 타입
+							success : function(data) {
+								if (data === "ok") {
+									$('#checkid').text("사용가능한 아이디입니다.").css(
+											"color", "blue").css("font-size",
+											"10pt");
+									setTimeout(hidetext, 2000);
+									$('#pw1').focus();
+								} else {
+									$('#checkid').css("color", "red");
+									$('#checkid').text("아이디가 중복되었습니다.").css(
+											"color", "red").css("font-size",
+											"10pt");
+									$('#userid').select();
+								}
+							},
+							error : function(data) {
+								alert("서블릿 에러");
+							}
+						});
+					}
+
+				})
+
+		$('#username').focusout(function() {
+			name = $('#username').val();
+			if (!name) {
+				$('#checkname').text("필수입력 사항입니다.").css("font-size", "10pt").css("color", "red");
+			} else {
+				$('#checkname').text("");
+			}
+		});
+
+		$('#pw1').focusout(function() {
+			pw = $('#pw1').val();
+			pw2 = $('#pw2').val();
 			
-		})
-	})
-       
-function myFunction(id) {
-    var x = document.getElementById(id);
-    if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-        x.previousElementSibling.className = 
-        x.previousElementSibling.className.replace("w3-black", "w3-red");
-    } else { 
-        x.className = x.className.replace(" w3-show", "");
-        x.previousElementSibling.className = 
-        x.previousElementSibling.className.replace("w3-red", "w3-black");
-    }
-}       
-       
-       
-</script>
+			if (!pw) {
+				$('#checkpw').text('필수입력 사항입니다.').css("color", "red").css("font-size", "10pt");
+			} else if (pw && pw2 && pw != pw2){
+				$('#checkpw2').text("암호가 일치하지 않습니다.")	.css("color", "red").css("font-size", "10pt");
+			} else {
+				$('#checkpw2').text("");
+				$('#checkpw').text("");
+			}
+		});
 
+		$('#pw2').focusout(function() {
+			pw = $('#pw1').val();
+			pw2 = $('#pw2').val();
 
+			if (!pw2) {
+				$('#checkpw2').text('필수입력 사항입니다.').css("color", "red").css("font-size", "10pt");
+			} else if (pw&&pw2 &&pw !== pw2) {
+				$('#checkpw2').text("암호가 일치하지 않습니다.")	.css("color", "red").css("font-size", "10pt");
+			} else {
+				$('#checkpw2').text("");
+			}
+
+		});
+
+		$('input[name=phonef]').focusout(function() {
+			phone1 = $('input[name=phonef]').val().length;
+			if (phone1==0 || phone1 < 3) {
+				$('#checktel').text('필수입력 사항입니다.').css("color", "red").css("font-size", "10pt");
+			} else {
+				$('#checktel').text("");
+			}
+		});
+		
+		$('input[name=phonem]').focusout(function() {
+			phone2 = $('input[name=phonem]').val().length;
+			if (phone2==0 || phone2 < 3) {
+				$('#checktel').text('필수입력 사항입니다.').css("color", "red").css("font-size", "10pt");
+			} else {
+				$('#checktel').text("");
+			}
+		});
+		
+		$('input[name=phonet]').focusout(function() {
+			phone3 = $('input[name=phonet]').val().length;
+			if (phone3==0 || phone3 < 4) {
+				$('#checktel').text('필수입력 사항입니다.').css("color", "red").css("font-size", "10pt");
+			} else {
+				$('#checktel').text("");
+			}
+		});
+
+		$('#email').focusout(function() {
+			email = $('#email').val();
+
+			if (!email) {
+				$('#checkemail').text('필수입력 사항입니다.').css("color", "red").css("font-size", "10pt");
+			} else {
+				$('#checkemail').text("");
+			}
+		});
+
+		$('#birthy').focusout(function() {
+			birth1 = $('#birthy').val();
+
+			if (!birth1) {
+				$('#checkbirth').text('필수입력 사항입니다.').css("color", "red").css("font-size", "10pt");
+			} else {
+				$('#checkbirth').text('');
+			}
+		});
+		
+		$('#birthm').focusout(function() {
+			birth2 = $('#birthm').val();
+
+			if (!birth2) {
+				$('#checkbirth').text('필수입력 사항입니다.').css("color", "red").css("font-size", "10pt");
+			} else {
+				$('#checkbirth').text('');
+			}
+		});
+		
+		$('#birthd').focusout(function() {
+			birth3 = $('#birthd').val();
+
+			if (!birth3) {
+				$('#checkbirth').text('필수입력 사항입니다.').css("color", "red").css("font-size", "10pt");
+			} else {
+				$('#checkbirth').text('');
+			}
+		});
+
+		$('#checkall').click(
+				function() {
+					var gender = $('input:radio[name=gender]:checked').val();
+					if (!$("[name=checkall]").prop("checked")){
+						alert("필수동의 항목을 체크해주세요");
+						$('[name=checkall]').focus();
+					}
+					
+					if (!gender) {
+						$('#checkgen').text('필수체크 사항입니다.').css("color", "red").css("font-size", "10pt");
+					} else {
+						$('#checkgen').text('');
+					}
+					
+					if(!name){
+						$('#username').focus();
+						$('#checkname').text('필수입력 사항입니다.').css("color", "red").css("font-size", "10pt");
+						return false;
+					}
+					
+					if(!id){
+						$('#userid').focus();
+						$('#checkid').text('필수입력 사항입니다.').css("color", "red").css("font-size", "10pt");
+						return false;
+					}
+					
+					if(!pw){
+						$('#pw1').focus();
+						$('#checkpw').text('필수입력 사항입니다.').css("color", "red").css("font-size", "10pt");
+						return false;
+					}
+					if(!pw2){
+						$('#pw2').focus();
+						$('#checkpw2').text('필수입력 사항입니다.').css("color", "red").css("font-size", "10pt");
+						return false;
+					}
+					if(!phone1){
+						$('input[name=phonef]').focus();
+						$('#checktel').text('필수입력 사항입니다.').css("color", "red").css("font-size", "10pt");
+						return false;
+					} else if (!phone2){
+						$('input[name=phonem]').focus();
+						$('#checktel').text('필수입력 사항입니다.').css("color", "red").css("font-size", "10pt");
+						return false;
+					} else if (!phone3){
+						$('input[name=phonet]').focus();
+						$('#checktel').text('필수입력 사항입니다.').css("color", "red").css("font-size", "10pt");
+						return false;
+					}
+					if(!email){
+						$('#email').focus();
+						$('#checkemail').text('필수입력 사항입니다.').css("color", "red").css("font-size", "10pt");
+						return false;
+					}
+					
+					if(!birth1){
+						$('#birthy').focus();
+						$('#checkbirth').text('필수입력 사항입니다.').css("color", "red").css("font-size", "10pt");
+						return false;
+					} else if (!birth2){
+						$('#birthm').focus();
+						$('#checkbirth').text('필수입력 사항입니다.').css("color", "red").css("font-size", "10pt");
+						return false;
+					} else if (!birth3){
+						$('#birthd').focus();
+						$('#checkbirth').text('필수입력 사항입니다.').css("color", "red").css("font-size", "10pt");
+						return false;
+					}
+		
+
+					if (name && id && pw && pw2 && phone1 && phone2  && phone3 && email && birth1 && birth2 && birth3
+							&& gender && pw === pw2 && $("[name=checkall]").prop("checked")) {
+						$('#enrolluser').submit();
+						return true;
+					} else {
+						console.log('a');
+						return false;
+					}
+				});
+
+	});
+	</script>
+	
 </head>
 
 <body>
@@ -127,7 +382,7 @@ function myFunction(id) {
             
 <span class="w3-block w3-left-align">
    <label class="agreet">&nbsp;&nbsp;&nbsp;이용약관 및 개인정보 수집 및 이용에 모두 동의합니다.</label> 
-   <input type="checkbox" value="check1">
+   <input type="checkbox" name="checkall" value="check1">
 </span>
 
    
@@ -137,7 +392,7 @@ function myFunction(id) {
 
 <span  class="w3-button w3-block w3-left-align">
    <label onclick="myFunction('agree2')" class="agreet">이용약관 동의(필수) </label> 
-   <input type="checkbox" value="check2">
+   <input type="checkbox" name="checkone" value="check2">
 </span>
 
 <div id="agree2" class="w3-hide w3-container agreement">
@@ -290,7 +545,7 @@ function myFunction(id) {
                
 <span  class="w3-button w3-block w3-left-align">
    <label class="agreet" onclick="myFunction('agree3')">개인정보 수집 및 이용 동의(필수)</label> 
-   <input type="checkbox" value="check3">
+   <input type="checkbox" name="checkone" value="check3">
 
 </span>
 <div id="agree3" class="w3-hide w3-container agreement">
@@ -344,36 +599,44 @@ function myFunction(id) {
             <hr>
             
             <p>이 름 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="text" name="username" id="username">&nbsp;
-            아이디 <input type="text" name="id" id="userid" placeholder="영문 숫자 8글자 이상">
-            <input type="button" id="checkid" value="중복체크">
+            <input type="text" name="username" id="username">&nbsp; 
+            아이디 <input type="text" name="id" id="userid" placeholder="영문 숫자 4글자 이상">
+            <div id="checkname"></div><div id="checkid"></div>
             </p>
             <p>비밀번호&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="password" name="pw1" id="pw1" placeholder="영문 숫자 8글자 이상" class="p1">
+            <input type="password" name="pw1" id="pw1" placeholder="영문 숫자 8글자 이상" class="p1" onkeypress="caps_lock(event)">
+            <div id="checkpw"></div>
+            <p id="capslock" style="position:relative; border:2px solid #003b83; width:300px; bottom:0px; display:none"> 
+    		&nbsp;<b>CapsLock</b> 키가 눌려있습니다.&nbsp;</p>
             </p>
             <p>비밀번호 확인
             <input type="password" name="pw2" id="pw2" placeholder="비밀번호 확인" class="p1">
+            <div id="checkpw2"></div>
             </p>
             <hr>
             <p>핸드폰 번호&nbsp;&nbsp;&nbsp;
             <input type="tel" name="phonef" class="phone">-
             <input type="tel" name="phonem" class="phone">-
             <input type="tel" name="phonet" class="phone">
+            <div id="checktel"></div>
             </p>
             <p>E-mail&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <input type="email" name="email" id="email" placeholder="123456@emos.com" class="p1">
+            <div id="checkemail"></div>
             </p>
             <p>
             생년월일&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <input type="number" name="birthy" id="birthy" value="생년월일" class="birth" min="1950" max="2017">
             <input type="number" name="birthm" id="birthm" value="생년월일" class="birth" min="1" max="12">
             <input type="number" name="birthd" id="birthd" value="생년월일" class="birth" min="1" max="31">
+            <div id="checkbirth"></div>
             </p>
             <p id="genp"><label>성 별</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <input type="radio" name="gender" class="gender" value="m" id="m"> 
             <label for="m">남</label>
             <input type="radio" name="gender" class="gender" value="f" id="f"> 
             <label for="f">여</label>
+            <div id="checkgen"></div>
             </p>
             <br>
             
@@ -392,18 +655,18 @@ function myFunction(id) {
                    
             <div id="en2" class="tab-pane fade">
             <form action="../../ejoin" id="enrollcompany" method="post">
-            <input type="text" name="username" id="username" placeholder="이름">
+            <input type="text" name="username" id="username1" placeholder="이름">
             <br>
-            <input type="text" name="id" id="userid" placeholder="아이디">
+            <input type="text" name="id" id="userid1" placeholder="아이디">
             <button type="button" id="checkid">중복체크</button>
             <br>
-            <input type="password" name="pw" id="pw" placeholder="비밀번호">
+            <input type="password" name="pw" id="pw3" placeholder="비밀번호">
             <br>
-            <input type="password" name="pw2" id="pw2" placeholder="비밀번호 확인">
+            <input type="password" name="pw2" id="pw4" placeholder="비밀번호 확인">
             <br>
             <input type="tel" name="phone" placeholder="핸드폰 번호">
             <br>
-            <input type="email" name="email" id="email" placeholder="이메일">
+            <input type="email" name="email" id="email1" placeholder="이메일">
             <br> 생년월일
             <input type="date" name="birth" id="birth" value="생년월일">
             <br>

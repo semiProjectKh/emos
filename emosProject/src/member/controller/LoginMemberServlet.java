@@ -40,7 +40,7 @@ public class LoginMemberServlet extends HttpServlet {
 				//2. 전송값 꺼내서 변수에 기록하기
 				String userId = request.getParameter("id");
 				String userPwd = request.getParameter("pw");
-				System.out.println(userId + ", " + userPwd);
+			
 				
 				//3. 비즈니스 로직 처리용 모델 객체 생성하고, 
 				//필요한 메소드 구동하고 처리결과 받는다.

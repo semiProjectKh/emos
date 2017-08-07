@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="css/style.css"> </head>
 <script type="text/javascript">
+
 </script>
 <body>
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -130,7 +131,7 @@
                                     <div style= "color : black;"><%=member.getUserId()%> 님
                                     	
                                     </div>
-									<a href="/emos/elogout">로그아웃</a> &nbsp; <a href="views/member/myinfo.jsp">내 정보</a>
+									<a href="/emos/elogout">로그아웃</a> &nbsp; <a href="/emos/einfo?num=1&userid=<%=member.getUserId() %>">내 정보</a>
                                     	
                                     
                           

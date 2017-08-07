@@ -1,8 +1,11 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="member.model.vo.Member"%>
+<%@ page import="member.model.vo.Member, reply.model.vo.Reply, java.util.*"%>
 <%
 	Member member = (Member) session.getAttribute("member");
+	ArrayList<Reply> reply = (ArrayList<Reply>)request.getAttribute("replylist");
+	
 %>
 
 <!DOCTYPE html>
@@ -17,7 +20,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="/emos/css/style.css">
 <script type="text/javascript">
     function logout(){
     	location.href="/emos/elogout";
@@ -26,6 +29,15 @@
     function update(){
     	location.href="/emos/views/member/update.jsp";
     }
+    
+    function detailcontent(){
+    	var userid = "<%= member.getUserId() %>";
+    	location.href="/emos/einfo?num=2&userid=" + userid
+    }
+    <%-- $(function(){
+    	var userid = "<%= member.getUserId()%>";
+    	location.replace("/emos/myreply?num=1&userid=" + userid);
+    }) --%>
     
     </script>
 </head>
@@ -76,15 +88,14 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">댓글목록</div>
 				<div class="panel-body">
-					<ul style="padding-left: 5px" class="none_li">
-						<li>이 름 : <%=member.getEmail()%></li>
-						<li>아이디 : <%=member.getEmail()%></li>
-						<li>비밀번호 : <%=member.getEmail()%></li>
-						<li>비밀번호 확인 : </li>
-						<li>전화번호 : <%=member.getEmail()%></li>
-						<li></li>
+					
+					<ul style="padding-left: 5px" class="none_li" id="f">
+						<% for(Reply r : reply) {%>
+						<li><%= r.getContent() %></li>
+						<%} %>
 					</ul>
-					<button>상세보기</button>
+					
+					<button onclick="detailcontent();">상세보기</button>
 				</div>
 			</div>
 		</div>
