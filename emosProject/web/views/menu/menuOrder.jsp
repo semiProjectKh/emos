@@ -20,6 +20,13 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>메뉴판</title>
+<style>  
+
+input[type=number]::-webkit-inner-spin-button {
+    opacity: 1;
+}
+
+</style>
 
 </head>
 <body>
@@ -49,7 +56,7 @@
     			<tbody>
     			<% for (int i=0; i<list.size(); i++) { %>
     				<% if (listType.get(0).equals(list.get(i).getMenuType())) { %>
-      					<tr> 
+      					<tr onclick="throwinCartEvent($(this).clone().attr('onclick', ''))"> 
         					<td><%= list.get(i).getMenuName() %></td>
         					<td><%= list.get(i).getPrice() %></td>
       					</tr>
@@ -70,8 +77,8 @@
     					<tbody>
  						<% for (int j=0; j<list.size(); j++) { %>
  							<% if (listType.get(i).equals(list.get(j).getMenuType())) { %>
-      							<tr> 
-        							<td><%= list.get(j).getMenuName() %></td>
+      							<tr onclick="throwinCartEvent($(this).clone().attr('onclick', ''))"> 
+        							<td value="<%= list.get(j).getMenuName() %>" ><%= list.get(j).getMenuName() %></td>
         							<td><%= list.get(j).getPrice() %></td>
       							</tr>
       						<% } %>
@@ -85,16 +92,89 @@
   </div>
   <div><button id="asa">aa</button></div>
 <div id="cart" class="col-sm-4 hide">
-			<form>
-				<h1>안녕 나는 장바구니라고해</h1>
+			<form id="cart_form">
+				<table id="cartTable" class="table table-bordered">
+					<tbody>
+						
+					</tbody>
+				</table>
 			</form>
+			<hr>
+			<div id="totPrice">
+			
+			</div>
 		</div>
 	</div>
 </body>
 <script>
-	$(function(){
+
+	
+	function throwinCartEvent(cart) {
+		var totPrice = 0;
+		var cloneTr = cart;
+		var cnt=0;
+		console.log(cloneTr.children('td:first').text());
 		
-	});
+		var ii = 0;
+		var ff = false;
+		if(!$('#cartTable > tbody').has('tr').length) {
+			$('#cartTable > tbody').append(cloneTr).prop('onclick', null);
+			$('#cartTable > tbody > tr:last').append("<td><input type='number' min='1' value='1' style='width:40px'></td><td><a class='glyphicon glyphicon-remove' onclick='deleteTr(this);'></a></td>");
+			totPrice += $(this).parent().parent().children('td:even').text();
+			
+		} else {
+			$('#cartTable > tbody > tr').each(function(index, element) {			
+				if($(element).children('td:eq(0)').text() == cloneTr.children('td:first').text()) {
+					ff = true;
+					ii = index;
+					return false;		
+				}
+				
+					
+				
+			})
+			if (!ff) {
+				$('#cartTable > tbody').append(cloneTr).prop('onclick', null);
+				$('#cartTable > tbody > tr:last').append("<td><input type='number' min='1' value='1' style='width:40px'></td><td><a class='glyphicon glyphicon-remove' onclick='deleteTr(this);'></a></td>");
+				totPrice += $(this).parent().parent().children('td:even').text();
+			} else {
+				var pp = $('#cartTable > tbody').children('tr').eq(ii).children('td').children('input');
+				pp.val(parseInt(pp.val())+1);
+			}
+		}
+		
+		
+		
+		/* if (cnt != 1) {
+			
+			$('#cartTable > tbody').append(cloneTr).prop('onclick', null);
+			$('#cartTable > tbody > tr:last').append("<td><input type='number' min='1' value='1' style='width:40px'></td><td><a class='glyphicon glyphicon-remove' onclick='deleteTr(this);'></a></td>");
+			totPrice += $(this).parent().parent().children('td:even').text();
+			cnt++;
+		}
+		else {
+			(this).children(1).val()
+		}
+		$('#cartTable > tbody > tr').each(function(index, element) {
+			totPrice = parseInt(totPrice) + parseInt($(element).children('td:eq(1)').text());
+			$('#totPrice').html("총가격 : " + totPrice).attr('align','right');
+		}) */
+		
+		
+		
+		
+	}
+	
+	function deleteTr(cartTr) {
+		var totPrice = 0;
+		$(cartTr).parent().parent().remove();
+		$('#cartTable > tbody > tr').each(function(index, element) {
+			totPrice = parseInt(totPrice) + parseInt($(element).children('td:eq(1)').text());
+			
+			$('#totPrice').html("총가격 : " + totPrice).attr('align','right');
+		})
+	}
+	
 	
 	$('#asa').click(function(){
 		if($('#cart').hasClass('show')) {
