@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="reply.model.vo.Reply, java.util.*, java.sql.Date"%>
 <%
+	// dd
 	ArrayList<Reply> list = (ArrayList<Reply>) request.getAttribute("list");
 		
 	int listCount = ((Integer)request.getAttribute("listCount")).intValue();
