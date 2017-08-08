@@ -5,6 +5,7 @@
 
 <%
 	Member member = (Member) session.getAttribute("member");
+	member = new Member();
 %>    
     
 <!DOCTYPE html>
@@ -19,6 +20,8 @@
     	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     	<link rel="stylesheet" href="css/style.css"> 
     </head>
+    
+    
 
 <body>
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -62,7 +65,9 @@
                     <li><span class="glyphicon glyphicon-lock w3-center" aria-hidden="true" onclick="document.getElementById('id02').style.display='block'"> 로그인</span></li>
                     <li><span class="glyphicon glyphicon-plus w3-center" aria-hidden="true"><a href="/emos/views/member/enroll/enroll.jsp" style="text-decoration:none"> 회원가입 </a></span></li>
                 <%}else{ %>
-                    <li><span class="glyphicon glyphicon-home" aria-hidden="true" onclick=""style="width:200px;"> 마이페이지</span></li>
+                
+                    <li><span class="glyphicon glyphicon-home" aria-hidden="true" onclick=""style="width:150px;"><a href="/emos/einfo?num=1&userid=<%=member.getUserId() %>" style="text-decoration:none"> 마이페이지</a></span></li>
+                    <li><span class="glyphicon glyphicon-remove-circle" aria-hidden="true" onclick=""><a href="/emos/elogout" style="text-decoration:none"> 로그아웃</span></li>
                 <%} %>
                 </ul>
             </div>
