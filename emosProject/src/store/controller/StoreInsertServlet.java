@@ -39,17 +39,20 @@ public class StoreInsertServlet extends HttpServlet {
 		
 		String storeId = request.getParameter("storeId");
 		String storePwd = request.getParameter("storePwd1");
-		
 		String storeName = request.getParameter("storeName");
 		String storeSerial = request.getParameter("storeSerial");
 		String ceo = request.getParameter("ceo");
 		String phone = request.getParameter("phone");
-		String address = request.getParameter("address");
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(request.getParameter("postcode") + ", ");
+		sb.append(request.getParameter("address") + ", ");
+		sb.append(request.getParameter("address2"));
+		String address = sb.toString();
+		
 		
 		String category = request.getParameter("category");
-		
 		String qr = request.getParameter("qr");
-		String map = request.getParameter("map");
 		String homepage = request.getParameter("homepage");
 		
 		String storeNotice = request.getParameter("storeNotice");
@@ -58,13 +61,9 @@ public class StoreInsertServlet extends HttpServlet {
 		String storeBusinessTime = request.getParameter("storeBusinessTime");
 		int storeMinPrice = Integer.parseInt(request.getParameter("storeMinPrice"));
 		
-//		StringBuilder sb = new StringBuilder();
-//		sb.append(request.getParameter("post") + ", ");
-//		sb.append(request.getParameter("address1") + ", ");
-//		sb.append(request.getParameter("address2"));
-//		String address = sb.toString();
+
 		
-		Store store = new Store(storeId, storePwd, storeName, phone, category, ceo, address, qr, map, storeSerial, homepage, storeIntro, storeOriginInfo, storeNotice, storeBusinessTime, storeMinPrice);
+		Store store = new Store(storeId, storePwd, storeName, phone, category, ceo, address, qr, storeSerial, homepage, storeIntro, storeOriginInfo, storeNotice, storeBusinessTime, storeMinPrice);
 		
 		int result = new StoreService().insertStore(store);
 		

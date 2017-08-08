@@ -207,7 +207,7 @@ section {
     height: 27px;
 }
 
-#login01 a {
+#login01 button{
     background: #0c0642;
     height: 60px;
     text-align: center;
@@ -389,8 +389,6 @@ footer {
             */
 
 
-
-
 #enrolltab li{
     width: 50%;
 }
@@ -401,6 +399,7 @@ footer {
     border-radius: 5px;
     height: 35px;
 }
+
 
 .p1{
     width: 53%
@@ -425,11 +424,12 @@ footer {
     padding-top: 30px;
 }
 
-#checkall{
+#checkall,#register{
     width: 30%;
     background: blue;
     color: white
 }
+
 
 #enrollcancle{
     width: 30%;
@@ -442,7 +442,7 @@ p{
 }
 
 .gender{
-    width: 15px
+    width: 15px;
 }
 
 label{
@@ -466,3 +466,27 @@ label{
     overflow: auto;
     padding: 10px 100px;
 }
+
+#enrollstore input{
+    margin: 10px;
+    border-radius: 5px;
+    height: 35px;
+}
+
+#storeName{
+    width:17%;
+}
+
+#ceo{
+        width:17%;
+}
+
+#category{
+    margin: 10px;
+    border-radius: 5px;
+    height: 35px;
+    width: 100px;
+}
+
+#qr{width: 40%;}
+#homepage,#storeNotice{width: 52%;}

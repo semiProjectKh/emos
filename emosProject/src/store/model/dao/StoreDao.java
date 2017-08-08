@@ -38,7 +38,6 @@ public class StoreDao {
 //					s.setCeo(rset.getString("CEO"));
 					s.setAddress(rset.getString("ADDRESS"));
 					s.setQr(rset.getString("QR"));
-//					s.setMap(rset.getString("MAP"));
 //					s.setStoreSerial(rset.getString("STORE_SERIAL"));
 //					s.setHomepage(rset.getString("HOMEPAGE"));
 //					s.setStoreIntro(rset.getString("STORE_INTRO"));
@@ -86,7 +85,6 @@ public class StoreDao {
 //					s.setCeo(rset.getString("CEO"));
 					s.setAddress(rset.getString("ADDRESS"));
 					s.setQr(rset.getString("QR"));
-//					s.setMap(rset.getString("MAP"));
 //					s.setStoreSerial(rset.getString("STORE_SERIAL"));
 //					s.setHomepage(rset.getString("HOMEPAGE"));
 //					s.setStoreIntro(rset.getString("STORE_INTRO"));
@@ -132,7 +130,6 @@ public class StoreDao {
 					store.setCeo(rset.getString("CEO"));
 					store.setAddress(rset.getString("ADDRESS"));
 					store.setQr(rset.getString("QR"));
-					store.setMap(rset.getString("MAP"));
 					store.setStoreSerial(rset.getString("STORE_SERIAL"));
 					store.setHomepage(rset.getString("HOMEPAGE"));
 					store.setStoreIntro(rset.getString("STORE_INTRO"));
@@ -176,7 +173,6 @@ public class StoreDao {
 					store.setCeo(rset.getString("CEO"));
 					store.setAddress(rset.getString("ADDRESS"));
 					store.setQr(rset.getString("QR"));
-					store.setMap(rset.getString("MAP"));
 					store.setStoreSerial(rset.getString("STORE_SERIAL"));
 					store.setHomepage(rset.getString("HOMEPAGE"));
 					store.setStoreIntro(rset.getString("STORE_INTRO"));
@@ -199,7 +195,7 @@ public class StoreDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
-		String query = "INSERT INTO STORE VALUES(?, ?, (SELECT MAX(STORE_NUM) FROM STORE) + 1, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, SYSDATE, ?, ?)";
+		String query = "INSERT INTO STORE VALUES(?, ?, (SELECT MAX(STORE_NUM) FROM STORE) + 1, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, SYSDATE, ?, ?)";
 
 		try {
 			pstmt = con.prepareStatement(query);
@@ -211,15 +207,14 @@ public class StoreDao {
 			pstmt.setString(6, s.getCeo());
 			pstmt.setString(7, s.getAddress());
 			pstmt.setString(8, s.getQr());
-			pstmt.setString(9, s.getMap());
-			pstmt.setString(10, s.getStoreSerial());
-			pstmt.setString(11, s.getHomepage());
-			pstmt.setString(12, s.getStoreIntro());
-			pstmt.setString(13, s.getStoreOriginInfo());
-			pstmt.setString(14, s.getStoreNotice());
-//			pstmt.setDate(15, s.getStoreJoinDate());
-			pstmt.setString(15, s.getStoreBusinessTime());
-			pstmt.setInt(16, s.getStoreMinPrice());
+			pstmt.setString(9, s.getStoreSerial());
+			pstmt.setString(10, s.getHomepage());
+			pstmt.setString(11, s.getStoreIntro());
+			pstmt.setString(12, s.getStoreOriginInfo());
+			pstmt.setString(13, s.getStoreNotice());
+//			pstmt.setDate(14, s.getStoreJoinDate());
+			pstmt.setString(14, s.getStoreBusinessTime());
+			pstmt.setInt(15, s.getStoreMinPrice());
 
 			result = pstmt.executeUpdate();
 
@@ -257,7 +252,7 @@ public class StoreDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
-		String query = "UPDATE STORE SET STORE_NAME = ?, STORE_SERIAL = ?, CEO = ?, PHONE = ?, ADDRESS = ?, CATEGORY = ?, MAP = ?, QR = ?, HOMEPAGE = ?, STORE_NOTICE = ?, STORE_INTRO = ?, STORE_ORIGIN_INFO = ?, STORE_BUSINESS_TIME = ?, STORE_MIN_PRICE = ? WHERE STORE_ID = ?";
+		String query = "UPDATE STORE SET STORE_NAME = ?, STORE_SERIAL = ?, CEO = ?, PHONE = ?, ADDRESS = ?, CATEGORY = ?, QR = ?, HOMEPAGE = ?, STORE_NOTICE = ?, STORE_INTRO = ?, STORE_ORIGIN_INFO = ?, STORE_BUSINESS_TIME = ?, STORE_MIN_PRICE = ? WHERE STORE_ID = ?";
 
 		try {
 			pstmt = con.prepareStatement(query);
@@ -269,15 +264,14 @@ public class StoreDao {
 			pstmt.setString(4, s.getPhone());
 			pstmt.setString(5, s.getAddress());
 			pstmt.setString(6, s.getCategory());
-			pstmt.setString(7, s.getMap());
-			pstmt.setString(8, s.getQr());
-			pstmt.setString(9, s.getHomepage());
-			pstmt.setString(10, s.getStoreNotice());
-			pstmt.setString(11, s.getStoreIntro());
-			pstmt.setString(12, s.getStoreOriginInfo());
-			pstmt.setString(13, s.getStoreBusinessTime());
-			pstmt.setInt(14, s.getStoreMinPrice());
-			pstmt.setString(15, s.getStoreId());
+			pstmt.setString(9, s.getQr());
+			pstmt.setString(10, s.getHomepage());
+			pstmt.setString(11, s.getStoreNotice());
+			pstmt.setString(12, s.getStoreIntro());
+			pstmt.setString(13, s.getStoreOriginInfo());
+			pstmt.setString(14, s.getStoreBusinessTime());
+			pstmt.setInt(15, s.getStoreMinPrice());
+			pstmt.setString(16, s.getStoreId());
 			
 			
 //			pstmt.setDate(15, s.getStoreJoinDate());
@@ -319,7 +313,6 @@ public class StoreDao {
 //					s.setCeo(rset.getString("CEO"));
 					s.setAddress(rset.getString("ADDRESS"));
 					s.setQr(rset.getString("QR"));
-//					s.setMap(rset.getString("MAP"));
 //					s.setStoreSerial(rset.getString("STORE_SERIAL"));
 //					s.setHomepage(rset.getString("HOMEPAGE"));
 //					s.setStoreIntro(rset.getString("STORE_INTRO"));
@@ -338,6 +331,33 @@ public class StoreDao {
 		}
 
 		return list;
+	}
+
+	public String idCheck(Connection con, String storeId) {
+		String result = " ";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "SELECT STORE_ID FROM STORE WHERE STORE_ID = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, storeId);
+			
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getString("STORE_ID");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 	

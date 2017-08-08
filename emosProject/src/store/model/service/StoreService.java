@@ -5,11 +5,6 @@ import static common.JDBCTemplate.commit;
 import static common.JDBCTemplate.getConnection;
 import static common.JDBCTemplate.rollback;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -107,40 +102,11 @@ public class StoreService {
 		close(con);
 		return list;
 	}
-	
-	public String addressConvert() {
-        String clientId = "c9peV05tyKffEh9bvxes";
-        String clientSecret = "VNUaAgdsfl";
-        StringBuffer response = null;
-        try {
-            String addr = URLEncoder.encode("불정로 6", "UTF-8");
-            String apiURL = "https://openapi.naver.com/v1/map/geocode?query=" + addr; //json
-            //String apiURL = "https://openapi.naver.com/v1/map/geocode.xml?query=" + addr; // xml
-            URL url = new URL(apiURL);
-            HttpURLConnection con = (HttpURLConnection)url.openConnection();
-            con.setRequestMethod("GET");
-            con.setRequestProperty("X-Naver-Client-Id", clientId);
-            con.setRequestProperty("X-Naver-Client-Secret", clientSecret);
-            int responseCode = con.getResponseCode();
-            BufferedReader br;
-            if(responseCode == 200) { // 정상 호출
-                br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            } else {  // 에러 발생
-                br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
-            }
-            String inputLine;
-            response = new StringBuffer();
-            while ((inputLine = br.readLine()) != null) {
-                response.append(inputLine);
-            }
-            br.close();
-            
-            
-            
-        } catch (Exception e) {
-        	e.getStackTrace();
-        }
-        
-        return response.toString();
-    }
+
+	public String idCheck(String storeId) {
+		Connection con = getConnection();
+		String result = new StoreDao().idCheck(con, storeId);
+		close(con);
+		return result;
+	}
 }

@@ -9,14 +9,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="/web/css/style.css">
+    <link rel="stylesheet" href="/emos/css/style.css">
 
  
    <script type="text/javascript">
 	$(function() {
 		$('#checkid').click(function(){
 			$.ajax({
-				url : "/web/edupid",
+				url : "/emos/edupid",
 				type : "post",
 				data : {userid : $('#userid').val()},
 				dataType : "text", //서블릿 서버에서 ajax 쪽으로 보내는 타입
@@ -79,8 +79,8 @@ function myFunction(id) {
 </head>
 
 <body>
-    <header id="header02"> <a href="/web/index.html">
-        <img id="logo2" src="/web/image/logo/logo.png"></a>
+    <header id="header02"> <a href="/emos/index.html">
+        <img id="logo2" src="/emos/image/logo/logo.png"></a>
         <div class="w3-display-right" style="margin-right:20px"> <button href="#" class="w3-button" style="color:white;border: solid 1px white; border-radius :3px" onclick="document.getElementById('id02').style.display='block'">로그인</button> <a href="#" class="w3-button w3-yellow" style="border-radius :3px">회원가입</a> </div>
         
                             <div id="id02" class="w3-modal">

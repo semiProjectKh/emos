@@ -1,8 +1,9 @@
 package store.model.vo;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Store {
+public class Store implements Serializable{
 	private String storeId;
 	private String storePwd;
 	private int storeNum;
@@ -12,7 +13,6 @@ public class Store {
 	private String ceo;
 	private String address;
 	private String qr;
-	private String map;
 	private String storeSerial;
 	private String homepage;
 	private String storeIntro;
@@ -27,7 +27,7 @@ public class Store {
 
 
 	public Store(String storeId, String storePwd, int storeNum, String storeName, String phone, String category,
-			String ceo, String address, String qr, String map, String storeSerial, String homepage, String storeIntro,
+			String ceo, String address, String qr, String storeSerial, String homepage, String storeIntro,
 			String storeOriginInfo, String storeNotice, Date storeJoinDate, String storeBusinessTime,
 			int storeMinPrice) {
 		super();
@@ -40,7 +40,6 @@ public class Store {
 		this.ceo = ceo;
 		this.address = address;
 		this.qr = qr;
-		this.map = map;
 		this.storeSerial = storeSerial;
 		this.homepage = homepage;
 		this.storeIntro = storeIntro;
@@ -55,7 +54,7 @@ public class Store {
 
 
 	public Store(String storeId, String storePwd, String storeName, String phone, String category, String ceo,
-			String address, String qr, String map, String storeSerial, String homepage, String storeIntro,
+			String address, String qr, String storeSerial, String homepage, String storeIntro,
 			String storeOriginInfo, String storeNotice, String storeBusinessTime, int storeMinPrice) {
 		super();
 		this.storeId = storeId;
@@ -66,7 +65,6 @@ public class Store {
 		this.ceo = ceo;
 		this.address = address;
 		this.qr = qr;
-		this.map = map;
 		this.storeSerial = storeSerial;
 		this.homepage = homepage;
 		this.storeIntro = storeIntro;
@@ -77,7 +75,7 @@ public class Store {
 	}
 	
 	public Store(String storeId, String storeName, String phone, String category, String ceo,
-			String address, String qr, String map, String storeSerial, String homepage, String storeIntro,
+			String address, String qr, String storeSerial, String homepage, String storeIntro,
 			String storeOriginInfo, String storeNotice, String storeBusinessTime, int storeMinPrice) {
 		super();
 		this.storeId = storeId;
@@ -87,7 +85,6 @@ public class Store {
 		this.ceo = ceo;
 		this.address = address;
 		this.qr = qr;
-		this.map = map;
 		this.storeSerial = storeSerial;
 		this.homepage = homepage;
 		this.storeIntro = storeIntro;
@@ -188,16 +185,6 @@ public class Store {
 	}
 
 
-	public String getMap() {
-		return map;
-	}
-
-
-	public void setMap(String map) {
-		this.map = map;
-	}
-
-
 	public String getStoreSerial() {
 		return storeSerial;
 	}
@@ -282,7 +269,7 @@ public class Store {
 	public String toString() {
 		return "Store [storeId=" + storeId + ", storePwd=" + storePwd + ", storeNum=" + storeNum + ", storeName="
 				+ storeName + ", phone=" + phone + ", category=" + category + ", ceo=" + ceo + ", address=" + address
-				+ ", qr=" + qr + ", map=" + map + ", storeSerial=" + storeSerial + ", homepage=" + homepage
+				+ ", qr=" + qr + ", storeSerial=" + storeSerial + ", homepage=" + homepage
 				+ ", storeIntro=" + storeIntro + ", storeOriginInfo=" + storeOriginInfo + ", storeNotice=" + storeNotice
 				+ ", storeJoinDate=" + storeJoinDate + ", storeBusinessTime=" + storeBusinessTime + ", storeMinPrice="
 				+ storeMinPrice + "]";
