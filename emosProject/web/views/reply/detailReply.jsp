@@ -15,7 +15,7 @@
 	<h1>내 댓글 상세보기</h1>
 	<ul>
 	<% for(Reply r : reply) {%>
-	<li></li>
+	<li><%= r.getContent() %> <%= r.getGood() %> <%= r.getReplyDate() %><%= r.getPoint() %></li>
 	<%} %>
 	</ul>
 </body>

@@ -43,8 +43,8 @@
 </head>
 <body>
 	<header id="header02">
-		<a href="../../index.jsp"> <img id="logo2"
-			src="../../image/logo/logo.png"></a> <label id="location"></label>
+		<a href="/emos/index.jsp"> <img id="logo2"
+			src="/emos/image/logo/logo.png"></a> <label id="location"></label>
 		<div class="w3-display-right" style="margin-right: 20px">
 			<button class="w3-button"
 				style="color: white; border: solid 1px white; border-radius: 3px"
@@ -78,7 +78,7 @@
 						<li>전화 : <%=member.getEmail()%></li>
 						<li>이메일 : <%=member.getEmail()%></li>
 					</ul>
-					<button>수정</button>
+					<button>더 보기</button>
 				</div>
 			</div>
 		</div>
@@ -95,7 +95,7 @@
 						<%} %>
 					</ul>
 					
-					<button onclick="detailcontent();">상세보기</button>
+					<button onclick="detailcontent();">더 보기</button>
 				</div>
 			</div>
 		</div>

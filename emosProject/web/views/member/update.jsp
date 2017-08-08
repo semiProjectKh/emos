@@ -18,10 +18,71 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="../../css/style.css">
 <script type="text/javascript">
+    
     function logout(){
     	location.href="/emos/elogout";
     }
     
+    var pw = $('#pw1').val();
+    var pw2 = $('#pw2').val();
+   
+    $(function(){
+    	
+    	$('#pw1').focusout(function() {
+			pw = $('#pw1').val();
+			pw2 = $('#pw2').val();
+			
+			if (!pw) {
+				$('#checkpw').text('필수입력 사항입니다.').css("color", "red").css("font-size", "10pt");
+			} else if (pw && pw2 && pw !== pw2){
+				$('#checkpw2').text("암호가 일치하지 않습니다.")	.css("color", "red").css("font-size", "10pt");
+			} else {
+				$('#checkpw2').text("");
+				$('#checkpw').text("");
+			} 
+			
+				
+		});
+
+		$('#pw2').focusout(function() {
+			pw = $('#pw1').val();
+			pw2 = $('#pw2').val();
+
+			if (!pw2) {
+				$('#checkpw2').text('필수입력 사항입니다.').css("color", "red").css("font-size", "10pt");
+			} else if (pw&&pw2 &&pw !== pw2) {
+				$('#checkpw2').text("암호가 일치하지 않습니다.")	.css("color", "red").css("font-size", "10pt");
+			} else {
+				$('#checkpw2').text("");
+			}
+			
+			
+		});
+			
+			$('#check').click(function(){
+				if(!pw){
+					$('#pw1').focus();
+					$('#checkpw').text('필수입력 사항입니다.').css("color", "red").css("font-size", "10pt");
+					return false;
+				}
+				if(!pw2){
+					$('#pw2').focus();
+					$('#checkpw2').text('필수입력 사항입니다.').css("color", "red").css("font-size", "10pt");
+					return false;
+				}
+				
+				if(pw && pw2 && pw === pw2){
+					$('#updateinfo').submit();
+					return true;
+				} else {
+					return false;
+				}
+					
+				
+			});
+			
+
+		});
 
 </script>
 </head>
@@ -37,7 +98,7 @@
 		</div>
 	</header>
 
-<form action="/emos/eupdate" method="post">
+<form action="/emos/eupdate" id="updateinfo" method="post">
 <table width="600" cellspacing="5" bgcolor="#3399ff">
 <tr><td width="150">아이디</td>
 	<td width="450"><input type="text" name="userid" value="<%= member.getUserId() %>" readonly></td></tr>
@@ -49,12 +110,14 @@
 <%} %>
 </tr>
 
-<tr><td>암 호</td><td><input type="password" name="userpwd" id="userpwd"></td></tr>
-<tr><td>암호확인</td><td><input type="password" name="userpwd2" id="userpwd2"></td></tr>
+<tr><td>암 호</td><td><input type="password" name="userpwd" id="pw1"><div id="checkpw"></div></td></tr>
+
+<tr><td>암호확인</td><td><input type="password" name="userpwd2" id="pw2"><div id="checkpw2"></div></td></tr>
+
 <tr><td>이메일</td><td><input type="email" name="email" value=<%= member.getEmail() %>></td></tr>
 <tr><td>전화번호</td><td><input type="tel" name="phone" value=<%= member.getPhone() %>></td></tr>
 <tr><td colspan="2" align="center">
-	<input type="submit" class="btn btn-default" value="수정하기"> &nbsp;
+	<input type="button" id="check" class="btn btn-default" value="수정하기"> &nbsp;
 	<a href="/emos/edelete?userid=<%= member.getUserId() %>" class="btn btn-default">탈퇴하기</a>
 </td>
 </tr>

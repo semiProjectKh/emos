@@ -1,4 +1,4 @@
-package reply.controller;
+package member.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,13 +17,13 @@ import reply.model.vo.Reply;
  * Servlet implementation class replyMyReply
  */
 @WebServlet("/einfo")
-public class replyMyReply extends HttpServlet {
+public class MyinfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public replyMyReply() {
+    public MyinfoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,7 +35,6 @@ public class replyMyReply extends HttpServlet {
 		response.setContentType("text/html; charset=8");
 		
 		String userId = request.getParameter("userid");
-		System.out.println(userId);
 		int result = Integer.parseInt(request.getParameter("num"));
 		
 		RequestDispatcher views = null;

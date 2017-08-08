@@ -322,7 +322,6 @@
 						$('#enrolluser').submit();
 						return true;
 					} else {
-						console.log('a');
 						return false;
 					}
 				});
@@ -610,8 +609,11 @@
     		&nbsp;<b>CapsLock</b> 키가 눌려있습니다.&nbsp;</p>
             </p>
             <p>비밀번호 확인
-            <input type="password" name="pw2" id="pw2" placeholder="비밀번호 확인" class="p1">
+            <input type="password" name="pw2" id="pw2" placeholder="비밀번호 확인" class="p1" onkeypress="caps_lock(event)">
             <div id="checkpw2"></div>
+             <p id="capslock" style="position:relative; border:2px solid #003b83; width:300px; bottom:0px; display:none"> 
+    		&nbsp;<b>CapsLock</b> 키가 눌려있습니다.&nbsp;</p>
+            </p>
             </p>
             <hr>
             <p>핸드폰 번호&nbsp;&nbsp;&nbsp;
