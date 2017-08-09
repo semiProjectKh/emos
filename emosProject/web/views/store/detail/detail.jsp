@@ -1,52 +1,16 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE>
 <html>
-
 <head>
-    <meta charset="UTF-8">
-    <title>E Mobile Menu Order System.</title>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="/emos/css/style.css">
+	<meta charset="UTF-8">
+    <link rel="stylesheet" href="/emos/css/detail.css"> 
 </head>
 
 <body>
-    <header id="header02"> <a href="/emos/index.html">
-        <img id="logo2" src="/emos/image/logo/logo.png"></a>
-        <div class="w3-display-right" style="margin-right:20px"> <button href="#" class="w3-button" style="border: solid 1px white; border-radius :3px" onclick="document.getElementById('id02').style.display='block'">로그인</button> <a href="#" class="w3-button w3-yellow" style="border-radius :3px">회원가입</a> </div>
-        
-                            <div id="id02" class="w3-modal">
-                        <div class="w3-modal-content w3-animate-top">
-                            <div class="w3-container"> 
-                                <span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                                
-                                
-                                
-                                
-                                <form id="login01" class="w3-display-topmiddle">
-                                    <input type="text" id="id" class="w3-display-topleft" value="아이디 입력">
-                                    
-                                    <input type="password" id="pw" class="w3-display-bottomleft"
-                                      >
-                                    
-                                    <a href="#" class="w3-button w3-display-right">로그인</a>
-                                </form>
-                                
-                                <div class="w3-display-bottommiddle" id="loginservice">
-                                <a href="#" class="w3-button w3-indigo">기업회원가입</a>
-                                <a href="#" class="w3-button w3-green">아이디 찾기</a>
-                                <a href="#" class="w3-button w3-teal">비밀번호 찾기</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>                     
-    </header>
-    
-    
-    
+	<%@ include file="../../header.jsp" %>
+
+
     <section id="detail01" class="detail ">
         <div class="w3-content w3-display-container ">
             <img src="/emos/image/store/detail/1112.jpg" width="100%" height="300px">
@@ -176,18 +140,6 @@
             </div>
         </div>
     </section>
-
-    
-    <footer>
-        <div class="w3-content w3-display-container" >
-                 <a href="#">개인정보 처리방침</a> | <a href="#">저작권 정책</a> | <a href="#">관련
-						사이트</a>
-                    <br>
-                    <br>
-                    <p>(34055) 경기도 안양시 동안구 호계동 전화: 010-6635-7088, 팩스: 031-123-5678</p>
-                    <p>Copyright (C) 2017 KH Information & Security Institute. All Rights Reserved.</p>
-                </div>
-    </footer>
+	<%@ include file="../../footer.jsp" %>
 </body>
-
 </html>

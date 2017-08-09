@@ -14,7 +14,7 @@ import member.model.vo.Member;
 /**
  * Servlet implementation class MemberUpdateServlet
  */
-@WebServlet("/eupdate")
+@WebServlet("/emupdate")
 public class MemberUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -43,7 +43,6 @@ public class MemberUpdateServlet extends HttpServlet {
 				String phone = request.getParameter("phone");
 				
 				Member m = new Member(userId, phone, userPwd, email);
-				
 				//3. 비즈니스로직 처리용 모델 객체 생성과 메소드 호출 
 				//리턴값 받기
 				MemberService mservice = new MemberService();

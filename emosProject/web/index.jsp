@@ -1,23 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import = "member.model.vo.Member"%> 
+    pageEncoding="UTF-8" %>
+
+<%@ page import="member.model.vo.Member"%>
+
 <%
-	Member member = (Member)session.getAttribute("member");
-%>   
+	Member member = (Member) session.getAttribute("member");
+//	member = new Member();
+%>    
+    
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
- <title>E Mobile Menu Order System.</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="css/style.css"> </head>
-<script type="text/javascript">
+	<head>
+    	<meta charset="UTF-8">
+    	<title>E Mobile Menu Order System.</title>
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    	<link rel="stylesheet" href="css/style.css"> 
+    </head>
+    
+    
 
-</script>
 <body>
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
@@ -42,9 +47,6 @@
                 <div class="carousel-caption"></div>
             </div>
         </div>
-        <!-- Controls -->
-        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a>
-        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next"> <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> <span class="sr-only">Next</span> </a>
     </div>
     <header>
         <div id="blackpad"></div>
@@ -55,7 +57,24 @@
                 <br>order
                 <br>system </p>
         </div>
+           
+        <div id="private">
+            <div class="navbar-collapse collapse ">
+                <ul class="nav navbar-nav">
+                <%if(member==null){ %>
+                    <li><span class="glyphicon glyphicon-lock w3-center" aria-hidden="true" onclick="document.getElementById('id02').style.display='block'"> 로그인</span></li>
+                    <li><span class="glyphicon glyphicon-plus w3-center" aria-hidden="true"><a href="/emos/views/member/enroll.jsp" style="text-decoration:none"> 회원가입 </a></span></li>
+                <%}else{ %>
+                
+                    <li><span class="glyphicon glyphicon-home" aria-hidden="true" onclick=""style="width:150px;"><a href="/emos/einfo?num=1&userid=<%=member.getUserId() %>" style="text-decoration:none"> 마이페이지</a></span></li>
+                    <li><span class="glyphicon glyphicon-remove-circle" aria-hidden="true" onclick=""><a href="/emos/elogout" style="text-decoration:none"> 로그아웃</a></span></li>
+                <%} %>
+                </ul>
+            </div>
+        </div>
+        
     </header>
+    
     <section id="main01">
         <div class="container">
             <div class="row">
@@ -63,26 +82,27 @@
                 <div class="col-sm-4">
                     
                     <!-- Trigger/Open the Modal -->                    
-                    <button onclick="document.getElementById('id01').style.display='block'" class="w3-button">
-                        <span class="glyphicon glyphicon-cutlery w3-display-middle" aria-hidden="true" ></span>    
-                    </button>
+                    <span id="mbtn01" class="glyphicon glyphicon-cutlery w3-display-middle mainbtn" aria-hidden="true" onclick="document.getElementById('id01').style.display='block'">
+                    <p style="font-size :15px;text-align:center"><b>매장검색</b></p>
+                    
+                    
+                    </span>
 
                     <!-- The Modal -->
                     <div id="id01" class="w3-modal ">
-                        <div class="w3-modal-content w3-animate-top">
-                            <div class="w3-container "> 
+                        <div class="w3-modal-content w3-animate-opacity" style="margin-top:200px" >
+                            <div class="w3-container"> 
                                 <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                                
-                                
-                                <div class="input-group w3-display-middle" id="search">
+                                    <div class="w3-display-middle w3-center">
+                                   <img src="image/AD/3333.JPG" width="345" height="100" style="margin-bottom:10px">
+                                   <img src="image/AD/3333.JPG" width="345" height="100" style="margin-bottom:10px">
+                                    <div class="input-group" id="search">
                                     <input type="text" class="form-control" placeholder="매장이름 지역명 을 입력하세요!!">
                                     <span class="input-group-btn">
-                                        <a href="views/search.html" class="btn btn-default" type="button">검색</a>
+                                        <a href="views/store/search/search.jsp" class="btn btn-default" type="button">검색</a>
                                     </span>
                                 </div><!-- /input-group -->
-                                
-                                
-                                
+                                </div>
                             </div>
                         </div>
                     </div> 
@@ -93,56 +113,34 @@
                 <div class="col-sm-4">  
                     
                     <!-- Trigger/Open the Modal -->                    
-                    <button onclick="document.getElementById('id02').style.display='block'" class="w3-button">
-                        <span class="glyphicon glyphicon-blackboard w3-display-middle" aria-hidden="true"></span>    
-                    </button>
+                        <span class="glyphicon glyphicon-blackboard w3-display-middle mainbtn" aria-hidden="true" onclick="document.getElementById('id02').style.display='block'">
+                            
+                            <p style="font-size :15px;text-align:center"><b>싸장님오피스</b></p>
+                            
+                        </span>    
 
                     <!-- The Modal -->
                     <div id="id02" class="w3-modal">
-                    	<% if (member == null) { %>  
-                        <div class="w3-modal-content w3-animate-top">
+                        <div class="w3-modal-content w3-animate-opacity">
                             <div class="w3-container"> 
                                 <span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                                
-                                
-                               
-                            <form id="login01" class="w3-display-topmiddle" action="elogin" method="post">
+
+                                <form id="login01" class="w3-display-topmiddle" action="ablogin" method="post">
                                     <input type="text" id="id" name="id" class="w3-display-topleft" placeholder="아이디 입력">
-                               
-                                    <input type="password" id="pw" name="pw" class="w3-display-bottomleft">
                                     
-                                    <!-- <a href="#" class="w3-button w3-display-right">로그인</a> -->
-                                    <input type="submit" class="w3-button w3-display-right" value="로그인" >
+                                    <input type="password" id="pw" name="pw" class="w3-display-bottomleft"  placeholder="비밀번호 입력">
+                                    
+                                    <input type="submit" class="w3-button w3-display-right" style="color:white;background: #0c0642;height: 60px;text-align: center;" value="로그인">
                                 </form>                               
-                                    
+
                                 <div class="w3-display-bottommiddle" id="loginservice">
-                                <a href="/emos/views/member/enroll.html" class="w3-button w3-indigo">기업회원가입</a>
-                                <a href="#" class="w3-button w3-green">아이디 찾기</a>
-                                <a href="#" class="w3-button w3-teal">비밀번호 찾기</a>
+                                <a href="views/member/enroll.jsp" class="w3-button w3-indigo">회원가입</a>
+                                <a href="#" onclick="window.open('/emos/views/member/idfind.html', '팝업', 'left= 20, top= 20, height=300, width=500')" class="w3-button w3-green">아이디 찾기</a>
+                                <a href="#" onclick="window.open('/emos/views/member/pwfind.html', '팝업', 'left= 20, top= 20, height=300, width=500')" class="w3-button w3-teal">비밀번호 찾기</a>
                                 </div>
                             </div>
                         </div>
-                         <% } else { %>
-                         <div class="w3-modal-content w3-animate-top">
-                            <div class="w3-container"> 
-                                <span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                               
-                   
-                                    <div style= "color : black;"><%=member.getUserId()%> 님
-                                    	
-                                    </div>
-									<a href="/emos/elogout">로그아웃</a> &nbsp; <a href="/emos/einfo?num=1&userid=<%=member.getUserId() %>">내 정보</a>
-                                    	
-                                    
-                          
-                                 
-                            </div>
-                        </div>
-                        <%} %>
-                    </div> 
-                   
-                                        
-                    
+                    </div>                     
                     
                     
                 </div>
@@ -164,4 +162,7 @@
         </div>
     </footer>
 </body>
+
 </html>
+
+

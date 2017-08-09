@@ -143,4 +143,66 @@ public class MemberDao {
 		return result;
 	}
 
+	public Member idsearch(Connection con, String userName, String email) {
+		Member member = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = "select user_id from member where user_name = ? and email = ?";
+		
+		try {
+			 pstmt = con.prepareStatement(query);
+			 
+			 pstmt.setString(1, userName);
+			 pstmt.setString(2, email);
+			 
+			 rset = pstmt.executeQuery();
+			 
+			 if(rset != null)
+				 if(rset.next()) {
+					 member = new Member();
+					 member.setUserId(rset.getString("user_id"));
+				 }
+				 
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return member;
+	}
+
+	public Member idsearch(Connection con, String userId, String userName, String email) {
+		Member member = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = "select user_pwd from member where user_id = ? and user_name = ? and email = ?";
+		
+		try {
+			 pstmt = con.prepareStatement(query);
+			 
+			 pstmt.setString(1, userId);
+			 pstmt.setString(2, userName);
+			 pstmt.setString(3, email);
+			 rset = pstmt.executeQuery();
+			 
+			 if(rset != null)
+				 if(rset.next()) {
+					 member = new Member();
+					 member.setUserId(rset.getString("user_pwd"));
+				 }
+				 
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return member;
+	}
+
 }

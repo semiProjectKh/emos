@@ -73,4 +73,22 @@ public class MemberService {
 		
 		return result;
 	}
+	
+	public Member idSearch(String userName, String email) {
+		Connection con = getConnection();
+		Member idSearch = new MemberDao().idsearch(con, userName, email);
+		
+		close(con);
+		
+		return idSearch;
+	}
+
+	public Member pwSearch(String userId, String userName, String email) {
+		Connection con = getConnection();
+		Member pwSearch = new MemberDao().idsearch(con, userId, userName, email);
+		
+		close(con);
+		
+		return pwSearch;
+	}
 }

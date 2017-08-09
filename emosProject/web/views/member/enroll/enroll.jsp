@@ -1,12 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ include file="../header.jsp"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/emos/js/enroll.js"></script>
+<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+
+</head>
+
+
+
+<body>
+	<%@ include file="../../header.jsp"%>
 
 	<section id="enroll01">
 		<div class="w3-content w3-display-container">
-
-
 
 			<div class="tab-content">
 				<ul class="nav nav-tabs" id="enrolltab">
@@ -15,6 +26,8 @@
 				</ul>
 
 				<div id="en1" class="tab-pane fade in active">
+
+
 					<form action="../../ejoin" id="enrolluser" method="post"
 						class="w3-center">
 
@@ -104,6 +117,9 @@
 				</div>
 
 				<div id="en2" class="tab-pane fade">
+				
+				
+				
 					<form method="post" action="/emos/sinsert" id="enrollstore" class="w3-center">
 						<span class="w3-block w3-left-align"> <label class="agreet">&nbsp;&nbsp;&nbsp;이용약관
 								및 개인정보 수집 및 이용에 모두 동의합니다.</label> <input type="checkbox" value="check1">
@@ -241,7 +257,10 @@
 		</div>
 	</section>
 
-	<%@ include file="../footer.jsp"%>
+
+
+
+	<%@ include file="../../footer.jsp"%>
 
 </body>
 
