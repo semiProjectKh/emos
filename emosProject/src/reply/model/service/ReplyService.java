@@ -26,6 +26,13 @@ public class ReplyService {
 		close(con);
 		return list;
 	}
+	
+	public ArrayList<Reply> replyDetail(int storeNo) {
+		Connection con = getConnection();
+		ArrayList<Reply> list = new ReplyDao().replyDetail(con, storeNo);
+		close(con);
+		return list;
+	}
 
 	public int insertReply(Reply r) {
 		Connection con = getConnection();
@@ -66,5 +73,19 @@ public class ReplyService {
 		close(con);
 		return listCount;
 	}
+
+	public ArrayList<Reply> recentTop5(String userId) {
+		Connection con = getConnection();
+		ArrayList<Reply> list = new ReplyDao().recentTop5(con, userId);
+		close(con);
+		return list;
+	}
 	
+	public ArrayList<Reply> myReply(String userId) {
+		Connection con = getConnection();
+		ArrayList<Reply> list = new ReplyDao().myReply(con, userId);
+		close(con);
+		return list;
+	}
+
 }

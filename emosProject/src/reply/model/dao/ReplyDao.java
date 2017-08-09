@@ -93,6 +93,47 @@ public class ReplyDao {
 		}
 		return list;
 	}
+	
+	public ArrayList<Reply> replyDetail(Connection con, int storeNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Reply> list = null;
+		
+		String query = "SELECT ROWNUM RNUM, T.* FROM (SELECT * FROM REPLY WHERE STORE_NUM = ? ORDER BY REPLY_NUM DESC) T";
+		
+		/*String query = "select * from (select * from reply where store_num = ? order by reply_num desc) where rnum >= ? and rnum <= ?";*/
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, storeNo);
+			
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset != null){
+					list = new ArrayList<Reply>();
+					while (rset.next()) {
+					Reply reply = new Reply();
+					
+					reply.setReplyNum(rset.getInt("reply_num"));
+					reply.setStoreNum(storeNo);
+					reply.setUserId(rset.getString("user_id"));
+					reply.setContent(rset.getString("content"));
+					reply.setPoint(rset.getInt("point"));
+					reply.setReplyDate(rset.getDate("reply_date"));
+					reply.setGood(rset.getInt("good"));
+					list.add(reply);
+				}
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
 
 	public int insertReply(Connection con, Reply r) {
 			int result = 0;
@@ -183,5 +224,83 @@ public class ReplyDao {
 		}
 		return listCount;
 	}
+
+	public ArrayList<Reply> recentTop5(Connection con, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Reply> list = null;
+		
+		String query = "select * from (select * from reply where user_id = ? order by reply_date desc) where rownum < 6;";
+		
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset != null){
+					list = new ArrayList<Reply>();
+					while (rset.next()) {
+					Reply reply = new Reply();
+					
+					reply.setReplyNum(rset.getInt("reply_num"));
+					reply.setStoreNum(rset.getInt("store_num"));
+					reply.setUserId(userId);
+					reply.setContent(rset.getString("content"));
+					reply.setPoint(rset.getInt("point"));
+					reply.setReplyDate(rset.getDate("reply_date"));
+					reply.setGood(rset.getInt("good"));
+					list.add(reply);
+				}
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
 	
+	public ArrayList<Reply> myReply(Connection con, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Reply> list = null;
+		
+		String query = "select * from reply where user_id = ? order by reply_date desc";
+		
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset != null){
+					list = new ArrayList<Reply>();
+					while (rset.next()) {
+					Reply reply = new Reply();
+					
+					reply.setReplyNum(rset.getInt("reply_num"));
+					reply.setStoreNum(rset.getInt("store_num"));
+					reply.setUserId(userId);
+					reply.setContent(rset.getString("content"));
+					reply.setPoint(rset.getInt("point"));
+					reply.setReplyDate(rset.getDate("reply_date"));
+					reply.setGood(rset.getInt("good"));
+					list.add(reply);
+				}
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
 }

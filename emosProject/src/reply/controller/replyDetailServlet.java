@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import good.model.service.GoodService;
 import reply.model.service.ReplyService;
 import reply.model.vo.Reply;
 
@@ -39,7 +40,7 @@ public class replyDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setContentType("text/html; charset=utf-8");
+		request.setCharacterEncoding("utf-8");
 
 		int storeNo = 1; // Integer.parseInt(request.getParameter("storenum"));
 
@@ -52,14 +53,21 @@ public class replyDetailServlet extends HttpServlet {
 		if (request.getParameter("page") != null) {
 			currentPage = Integer.parseInt(request.getParameter("page"));
 		}
-
 		ReplyService rService = new ReplyService();
 
 		// 전체 목록 갯수와 해당 페이지별 목록을 리턴받음
 		int listCount = rService.getListCount();
 		// System.out.println("조회된 목록 갯수 : " + listCount);
 		ArrayList<Reply> list = rService.replyDetail(storeNo, currentPage, limit);
-
+		//총 페이지수 계산 : 목록이 최소 1개일 때 1page로 처리하기 //위해 0.9 더함
+		int pageMax = (int)((double)listCount / limit + 0.9); //현재 페이지에 보여줄 시작 페이지수 //(1, 11, 21, .......) //현재 페이지가 13page 이면 시작페이지는 11page 가 됭ㅇㅇㅇㅇㅇㅇ
+		int startPage = (currentPage / limit) * limit + 1; //만약, 목록 아래에 보여질 페이지갯수가 10개이면 //끝페이지수는 20페이지가 되어야 함 
+		int endPage = startPage + limit - 1;
+		  if(pageMax < endPage){ 
+			  endPage = pageMax; 
+		  }
+		
+		if(list != null && list.size() > 0){
 		// 전송할 최종 json 객체
 		JSONObject json = new JSONObject();
 		JSONArray jarr = new JSONArray();
@@ -67,46 +75,33 @@ public class replyDetailServlet extends HttpServlet {
 		for (Reply reply : list) {
 			// 한 사람의 정보를 저장할 json 객체
 			JSONObject re = new JSONObject();
-			re.put("replyNo", reply.getReplyNum());
-			re.put("storeNo", reply.getStoreNum());
+			re.put("replyNum", reply.getReplyNum());
+			re.put("storeNum", reply.getStoreNum());
 			re.put("userId", reply.getUserId());
 			// json에서 한글 깨짐을 막으려면, java.net.URLEncoder 클래스의 encode() 메소드로 인코딩 처리
-			re.put("content", URLEncoder.encode(reply.getContent(), "UTF-8"));
+			re.put("content", URLEncoder.encode(reply.getContent(), "UTF-8").replace('+', ' '));
 			re.put("point", reply.getPoint());
-			re.put("replyDate", reply.getReplyDate());
+			re.put("replyDate", reply.getReplyDate().toString());
 			re.put("good", reply.getGood());
 
 			jarr.add(re);
 		}
 
 		json.put("list", jarr);
-		System.out.println(json.toJSONString());
+		json.put("currentPage", currentPage);
+		json.put("pageMax", pageMax);
+		json.put("startPage", startPage);
+		json.put("endPage", endPage);
+		json.put("listCount", listCount); 
+		
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
 		out.print(json.toJSONString());
 		out.flush();
 		out.close();
-
-		/*
-		 * //총 페이지수 계산 : 목록이 최소 1개일 때 1page로 처리하기 //위해 0.9 더함 int pageMax =
-		 * (int)((double)listCount / limit + 0.9); //현재 페이지에 보여줄 시작 페이지수 //(1,
-		 * 11, 21, .......) //현재 페이지가 13page 이면 시작페이지는 11page 가 됭ㅇㅇㅇㅇㅇㅇ int
-		 * startPage = (currentPage / limit) * limit + 1; //만약, 목록 아래에 보여질 페이지
-		 * 갯수가 10개이면 //끝페이지수는 20페이지가 되어야 함 int endPage = startPage + limit - 1;
-		 * if(pageMax < endPage){ endPage = pageMax; }
-		 * 
-		 * if(list != null && list.size() > 0){ RequestDispatcher view =
-		 * request.getRequestDispatcher("views/reply/replyDetail.jsp");
-		 * request.setAttribute("list", list);
-		 * request.setAttribute("currentPage", currentPage);
-		 * request.setAttribute("pageMax", pageMax);
-		 * request.setAttribute("startPage", startPage);
-		 * request.setAttribute("endPage", endPage);
-		 * request.setAttribute("listCount", listCount); view.forward(request,
-		 * response); }else{
-		 * response.sendRedirect("/e/views/reply/replyError.jsp"); }
-		 */
-
+		  }else{
+			  response.sendRedirect("/e/views/reply/replyError.jsp");
+		  }
 	}
 
 	/**

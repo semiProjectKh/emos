@@ -30,7 +30,7 @@ public class replyInsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		response.setContentType("html/text; charset=utf-8");
+		response.setContentType("text/html; charset=utf-8");
 		
 		String rwriter = request.getParameter("rwriter");
 		int rstar = Integer.parseInt(request.getParameter("rstar"));
@@ -44,7 +44,7 @@ public class replyInsertServlet extends HttpServlet {
 		int result	= new ReplyService().insertReply(r);
 		
 		if(result > 0){
-			response.sendRedirect("/e/rdetail");
+			response.sendRedirect("/e/views/reply/replyDetail.jsp");
 		}else{
 			response.sendRedirect("/e/views/reply/replyError.jsp");
 		}
