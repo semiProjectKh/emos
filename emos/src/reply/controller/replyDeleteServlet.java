@@ -32,10 +32,11 @@ public class replyDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				response.setContentType("text/html; charset=utf-8");
 				
-				int replyNum = Integer.parseInt(request.getParameter("rnum"));
+				int replyNum = Integer.parseInt(request.getParameter("rNum"));
 						
 				if(new ReplyService().deleteReply(replyNum) > 0){
-					response.sendRedirect("/e/rdetail");
+					/*response.sendRedirect("/e/views/reply/replyDetail.jsp");*/
+					response.getWriter().append("true");
 				}else{
 					RequestDispatcher view = request.getRequestDispatcher("views/reply/replyError.jsp");
 					request.setAttribute("message", "게시글 삭제 처리 실패!");

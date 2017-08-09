@@ -1,16 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="reply.model.vo.Reply, java.util.*, java.sql.Date"%>
-<%
-	// dd
-	ArrayList<Reply> list = (ArrayList<Reply>) request.getAttribute("list");
-		
-	int listCount = ((Integer)request.getAttribute("listCount")).intValue();
-	int currentPage = ((Integer)request.getAttribute("currentPage")).intValue();
- 	int startPage = ((Integer)request.getAttribute("startPage")).intValue();
-	int endPage = ((Integer)request.getAttribute("endPage")).intValue(); 
-	int pageMax = ((Integer)request.getAttribute("pageMax")).intValue();
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,11 +28,9 @@
 	});
 </script>
 <script>
-$( document ).ready(function() {
-	   $("a.good").on("click", function(){
-		   /* $("a#good").on("click", function(){ */
-	      var rNumValue = $(this).attr("id").substring(4);
-	      var tempA = $(this);
+function star(data) {
+	      var rNumValue = data;
+	      var tempA = $("#good" + data);
 
 	      $.ajax({
 	         url : "/e/rgood",
@@ -61,11 +49,39 @@ $( document ).ready(function() {
 	            // tempA.text("♥" + (Number(tempA.text().substring(1)) + 1));
 	            alert("실패(" + data + ")");
 	         }
-	      });
-	   });
-	});
+	      }); 
+	   /* });//click */ 
+	   }//star   
 </script>
+<script>
+function rdelete(data) {
+	var tr = $(data).parent().parent();
+	var rNumValue = data;
+	if (!confirm("삭제하시겠습니까?")) {
+        return;
+    }
 
+	  $.ajax({
+	         url : "/e/rdelete",
+	         data : {rNum : rNumValue},
+	         type : "get",
+	         success : function(data){
+	        	 if(data=="true"){
+	        		 tr.remove();
+	        		 location.reload();
+	                 alert("삭제되었습니다.");
+
+	        	 }else{
+	        		 alert("삭제할 수 없습니다.");
+	        	 }
+	            
+	         },
+	         error : function(data){
+	            alert("실패(" + data + ")");
+	         }
+	      }); 
+};
+</script>
 </head>
 <body>
 	<header id="menubar">
@@ -78,12 +94,11 @@ $( document ).ready(function() {
 		%>
 		&nbsp; &nbsp; &nbsp;
 
-		<form action="rinsert" method="post">
+		<form action="/e/rinsert" method="post">
 			<input type="hidden" name="rwriter" value="<%=member.getUserId()%>">
 			<table align="center" width="600" bgcolor="yellow" border="1" id="test11">
 				<tr>
-					<td><input type="text" readonly
-						value="<%=member.getUserName()%>"></td>
+					<td><input type="text" readonly	value="<%=member.getUserName()%>"></td>
 				</tr>
 				<tr>
 					<td>&nbsp; <label id="star"></label> <!-- <label for="starRating">Value : </label> -->
@@ -99,8 +114,7 @@ $( document ).ready(function() {
 							placeholder="리뷰를 입력해주세요."></textarea></td>
 				</tr>
 				<tr>
-					<td colspan="2" align="center"><input type="submit"
-						value="등록하기"> &nbsp; <input type="reset" value="등록취소">
+					<td colspan="2" align="center"><input type="submit" value="등록하기"> &nbsp; <input type="reset" value="등록취소">
 					</td>
 				</tr>
 			</table>
@@ -109,107 +123,165 @@ $( document ).ready(function() {
 			}
 		%>
 		&nbsp;
-				<!-- <div style="width:100%; height:200px; overflow:hidden"> -->
-				<div class="wrdLatest" id=9>
-				
 		<table align="center" cellpadding="10" cellspacing="0" border="1"
-			width="700" id="ptable">
-			<%
-				for (Reply reply : list) {
-			%>
-			<%
-				if (reply.getStoreNum() == 1) {
-			%>
-			<tr>
-				<td><%=reply.getReplyNum()%></td>
-				<td><%=reply.getContent()%></td>
-				<td>
-					<% for(int i = 0; i < reply.getPoint(); i++){ %> <img
-					src="/e/views/images/star-on.png"> <% } %> <% for(int i = 5; i > reply.getPoint(); i--){ %>
-					<img src="/e/views/images/star-off.png"> <% } %> <label
-					id="displayStarRating2" style="padding-left: 10px;"> <%= reply.getPoint() %>
-				</label> <label for="displayStarRating2">/5</label>
-				</td>
-				<% if( member != null){ 
-					 if(member.getUserId().equals(reply.getUserId()) == false){
-				%>
-				
-				<td><a id= "good<%= reply.getReplyNum() %>"style="text-decoration: none;" class="good">♥<%= reply.getGood() %></a></td>
-				<% } if(member.getUserId().equals(reply.getUserId()) == true){ %>
-				<td>♥<%= reply.getGood() %></td>
-				<td><a href="/e/rdelete?rnum=<%= reply.getReplyNum() %>">삭제</a>
-				</td>
-				<% }}else{ %>
-				<td>♥<%= reply.getGood() %></td>
-				<% }
-				} //stor_num if문 close
-			} //for close%>
-			</tr>
-			
-<%--  <tr align="center" valign="middle"> 
+			width="800" id="ptable">
+	
+	<%--  <tr align="center" valign="middle"> 
         <td colspan="2"> 
-         <% if(member != null){ %>            
+         <% if(member != null){ %>
             <a href="/first/views/Reply/ReplyReplyForm.jsp?bnum=<%= reply.getReplyNum() %>&page=<%= currentPage %>"> [댓글달기] </a> &nbsp;&nbsp; 
          <% } %>          
         </td> 
     	</tr> --%>
     	
 		</table>
-		
-		</div>
-	<button type="button" id="test5" class="test5" style="text-decoration: underline;">더보기 + </button>
-	<script>
-		var page = "<%= currentPage %>";
-			$("#test5").click(function(){
-				//page++;
-			console.log(page);
-				$.ajax({
-					url : "rdetail",
-					data : {page : page},
-					type : "post",
-					/* dataType : "json", */
-					success : function(data){
-						//console.log("데이타"+data);
-						var jsonStr = JSON.stringify(data);  //객체를 문자열로 변환
-						//console.log(jsonStr);
-						var json = JSON.parse(jsonStr); //문자열을 배열 객체로 바꿈
-						
-						var values = $("table#ptable").html();
-						for(var i in json.list){
-							
-							//한글 깨짐을 막기 위해 문자 인코딩 처리한 json 객체의 값은 decodeURIComponent() 로 디코딩 처리함
-							values += "<tr><td>" + json.list[i].replyNo + "</td><td>" + json.list[i].storeNo + "</td><td>" + json.list[i].userId + "</td><td>" + 
-							decodeURIComponent(json.list[i].content) + 
-							"</td><td>" + json.list[i].point + "</td><td>" + json.list[i].replyDate + "</td><td>" + json.list[i].good + "</td></tr>";
-						}
-						
-						$("table#ptable").append(values);
-					
-					},
-					error : /* function(request,status,error){
-
-						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-					}
-					 */
-					
-					function(xhr){
-						var jsonResponse = JSON.parse(xhr.responseText);
-						alert(jsonResponse.msg);
-					}
-					
-				});
-				
-			});		//click
-</script>
 	</section>
 	<p align="center">
-		<a href="/e/index.jsp">시작페이지로 이동</a> &nbsp; <a
-			href="/first/blist?page=1">목록보기로 이동</a>
+		<a href="/e/index.jsp">시작페이지로 이동</a> &nbsp; 
 	</p>
 	<hr>
 
 	<footer>
 		<%@ include file="../../footer.html"%>
 	</footer>
+	<script>
+$(document).ready(function () {
+	var p = 0;
+	
+	$.ajax({
+		url : "/e/rdetail",
+		type : "get",
+		dataType : "json",
+		/* complete : function(){
+				console.log("이거이거");
+			}
+		, */
+		success : function(data){
+			//console.log("데이타"+data);
+			var jsonStr = JSON.stringify(data);  //객체를 문자열로 변환
+			//console.log("dd2" + jsonStr);
+			var json = JSON.parse(jsonStr); //문자열을 배열 객체로 바꿈
+			p = json.currentPage;
+			
+			var mId = null;
+			<%
+			if (member != null) {
+			%>
+				mId = "<%= member.getUserId() %>";
+			<% } %>
+				
+			var values = ""; 
+			$("table#ptable").html(); 
+			for(var i in json.list){
+				
+				 //한글 깨짐을 막기 위해 문자 인코딩 처리한 json 객체의 값은 decodeURIComponent() 로 디코딩 처리함
+				values += "<tr><td>" + json.list[i].replyNum + "</td><td>" + json.list[i].storeNum + "</td><td>" + json.list[i].userId + "</td><td>" + 
+				decodeURIComponent(json.list[i].content) + "</td>"
+				values += "<td>";
+				for(var k = 0; k < Number(json.list[i].point); k++){
+					values +=	"<img src='/e/views/images/star-on.png'>" 
+				} 
+				for(var k = 5; k > Number(json.list[i].point); k--){ 
+					values += "<img src='/e/views/images/star-off.png'>"
+				}
+				
+				values += '<label id="displayStarRating2" style="padding-left: 10px;">' + json.list[i].point;
+				values += '</label> <label for="displayStarRating2">/5</label></td>';
+				
+				values += "<td>" + json.list[i].replyDate + "</td>";
+				
+				if(json.list[i].userId == mId){
+					values += "<td>♥" + json.list[i].good + "</td>"
+					+ "<td><a onclick=rdelete(" + json.list[i].replyNum + ")>삭제</a></td></tr>";
+				}else if(mId != null){
+					values += "<td><a id=good" + json.list[i].replyNum + " class=good onclick=star(" + json.list[i].replyNum + ")>♥" + json.list[i].good + "</a></td>"
+					+ "<td></td></tr>";
+				}else{
+					values += "<td>♥" + json.list[i].good + "</td><td></td></tr>";
+				}
+			}
+			//console.log("v" + values)
+									
+			$("table#ptable").append(values);
+			},
+		error : 
+			function(textStatus){
+				//console.log("에러 : " + textStatus.status);
+		}
+		
+	}); //ajax
+	
+	$(document).scroll(function() {
+	var maxHeight = $(document).height();
+	var currentScroll = $(window).scrollTop() + $(window).height();
+
+	if (maxHeight <= currentScroll + 100) {
+					p = p + 1;
+					/* p++; */
+				//console.log("콘솔" + p);
+					$.ajax({
+						url : "/e/rdetail",
+						data : {page : p},
+						type : "post",
+						dataType : "json",
+						success : function(data){
+							//console.log("데이타"+data);
+							var jsonStr = JSON.stringify(data);  //객체를 문자열로 변환
+							//console.log("dd2" + jsonStr);
+							var json = JSON.parse(jsonStr); //문자열을 배열 객체로 바꿈
+							
+							var mId = null;
+							<%
+							if (member != null) {
+							%>
+								mId = "<%= member.getUserId() %>";
+							<% } %>
+							
+							var values = "";
+							for(var i in json.list){
+								
+								if (json.list[i].storeNum == 1) {
+								//한글 깨짐을 막기 위해 문자 인코딩 처리한 json 객체의 값은 decodeURIComponent() 로 디코딩 처리함
+								values += "<tr><td>" + json.list[i].replyNum + "</td><td>" + json.list[i].storeNum + "</td><td>" + json.list[i].userId + "</td><td>" + 
+								decodeURIComponent(json.list[i].content) + 
+								"</td>"
+								values += "<td>";
+								for(var k = 0; k < Number(json.list[i].point); k++){
+									values +=	"<img src='/e/views/images/star-on.png'>" 
+								} 
+								for(var k = 5; k > Number(json.list[i].point); k--){ 
+									values += "<img src='/e/views/images/star-off.png'>"
+								}
+								
+								values += '<label id="displayStarRating2" style="padding-left: 10px;">' + json.list[i].point;
+								values += '</label> <label for="displayStarRating2">/5</label></td>';
+								
+								values += "<td>" + json.list[i].replyDate + "</td>";
+								
+									if(json.list[i].userId == mId){
+										values += "<td>♥" + json.list[i].good + "</td>"
+										+ "<td><a onclick = rdelete(" + json.list[i].replyNum + ")>삭제</a></td></tr>";
+									}else if(mId != null){
+										values += "<td><a id=good" + json.list[i].replyNum + " class=good onclick=star(" + json.list[i].replyNum + ")>♥" + json.list[i].good + "</a></td>"
+										+ "<td></td></tr>";
+									}else{
+										values += "<td>♥" + json.list[i].good + "</td><td></td></tr>";
+									}
+								}
+							}
+							
+							$("table#ptable").append(values);
+						} ,
+						error : 
+							function(textStatus){
+								//console.log("에러 : " + textStatus.status);
+						}
+						
+					}); //ajax
+				
+			}; //if
+	});	//scroll
+});//ready
+</script>
 </body>
 </html>

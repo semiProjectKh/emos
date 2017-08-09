@@ -53,7 +53,7 @@
 		<li><a href="">테이블설정</a></li> 
 		<li><a href="">쿠폰/적립금</a></li>
 		&nbsp; &nbsp; &nbsp;
-		<li><a href="/e/rdetail?">테스트용 리뷰</a>
+		<li><a href="/e/views/reply/replyDetail.jsp">테스트용 리뷰</a>
 	</ul>
 	
 	<!-- ( 1 ) -->
