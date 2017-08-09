@@ -1,7 +1,7 @@
-package menu.controller;
+package reply.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import menu.model.service.MenuService;
-import menu.model.vo.Menu;
+import reply.model.service.ReplyService;
+import reply.model.vo.Reply;
 
 /**
- * Servlet implementation class UpdateMenuServlet
+ * Servlet implementation class replyMyReply
  */
-@WebServlet("/mupdate")
-public class UpdateMenuServlet extends HttpServlet {
+@WebServlet("/myreply")
+public class replyMyReply extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateMenuServlet() {
+    public replyMyReply() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,29 +31,31 @@ public class UpdateMenuServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/plain; utf-8");
+		response.setContentType("text/html; charset=8");
 		
-		int menuNum = Integer.parseInt(request.getParameter("menuNum"));
-		String menuName = request.getParameter("menuName");
-		int price = Integer.parseInt(request.getParameter("menuPrice"));
-		String menuType = request.getParameter("menuType");
+		String userId = request.getParameter("");
+		int result = Integer.parseInt(request.getParameter(""));
 		
-		Menu m = new Menu(menuNum, menuName, price, menuType);
+		if(result == 1){
+			ArrayList<Reply> list = new ReplyService().recentTop5(userId);
 		
-		int result = new MenuService().updateMenu(m);
-		
-		PrintWriter clientOut = response.getWriter();
-		
-		// 업데이트 완료 여부 콜백
-		if (result > 0) {
-			clientOut.append("1");
-			clientOut.flush();
-		} else {
-			clientOut.append("0");
-			clientOut.flush();
+			if(list != null && list.size() > 0){
+			
+			}else{
+			
+			}
 		}
-		clientOut.close();
+		
+		if(result == 2){
+			ArrayList<Reply> list = new ReplyService().myReply(userId);
+		
+			if(list != null && list.size() > 0){
+			
+			}else{
+			
+			}
+		}
+		
 	}
 
 	/**

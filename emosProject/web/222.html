@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+$.fn.generateStars = function() {
+	return this.each(function(i,e){$(e).html($('<span/>').width($(e).text()*16));});
+	};
+
+	// 숫자 평점을 별로 변환하도록 호출하는 함수
+	$('.star-prototype').generateStars();
+	//Source: http://htmlexplorer.com/2014/05/display-star-ratings-using-jquery-and.html
+</script>
+<style>
+#setStars {
+    overflow:hidden;margin-top:50px;margin-left:20px;
+}
+#setStars span {
+    display:block;
+    float:left;
+    width:16px;
+    height:30px;
+}
+#setStars span:nth-child(1n+1) {
+    background:url(http://www.patchpalette.com/tistory/ic_star.png) no-repeat scroll 0 0 #fff;
+    background-size:auto 60px;
+}
+#setStars span:nth-child(2n+2) {
+    background:url(http://www.patchpalette.com/tistory/ic_star.png) no-repeat scroll 100% 0 #fff;
+    background-size:auto 60px;
+}
+#setStars span.on:nth-child(1n+1) {
+    background:url(http://www.patchpalette.com/tistory/ic_star.png) no-repeat scroll 0 100% #fff;
+    background-size:auto 60px;
+}
+#setStars span.on:nth-child(2n+2) {
+    background:url(http://www.patchpalette.com/tistory/ic_star.png) no-repeat scroll 100% 100% #fff;
+    background-size:auto 60px;
+}
+</style>
+</head>
+<body>
+<script src="http://labs.rampinteractive.co.uk/touchSwipe/jquery.touchSwipe.min.js"></script>
+<div id="setStars"> <span class="on" id="0"></span>
+ <span class="on" id="1"></span>
+ <span id="2"></span>
+ <span id="3"></span>
+ <span id="4"></span>
+ <span id="5"></span>
+ <span id="6"></span>
+ <span id="7"></span>
+ <span id="8"></span>
+ <span id="9"></span>
+
+</div>
+</body>
+</html>

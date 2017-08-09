@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="menu.model.vo.Menu"%>
 
-<% Menu m = (Menu) (Menu) request.getAttribute("menu"); %>
+<%
+	Menu m = (Menu) (Menu) request.getAttribute("menu");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,8 +28,6 @@
 			console.log($('#numOfInput').val()); */
 		})
 	})
-	
-	
 </script>
 <title>메뉴 추가</title>
 
@@ -37,49 +37,46 @@
 		<h1 align="center">메뉴 추가</h1>
 	</div>
 	<form action="/emos/mninsert">
-	<div id="form1">
-		<div id="form2" class="row">
-			<div class=" col-xs-3">
-				<span class="input-group-addon"><i
-					class="glyphicon glyphicon-user"></i></span> <input id="menuname1"
-					type="text" class="form-control inputMenu" name="menuname1"
-					placeholder="메뉴이름">
-			</div>
-			<div class="col-xs-3">
-				<span class="input-group-addon"><i
-					class="glyphicon glyphicon-user"></i></span> <input id="price"
-					type="number" class="form-control" name="price1" placeholder="메뉴가격"
-					value="0" step="100">
-			</div>
-			<div class=" col-xs-3">
-				<span class="input-group-addon"><i
-					class="glyphicon glyphicon-user"></i></span> <select class="form-control"
-					id="mtype" name="mtype1">
-					<option>메인메뉴</option>
-					<option>사이드메뉴</option>
-					<option>음료</option>
-				</select>
+		<div id="form1">
+			<div id="form2" class="row">
+				<div class=" col-xs-3">
+					<span class="input-group-addon"><i
+						class="glyphicon glyphicon-user"></i></span> <input id="menuname1"
+						type="text" class="form-control inputMenu" name="menuname1"
+						placeholder="메뉴이름">
+				</div>
+				<div class="col-xs-3">
+					<span class="input-group-addon"><i
+						class="glyphicon glyphicon-user"></i></span> <input id="price"
+						type="number" class="form-control" name="price1"
+						placeholder="메뉴가격" value="0" step="100">
+				</div>
+				<div class=" col-xs-3">
+					<span class="input-group-addon"><i
+						class="glyphicon glyphicon-user"></i></span> <select class="form-control"
+						id="mtype" name="mtype1">
+						<option>메인메뉴</option>
+						<option>사이드메뉴</option>
+						<option>음료</option>
+					</select>
+				</div>
 			</div>
 		</div>
-	</div>
-	<br>
-	<br>
-	<div class="col-xs-12">
-		<input type="hidden" name="numOfInput" id="numOfInput" value="1">
-		<button type="button" id="menuinsert" class="btn btn-default">
-			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-		</button>
-	</div>
+		<br> <br>
+		<div class="col-xs-12">
+			<input type="hidden" name="numOfInput" id="numOfInput" value="1">
+			<button type="button" id="menuinsert" class="btn btn-default">
+				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+			</button>
+		</div>
 
-	<br>
-	<br>
-	<br>
-		<input type="submit" value="확인" class="btn btn-default">
-</form>
-<hr>
-<a href="/emos/mupview?storeNum=2" class="btn btn-default">수정/삭제</a>
-<hr>
-<a href="/emos/lmenuview?storeNum=2" class="btn btn-default">메뉴판</a>
+		<br> <br> <br> <input type="submit" value="확인"
+			class="btn btn-default">
+	</form>
+	<hr>
+	<a href="/emos/mupview?storeNum=2" class="btn btn-default">수정/삭제</a>
+	<hr>
+	<a href="/emos/lmenuview?storeNum=2" class="btn btn-default">메뉴판</a>
 </body>
 
 

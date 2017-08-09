@@ -1,31 +1,28 @@
-package menu.controller;
+package member.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
-import menu.model.service.MenuService;
-import menu.model.vo.Menu;
+import member.model.service.MemberService;
+import member.model.vo.Member;
 
 /**
- * Servlet implementation class InsertMenuServlet
+ * Servlet implementation class LoginServlet
  */
-@WebServlet("/mninsert")
-public class InsertMenuServlet extends HttpServlet {
+@WebServlet("/login")
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public InsertMenuServlet() {
+	public LoginServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -36,30 +33,23 @@ public class InsertMenuServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 
-		ArrayList<Menu> list = new ArrayList<Menu>();
-		Menu menu = null;
-		
-		int k = 1;
-		
-		// 파라미터 호출용 반복문
-		while (true) {
-			if (request.getParameter("menuname" + k) == null)
-				break;
-			menu = new Menu();
-			menu.setMenuName(request.getParameter("menuname" + k));
-			menu.setPrice(Integer.parseInt(request.getParameter("price" + k)));
-			menu.setMenuType(request.getParameter("mtype"+k));
-			list.add(menu);
-			
-			k++;
+		String userId = request.getParameter("id");
+		String userPwd = request.getParameter("pwd");
+		System.out.println("로그인 서블릿 : "+userId+" "+userPwd);
+		Member m = new MemberService().selectMember(userId, userPwd);
+		System.out.println(m);
+		if (m != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("member", m);
+			response.sendRedirect("/e/index.jsp");
+		} else {
+			response.sendRedirect("/e/views/member/memberError.jsp");
 		}
-		
-		int result = new MenuService().menuInsert(list);
-		
-		
+
 	}
 
 	/**

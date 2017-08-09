@@ -48,9 +48,11 @@
 				<span class="input-group-addon"><i
 					class="glyphicon glyphicon-user inMType"></i></span> <select
 					class="form-control" id="mtype" name="mtype<%=i%>">
-					<% for (String type : typeArr) { %>
-						
-					<% 
+					<%
+						for (String type : typeArr) {
+					%>
+
+					<%
 						if (m.getMenuType().equals(type)) {
 					%>
 					<option value="<%=m.getMenuType()%>" selected><%=m.getMenuType()%></option>
@@ -105,32 +107,37 @@
 
 			})
 		})
-		
-		$('.ubtn').click(function(){			
-			var menuName = $(this).parent().parent().parent().children('div').children('input[type=text]').val();
-			var menuNum = $(this).val();
-			var menuPrice = $(this).parent().parent().parent().children('div').children('input[type=number]').val();
-			var menuType = $(this).parent().parent().parent().children('div').children('select').val();
-			$.ajax({
-				url : "mupdate",
-				type : "post",
-				data : {
-						menuNum : menuNum,
-						menuName : menuName,
-						menuPrice : menuPrice,
-						menuType : menuType
-					},
-				dataType : "text",
-				success : function(value) {
-					if (value == 1) {
-						location.reload();
-					}
-				},
-				error : function() {
-					console.log("실패함");
-				}
-			})	
-		})
+
+		$('.ubtn').click(
+				function() {
+					var menuName = $(this).parent().parent().parent().children(
+							'div').children('input[type=text]').val();
+					var menuNum = $(this).val();
+					var menuPrice = $(this).parent().parent().parent()
+							.children('div').children('input[type=number]')
+							.val();
+					var menuType = $(this).parent().parent().parent().children(
+							'div').children('select').val();
+					$.ajax({
+						url : "mupdate",
+						type : "post",
+						data : {
+							menuNum : menuNum,
+							menuName : menuName,
+							menuPrice : menuPrice,
+							menuType : menuType
+						},
+						dataType : "text",
+						success : function(value) {
+							if (value == 1) {
+								location.reload();
+							}
+						},
+						error : function() {
+							console.log("실패함");
+						}
+					})
+				})
 	</script>
 
 

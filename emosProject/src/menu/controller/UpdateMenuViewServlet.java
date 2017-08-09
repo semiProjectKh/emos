@@ -35,15 +35,16 @@ public class UpdateMenuViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html; charset=utf-8");
-
+		
+		// jsp단에서 받은 storeNum 사용하면 됨
 		int storeNum = 2;
-		// Integer.parseInt(request.getParameter("storeNum"));
-
+		
+		// 업데이트 화면에 뿌려줄 리스트
 		ArrayList<Menu> list = new MenuService().selectMenuList(storeNum);
 
-		System.out.println(list.toString());
 		RequestDispatcher view = null;
-
+		
+		// 업데이트 화면에 콜백할 리스트
 		if (list != null && list.size() > 0) {
 			view = request.getRequestDispatcher("views/menu/menuUpdateForm.jsp");
 			request.setAttribute("list", list);

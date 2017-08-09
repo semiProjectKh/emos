@@ -177,41 +177,4 @@ public class MenuDao {
 		}
 		return listType;
 	}
-
-	public ArrayList<Menu> selectMenuList(Connection con, int storeNum, String mCategory) {
-		ArrayList<Menu> list = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String query = "SELECT * FROM MENU WHERE STORE_NUM = ? AND MENU_TYPE = ?";
-		
-		try {
-			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, storeNum);
-			pstmt.setString(2, mCategory);
-			rset = pstmt.executeQuery();
-			
-			if (rset != null) {
-				list = new ArrayList<Menu>();
-				while (rset.next()) {
-					Menu m = new Menu();
-					m.setMenuNum(rset.getInt("MENU_NUM"));
-					m.setStoreNum(rset.getInt("STORE_NUM"));
-					m.setMenuName(rset.getString("MENU_NAME"));
-					m.setPrice(rset.getInt("PRICE"));
-					m.setMenuType(rset.getString("MENU_TYPE"));
-					System.out.println(m.toString());
-					list.add(m);
-				}
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		return list;
-	}
-
 }
