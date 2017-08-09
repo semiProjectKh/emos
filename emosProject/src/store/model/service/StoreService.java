@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import store.model.dao.StoreDao;
 import store.model.vo.Store;
+import store.model.vo.StoreImage;
 
 public class StoreService {
 	public StoreService() {
@@ -108,5 +109,46 @@ public class StoreService {
 		String result = new StoreDao().idCheck(con, storeId);
 		close(con);
 		return result;
+	}
+
+	public String nullCheck(String str) {
+		if (str == null || str.length() == 0) {
+			str = "";
+		}
+		return str;
+	}
+
+	public ArrayList<Store> selectListMore(int page, String category) {
+		Connection con = getConnection();
+		ArrayList<Store> list = new StoreDao().selectListMore(con, page, category);
+
+		close(con);
+		return list;
+	}
+
+	
+//	IAMGE
+	public int insertImage(StoreImage simg) {
+		Connection con = getConnection();
+		int result = 0;
+		
+		result = new StoreDao().insertImage(con, simg);
+		if(result > 0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		
+		close(con);
+		return result;
+	}
+
+	public StoreImage selectStoreImg(int storeNum) {
+		Connection con = getConnection();
+
+		StoreImage simg = new StoreDao().selectStoreImg(con, storeNum);
+
+		close(con);
+		return simg;
 	}
 }

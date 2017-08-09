@@ -12,7 +12,7 @@
 }
 
 body {
-    background-color: darkgray;
+    background-color: #f1f1f1;
 }
 
 .container {
@@ -197,7 +197,7 @@ section {
 #login01 {
     width: 335px;
     height: 60px;
-    margin-top: 30px;
+    margin-top: 10px;
 }
 
 #login01 input {
@@ -259,7 +259,7 @@ section {
             */
 
 #detail01 {
-    margin-top: 5px;
+    margin-top: 10px;
     height: 545px;
 }
 
@@ -372,13 +372,14 @@ hr {
             */
 
 footer {
-    position: relative;
+	width:100%;
     bottom: 0px;
     height: 150px;
     background-color: #333;
     opacity: 0.7;
-    margin-top: 25px;
+    margin-top: 15px;
     color: white;
+    clear:left;
 }
 
 
@@ -553,3 +554,179 @@ label{
     background: black;
     color: white;
 }
+
+
+
+
+
+
+
+/*
+            =====================
+            ==   update user   ==
+            =====================
+            */
+
+#check{
+    width: 30%;
+    background: blue;
+    color: white
+}
+
+#reject{
+    margin-left: 20px;
+    background: black;
+    color: white;
+}
+
+
+/*
+            =====================
+            ==      footer     ==
+            =====================
+            */
+
+footer {
+    border: 1px solid red;
+    position: relative;
+    bottom: 0px;
+    height: 150px;
+    background-color: #333;
+    opacity: 0.7;
+    margin-top: 25px;
+    color: white;
+}
+
+
+
+
+/*
+            =====================
+            ==       c e o     ==
+            =====================
+            */
+#ceo01{
+    margin-top: 10px;
+}
+#ceotab li{
+    width: 33.3333%;
+    text-align: center;
+    font-weight: 700;
+}
+
+#ceo1,#ceo2,#ceo3{
+    padding: 20px;
+}
+
+.storetable{
+    width: 24.4%;
+    height: 150px;
+    border: solid 1px white;
+    display: inline-block;
+    background: white;
+    border-radius: 5px;
+    position: relative;
+    color: black;
+}
+
+.tableused{
+    margin-left: 10px;
+}
+
+.tableprice{
+    margin-right: 10px;
+}
+
+.tablemenu{
+    
+}
+
+.bookings{
+    height: 40px;
+    width: 49.6%;
+    background: white;
+    border-radius: 5px;
+    display: inline-block;
+    position: relative; 
+
+    border: solid 1px white;
+}
+
+.orderbtn{
+    width: 12%;
+    height: 45px;
+    border-radius: 5px;
+    color: black;
+}
+
+.storeerp{
+    width:49.6%;
+    height: 150px;
+    border: solid 1px white;
+    display: inline-block;
+    background: white;
+    border-radius: 5px;
+    position: relative;
+    color: black;
+}
+
+.ceomemo{    
+    width:100%;
+    height: 250px;
+    overflow-x: auto;
+    overflow-y: scroll;
+}
+
+.marginT10{
+    margin-top: 10px;
+}
+
+.storeerp>div{
+    color: #666666;
+}
+
+.textR{
+    text-align: right;
+}
+
+#todayearn>div{
+    letter-spacing: 5px;
+    font-size: 20px;
+    padding-top: 20px;
+}
+
+#progress-disp{
+    height: 30px;
+    width: 95%;
+}
+
+
+.vGraph{ padding:20px 10px;}
+.vGraph ul{ margin:0; padding:0; height:110px; border:1px solid #ddd; border-top:0; border-right:0; font-size:11px; font-family:Tahoma, Geneva, sans-serif; list-style:none;}
+
+.vGraph ul:after{ content:""; display:block; clear:both;}
+
+.vGraph li{ float:left; display:inline; width:8%; height:100%; margin:0 3%; position:relative; text-align:center; white-space:nowrap;}
+
+.vGraph .gTerm{ position:relative; display:inline-block; width:100%; height:20px; line-height:20px; margin:0 -100% 0px 0; padding:110px 0 0 0; vertical-align:bottom; color:#767676; font-weight:bold;}
+
+.vGraph .gBar{ position:relative; display:inline-block; width:100%; margin:-1px 0 0 0; border:1px solid #ccc; border-bottom:0; background:#e9e9e9; vertical-align: bottom;}
+
+.vGraph .gBar span{ position:absolute; width:100%; top:-20px; left:0; color:#767676;}
+
+
+
+
+.vGraph2{ padding:20px 10px;}
+.vGraph2 ul{ margin:0; padding:0; height:110px; border:1px solid #ddd; border-top:0; border-right:0; font-size:11px; font-family:Tahoma, Geneva, sans-serif; list-style:none;}
+
+.vGraph2 ul:after{ content:""; display:block; clear:both;}
+
+.vGraph2 li{ float:left; display:inline; width:4.3%; height:100%; margin:0 2%; position:relative; text-align:center; white-space:nowrap;}
+
+.vGraph2 .gTerm{ position:relative; display:inline-block; width:100%; height:20px; line-height:20px; margin:0 -100% 0px 0; padding:110px 0 0 0; vertical-align:bottom; color:#767676; font-weight:bold;}
+
+.vGraph2 .gBar{ position:relative; display:inline-block; width:100%; margin:-1px 0 0 0; border:1px solid #ccc; border-bottom:0; background:#e9e9e9; vertical-align: bottom;}
+
+.vGraph2 .gBar span{ position:absolute; width:100%; top:-20px; left:0; color:#767676; }
+

@@ -1,11 +1,13 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
-<%@ page import="member.model.vo.Member"%>
+<%@ page import="member.model.vo.Member, store.model.vo.Store"%>
 
 <%
 	Member member = (Member) session.getAttribute("member");
-%>
+	Store store = (Store) session.getAttribute("store");
+//	member = new Member();
+%> 
 
 <!DOCTYPE html>
 <html>
@@ -57,7 +59,7 @@
                         <div class="w3-modal-content w3-animate-opacity">
                             <div class="w3-container"> 
                                 <span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                                <form id="login01" class="w3-display-topmiddle" action="elogin" method="post">
+                                <form id="login01" class="w3-display-topmiddle" action="ablogin" method="post">
                                     <input type="text" id="id" class="w3-display-topleft" placeholder="아이디 입력">
                                     
                                     <input type="password" id="pw" class="w3-display-bottomleft"  placeholder="비번 입력">

@@ -32,8 +32,6 @@ public class StoreInsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		회원가입 처리용 컨트롤러
-//		1. 전송값에 한글이 있을 경우 문자인코딩 처리
-//		응답처리에 컨텐츠타입 지정
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; utf-8");
 		
@@ -50,17 +48,30 @@ public class StoreInsertServlet extends HttpServlet {
 		sb.append(request.getParameter("address2"));
 		String address = sb.toString();
 		
-		
 		String category = request.getParameter("category");
-		String qr = request.getParameter("qr");
-		String homepage = request.getParameter("homepage");
 		
-		String storeNotice = request.getParameter("storeNotice");
-		String storeIntro = request.getParameter("storeIntro");
-		String storeOriginInfo = request.getParameter("storeOriginInfo");
-		String storeBusinessTime = request.getParameter("storeBusinessTime");
-		int storeMinPrice = Integer.parseInt(request.getParameter("storeMinPrice"));
 		
+		String qr = new StoreService().nullCheck(request.getParameter("qr"));
+		String homepage = new StoreService().nullCheck(request.getParameter("homepage"));
+		String storeNotice = new StoreService().nullCheck(request.getParameter("storeNotice"));
+		String storeIntro = new StoreService().nullCheck(request.getParameter("storeIntro"));
+		String storeOriginInfo = new StoreService().nullCheck(request.getParameter("storeOriginInfo"));
+		String storeBusinessTime = new StoreService().nullCheck(request.getParameter("storeBusinessTime"));
+		
+		String storeMinPriceString = request.getParameter("storeMinPrice");
+		
+		if(storeMinPriceString == null || storeMinPriceString.length() == 0){
+			storeMinPriceString = "0";
+		}
+		int storeMinPrice = Integer.parseInt(storeMinPriceString);
+		
+		
+//		String homepage = request.getParameter("homepage");
+//		String storeNotice = request.getParameter("storeNotice");
+//		String storeIntro = request.getParameter("storeIntro");
+//		String storeOriginInfo = request.getParameter("storeOriginInfo");
+//		String storeBusinessTime = request.getParameter("storeBusinessTime");
+//		int storeMinPrice = Integer.parseInt(request.getParameter("storeMinPrice"));
 
 		
 		Store store = new Store(storeId, storePwd, storeName, phone, category, ceo, address, qr, storeSerial, homepage, storeIntro, storeOriginInfo, storeNotice, storeBusinessTime, storeMinPrice);

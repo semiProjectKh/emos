@@ -40,7 +40,7 @@ public class StoreListServlet extends HttpServlet {
 		StoreService sservice = new StoreService();
 
 		ArrayList<Store> list = null;
-		if (category == null) {
+		if (category.equals("전체메뉴")) {
 			list = sservice.selectList();
 		} else {
 			list = sservice.selectCategoryList(category);
@@ -50,7 +50,7 @@ public class StoreListServlet extends HttpServlet {
 		if (list != null && list.size() > 0) {
 			view = request.getRequestDispatcher("views/store/storeListView.jsp");
 			request.setAttribute("list", list);
-
+			request.setAttribute("category", category);
 			view.forward(request, response);
 		} else {
 			view = request.getRequestDispatcher("views/store/storeError.jsp");

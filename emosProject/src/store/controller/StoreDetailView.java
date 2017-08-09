@@ -37,12 +37,15 @@ public class StoreDetailView extends HttpServlet {
 		int storeNum = Integer.parseInt(request.getParameter("storeNum"));
 
 		Store store = new StoreService().selectOne(storeNum);
-
+		
+		
+		
 		RequestDispatcher view = null;
 		if(store != null){
 			
 			view = request.getRequestDispatcher("views/store/storeDetailView.jsp");
 			request.setAttribute("store", store);
+			
 			view.forward(request, response);
 		}else{
 			view = request.getRequestDispatcher("views/store/storeError.jsp");

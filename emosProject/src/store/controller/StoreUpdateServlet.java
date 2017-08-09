@@ -45,17 +45,23 @@ public class StoreUpdateServlet extends HttpServlet {
 		
 		String category = request.getParameter("category");
 		
-		String qr = request.getParameter("qr");
-		String map = request.getParameter("map");
-		String homepage = request.getParameter("homepage");
+		String qr = new StoreService().nullCheck(request.getParameter("qr"));
+		String homepage = new StoreService().nullCheck(request.getParameter("homepage"));
+		String storeNotice = new StoreService().nullCheck(request.getParameter("storeNotice"));
+		String storeIntro = new StoreService().nullCheck(request.getParameter("storeIntro"));
+		String storeOriginInfo = new StoreService().nullCheck(request.getParameter("storeOriginInfo"));
+		String storeBusinessTime = new StoreService().nullCheck(request.getParameter("storeBusinessTime"));
 		
-		String storeNotice = request.getParameter("storeNotice");
-		String storeIntro = request.getParameter("storeIntro");
-		String storeOriginInfo = request.getParameter("storeOriginInfo");
-		String storeBusinessTime = request.getParameter("storeBusinessTime");
-		int storeMinPrice = Integer.parseInt(request.getParameter("storeMinPrice"));
+		String storeMinPriceString = request.getParameter("storeMinPrice");
 		
-		Store store = new Store(storeId, /*storePwd,*/ storeName, phone, category, ceo, address, qr, map, storeSerial, homepage, storeIntro, storeOriginInfo, storeNotice, storeBusinessTime, storeMinPrice);
+		if(storeMinPriceString == null || storeMinPriceString.length() == 0){
+			storeMinPriceString = "0";
+		}
+		int storeMinPrice = Integer.parseInt(storeMinPriceString);
+		
+		
+		
+		Store store = new Store(storeId, /*storePwd,*/ storeName, phone, category, ceo, address, qr, storeSerial, homepage, storeIntro, storeOriginInfo, storeNotice, storeBusinessTime, storeMinPrice);
 
 		RequestDispatcher view = null;
 		if(new StoreService().updateStore(store) > 0){

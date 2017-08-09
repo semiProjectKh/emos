@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import store.model.vo.Store;
+import store.model.vo.StoreImage;
 
 public class StoreDao {
 
@@ -18,7 +19,8 @@ public class StoreDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String query = "SELECT * FROM STORE";
+//		String query = "SELECT * FROM STORE";
+		String query = "SELECT * FROM (SELECT ROWNUM RNUM, T.* FROM (SELECT * FROM STORE) T) WHERE RNUM < 7";
 
 		try {
 			pstmt = con.prepareStatement(query);
@@ -34,7 +36,7 @@ public class StoreDao {
 					s.setStoreNum(rset.getInt("STORE_NUM"));
 					s.setStoreName(rset.getString("STORE_NAME"));
 					s.setPhone(rset.getString("PHONE"));
-//					s.setCategory(rset.getString("CATEGORY"));
+					s.setCategory(rset.getString("CATEGORY"));
 //					s.setCeo(rset.getString("CEO"));
 					s.setAddress(rset.getString("ADDRESS"));
 					s.setQr(rset.getString("QR"));
@@ -81,7 +83,7 @@ public class StoreDao {
 					s.setStoreNum(rset.getInt("STORE_NUM"));
 					s.setStoreName(rset.getString("STORE_NAME"));
 					s.setPhone(rset.getString("PHONE"));
-//					s.setCategory(rset.getString("CATEGORY"));
+					s.setCategory(rset.getString("CATEGORY"));
 //					s.setCeo(rset.getString("CEO"));
 					s.setAddress(rset.getString("ADDRESS"));
 					s.setQr(rset.getString("QR"));
@@ -358,6 +360,116 @@ public class StoreDao {
 		}
 		
 		return result;
+	}
+
+	public ArrayList<Store> selectListMore(Connection con, int page, String category) {
+		ArrayList<Store> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+//		String query = "SELECT * FROM STORE";
+		String query = "SELECT * FROM (SELECT ROWNUM RNUM, T.* FROM (SELECT * FROM STORE) T) WHERE RNUM > ? AND RNUM < ?";
+		if(!category.equals("전체메뉴")) {
+			query += "AND CATEGORY = ?";
+		}
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, page * 6);
+			pstmt.setInt(2, (page + 1) * 6 + 1);
+			if(!category.equals("전체메뉴")) {
+				pstmt.setString(3, category);
+			}
+			
+			rset = pstmt.executeQuery();
+			if (rset != null) {
+				list = new ArrayList<Store>();
+				while (rset.next()) {
+
+					Store s = new Store();
+
+//					s.setStoreId(rset.getString("STORE_ID"));
+//					s.setStorePwd(rset.getString("STORE_PWD"));
+					s.setStoreNum(rset.getInt("STORE_NUM"));
+					s.setStoreName(rset.getString("STORE_NAME"));
+					s.setPhone(rset.getString("PHONE"));
+					s.setCategory(rset.getString("CATEGORY"));
+//					s.setCeo(rset.getString("CEO"));
+					s.setAddress(rset.getString("ADDRESS"));
+					s.setQr(rset.getString("QR"));
+//					s.setStoreSerial(rset.getString("STORE_SERIAL"));
+//					s.setHomepage(rset.getString("HOMEPAGE"));
+//					s.setStoreIntro(rset.getString("STORE_INTRO"));
+//					s.setStoreOriginInfo(rset.getString("STORE_ORIGIN_INFO"));
+//					s.setStoreNotice(rset.getString("STORE_NOTICE"));
+//					s.setStoreJoinDate(rset.getDate("STORE_JOIN_DATE"));
+//					s.setStoreBusinessTime(rset.getString("STORE_BUSINESS_TIME"));
+//					s.setStoreMinPrice(rset.getInt("STORE_MIN_PRICE"));
+
+					list.add(s);
+
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
+	public int insertImage(Connection con, StoreImage simg) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		String query = "INSERT INTO IMAGE VALUES(?, ?, ?, ?, ?)";
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, simg.getStoreNum());
+			pstmt.setString(2, simg.getImgMain());
+			pstmt.setString(3, null);
+			pstmt.setString(4, null);
+			pstmt.setString(5, null);
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+
+	public StoreImage selectStoreImg(Connection con, int storeNum) {
+		StoreImage simg = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = "SELECT * FROM IMAGE WHERE STORE_NUM = ?";
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, storeNum);
+			rset = pstmt.executeQuery();
+			
+			if (rset != null) {
+				if (rset.next()) {
+					simg = new StoreImage();
+					
+					simg.setStoreNum(rset.getInt("STORE_NUM"));
+					simg.setImgMain(rset.getString("IMG_MAIN"));
+					simg.setImg1(rset.getString("IMG1"));
+					simg.setImg2(rset.getString("IMG2"));
+					simg.setImg3(rset.getString("IMG3"));
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return simg;
 	}
 
 	

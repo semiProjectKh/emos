@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
 
-<%@ page import="member.model.vo.Member"%>
+<%@ page import="member.model.vo.Member, store.model.vo.Store"%>
 
 <%
 	Member member = (Member) session.getAttribute("member");
+	Store store = (Store) session.getAttribute("store");
 //	member = new Member();
 %>    
     
@@ -61,13 +62,17 @@
         <div id="private">
             <div class="navbar-collapse collapse ">
                 <ul class="nav navbar-nav">
-                <%if(member==null){ %>
-                    <li><span class="glyphicon glyphicon-lock w3-center" aria-hidden="true" onclick="document.getElementById('id02').style.display='block'"> 로그인</span></li>
-                    <li><span class="glyphicon glyphicon-plus w3-center" aria-hidden="true"><a href="/emos/views/member/enroll.jsp" style="text-decoration:none"> 회원가입 </a></span></li>
-                <%}else{ %>
-                
+                <%if(member==null){ 
+                	if(store==null){%>
+                    	<li><span class="glyphicon glyphicon-lock w3-center" aria-hidden="true" onclick="document.getElementById('id02').style.display='block'"> 로그인</span></li>
+                    	<li><span class="glyphicon glyphicon-plus w3-center" aria-hidden="true"><a href="/emos/views/member/enroll.jsp" style="text-decoration:none"> 회원가입 </a></span></li>
+                	<%}else{ %>
+                    	<li><span class="glyphicon glyphicon-home" aria-hidden="true" onclick=""style="width:150px;"><a href="/emos/ceoinfo?storeid=<%=store.getStoreId() %>" style="text-decoration:none"> 매장 가기</a></span></li>
+                    	<li><span class="glyphicon glyphicon-remove-circle" aria-hidden="true" onclick=""><a href="/emos/elogout" style="text-decoration:none"> 로그아웃</a></span></li>
+                	<%}
+                }else{ %>
                     <li><span class="glyphicon glyphicon-home" aria-hidden="true" onclick=""style="width:150px;"><a href="/emos/einfo?num=1&userid=<%=member.getUserId() %>" style="text-decoration:none"> 마이페이지</a></span></li>
-                    <li><span class="glyphicon glyphicon-remove-circle" aria-hidden="true" onclick=""><a href="/emos/elogout" style="text-decoration:none"> 로그아웃</span></li>
+                    <li><span class="glyphicon glyphicon-remove-circle" aria-hidden="true" onclick=""><a href="/emos/elogout" style="text-decoration:none"> 로그아웃</a></span></li>
                 <%} %>
                 </ul>
             </div>
@@ -82,30 +87,9 @@
                 <div class="col-sm-4">
                     
                     <!-- Trigger/Open the Modal -->                    
-                    <span id="mbtn01" class="glyphicon glyphicon-cutlery w3-display-middle mainbtn" aria-hidden="true" onclick="document.getElementById('id01').style.display='block'">
+                    <span id="mbtn01" class="glyphicon glyphicon-cutlery w3-display-middle mainbtn" aria-hidden="true" onclick='location.href="/emos/slist?category=전체메뉴"'>
                     <p style="font-size :15px;text-align:center"><b>매장검색</b></p>
-                    
-                    
                     </span>
-
-                    <!-- The Modal -->
-                    <div id="id01" class="w3-modal ">
-                        <div class="w3-modal-content w3-animate-opacity" style="margin-top:200px" >
-                            <div class="w3-container"> 
-                                <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                                    <div class="w3-display-middle w3-center">
-                                   <img src="image/AD/3333.JPG" width="345" height="100" style="margin-bottom:10px">
-                                   <img src="image/AD/3333.JPG" width="345" height="100" style="margin-bottom:10px">
-                                    <div class="input-group" id="search">
-                                    <input type="text" class="form-control" placeholder="매장이름 지역명 을 입력하세요!!">
-                                    <span class="input-group-btn">
-                                        <a href="views/store/search/search.jsp" class="btn btn-default" type="button">검색</a>
-                                    </span>
-                                </div><!-- /input-group -->
-                                </div>
-                            </div>
-                        </div>
-                    </div> 
                 </div>
                 
                 
@@ -113,10 +97,15 @@
                 <div class="col-sm-4">  
                     
                     <!-- Trigger/Open the Modal -->                    
-                        <span class="glyphicon glyphicon-blackboard w3-display-middle mainbtn" aria-hidden="true" onclick="document.getElementById('id02').style.display='block'">
-                            
+                        <%if(member != null){ %>
+                        <span class="glyphicon glyphicon-blackboard w3-display-middle mainbtn" aria-hidden="true" 
+                        	onclick="location.href='/emos/ceoinfo?id=<%=member.getUserId()%>'">
+                        <%}else{ %>
+                        <span class="glyphicon glyphicon-blackboard w3-display-middle mainbtn" aria-hidden="true" 
+                        	onclick="document.getElementById('id02').style.display='block'">
+                        <%}%>
+                                                
                             <p style="font-size :15px;text-align:center"><b>싸장님오피스</b></p>
-                            
                         </span>    
 
                     <!-- The Modal -->
@@ -130,7 +119,7 @@
                                     
                                     <input type="password" id="pw" name="pw" class="w3-display-bottomleft"  placeholder="비밀번호 입력">
                                     
-                                    <input type="submit" class="w3-button w3-display-right" style="color:white;background: #0c0642;height: 60px;text-align: center;" value="로그인">
+                                    <button class="w3-button w3-display-right" onclick="submit()" style="color:white;background: #0c0642;height: 60px;text-align: center;">로그인</button>
                                 </form>                               
 
                                 <div class="w3-display-bottommiddle" id="loginservice">
@@ -162,6 +151,7 @@
         </div>
     </footer>
 </body>
+
 
 </html>
 
