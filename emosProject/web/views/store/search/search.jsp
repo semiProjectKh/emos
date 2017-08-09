@@ -1,17 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<!DOCTYPE>
-<html>
-<head>
-	<meta charset="UTF-8">
-    <link rel="stylesheet" href="/emos/css/search.css"> 
-</head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
 
-<body>
 	<%@ include file="../../header.jsp"%>
 	
     <section id="searchsec01">
@@ -128,11 +118,6 @@
             
         </div>
     </section>
-	
-	
-	
-	
-	
 			
 	
 	<%@ include file="../../footer.jsp"%>

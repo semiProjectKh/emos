@@ -19,7 +19,7 @@ public class JDBCTemplate {
 			String pw = prop.getProperty("passwd");
 			
 			Class.forName(driver);
-			con = DriverManager.getConnection(url, "student", "student");
+			con = DriverManager.getConnection(url, "emos", "emos");
 			con.setAutoCommit(false);
 
 		} catch (Exception e) {

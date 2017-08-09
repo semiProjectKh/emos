@@ -490,3 +490,66 @@ label{
 
 #qr{width: 40%;}
 #homepage,#storeNotice{width: 52%;}
+
+
+
+
+/*
+            =====================
+            ==      mypage     ==
+            =====================
+            */
+
+#myinfo01{
+    height: 600px;
+}
+
+.none_li{
+	list-style-type:none;
+}
+
+
+.myinfo{
+    padding: 3px;
+}
+
+.myinfo>div{
+    margin: 0px;
+    height: 300px;
+
+}
+
+.panel-heading{
+    font-weight: 700;
+    text-align: center;
+
+}
+.myinfo button{
+    width: 40%;
+    height: 40px;
+    position: absolute;
+    bottom: 20px;
+    text-align: center;
+    border-radius: 5px;
+    color: #666;
+    font-weight: 700;
+}
+
+
+/*
+            =====================
+            ==   update user   ==
+            =====================
+            */
+
+#check{
+    width: 30%;
+    background: blue;
+    color: white
+}
+
+#reject{
+    margin-left: 20px;
+    background: black;
+    color: white;
+}

@@ -37,7 +37,6 @@ public class MemberDuplicateIdCheck extends HttpServlet {
 		
 		int result = new MemberService().checkId(userId);
 		
-		System.out.println(result);
 		
 		PrintWriter clientOut = response.getWriter();
 		if (result == 0){

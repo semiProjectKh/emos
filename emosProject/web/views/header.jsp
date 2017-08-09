@@ -2,9 +2,11 @@
 	pageEncoding="UTF-8"%>
 	
 <%@ page import="member.model.vo.Member"%>
+
 <%
 	Member member = (Member) session.getAttribute("member");
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,8 +33,8 @@
 		if (member != null) {
 	%>
 	<header id="header02">
-		<a href="../../index.jsp"> <img id="logo2"
-			src="../../image/logo/logo.png"></a> <label id="location"></label>
+		<a href="/emos/index.jsp"> <img id="logo2"
+			src="/emos/image/logo/logo.png"></a> <label id="location"></label>
 		<div class="w3-display-right" style="margin-right: 20px">
 			<button class="w3-button"
 				style="color: white; border: solid 1px white; border-radius: 3px"

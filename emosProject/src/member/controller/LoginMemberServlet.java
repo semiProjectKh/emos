@@ -13,17 +13,15 @@ import javax.servlet.http.HttpSession;
 import member.model.service.MemberService;
 import member.model.vo.Member;
 
-@WebServlet("/elogin")
+
+@WebServlet("/ablogin")
 public class LoginMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	public LoginMemberServlet() {
+       
+    public LoginMemberServlet() {
         super();
     }
 
-
-
-    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1. 전송값에 한글이 있을 경우, 문자셋 인코딩 처리함
 				// 응답 보낼 값에도 한글이 있을 경우 인코딩 처리함
@@ -33,7 +31,10 @@ public class LoginMemberServlet extends HttpServlet {
 				//2. 전송값 꺼내서 변수에 기록하기
 				String userId = request.getParameter("id");
 				String userPwd = request.getParameter("pw");
-				System.out.println(userId + ", " + userPwd);
+				
+				
+				System.out.println("hihi"+userId);
+				System.out.println("hihi"+userPwd);
 				
 				//3. 비즈니스 로직 처리용 모델 객체 생성하고, 
 				//필요한 메소드 구동하고 처리결과 받는다.
@@ -60,4 +61,5 @@ public class LoginMemberServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
+
 }
