@@ -178,7 +178,7 @@ input[type=number]::-webkit-inner-spin-button {
 				$('#cartTable > tbody').append(cloneTr).prop('onclick', null);
 				$('#cartTable > tbody > tr:last')
 						.append(
-								"<td><input type='number' min='1' value='1' style='width:40px' class='spinner'></td><td><a class='glyphicon glyphicon-remove' onclick='deleteTr(this);'></a></td>");
+								"<td><input type='number' name='mcnt' min='1' value='1' style='width:40px' class='spinner'></td><td><a class='glyphicon glyphicon-remove' onclick='deleteTr(this);'></a></td>");
 			} else {
 				var pp = $('#cartTable > tbody').children('tr').eq(ii)
 						.children('td').children('input');
@@ -262,79 +262,62 @@ input[type=number]::-webkit-inner-spin-button {
 		IMP.init('imp77260699');
 	});
 	function pay_sys() {
-		IMP
-				.request_pay(
-						{
-							pay_method : 'card',
-							merchant_uid : 'merchant_' + new Date().getTime(),
-							name : $('#cartTable > tbody > tr:eq(0) > td:eq(0)')
-									.text()
-									+ " ...",//getTimeStamp(),
-							amount : totPrice(),
-							buyer_email : 'iamport@siot.do',
-							buyer_name : '구매자이름',
-							buyer_tel : '010-1234-5678',
-							buyer_addr : '서울특별시 강남구 삼성동',
-							buyer_postcode : '123-456'
-						},
-						function(rsp) {
-							if (rsp.success) {
-								var msg = '결제가 완료되었습니다.';
-								msg += '고유ID : ' + rsp.imp_uid;
-								msg += '상점 거래ID : ' + rsp.merchant_uid;
-								msg += '결제 금액 : ' + rsp.paid_amount;
-								msg += '카드 승인번호 : ' + rsp.apply_num;
+		var cnt = [];
+		var menuNum = [];
 
-								function pay_sys() {
-									// 결제 서블릿으로 넘어가는 아작스 ()
-									var cnt = [];
-									var menuNum = [];
+		$('#cartTable input[name="menuNum"]').each(function(i) {
+			menuNum.push($(this).val());
+		})
+		$('input[name="mcnt"]').each(function(i) {
+			cnt.push($(this).val());
+		})
 
-									$(
-											'#cartTable > tbody > tr > td:eq(0) > input[name="menuNum"]')
-											.each(function(i) {
-												menuNum.push($(this).val());
-											})
-									$('input[name="mcnt"]').each(function(i) {
-										cnt.push($(this).val());
-									})
+		IMP.request_pay({
+			pay_method : 'card',
+			merchant_uid : 'merchant_' + new Date().getTime(),
+			name : $('#cartTable > tbody > tr:eq(0) > td:eq(0)').text()
+					+ " ...",//getTimeStamp(),
+			amount : totPrice(),
+			buyer_email : 'iamport@siot.do',
+			buyer_name : '구매자이름',
+			buyer_tel : '010-1234-5678',
+			buyer_addr : '서울특별시 강남구 삼성동',
+			buyer_postcode : '123-456'
+		}, function(rsp) {
+			if (rsp.success) {
+				var msg = '결제가 완료되었습니다.';
+				msg += '고유ID : ' + rsp.imp_uid;
+				msg += '상점 거래ID : ' + rsp.merchant_uid;
+				msg += '결제 금액 : ' + rsp.paid_amount;
+				msg += '카드 승인번호 : ' + rsp.apply_num;
+				// 결제 서블릿으로 넘어가는 아작스 ()
+				$.ajax({
+					url : "morder",
+					type : "post",
+					data : {
+						"paymentTime" : getTimeStamp(),
+						"storeNum" : "2",
+						"memberNum" : "1",
+						"paymentMethod" : "card",
+						"mcnt" : cnt,
+						"menuNum" : menuNum
+					},
+					dataType : "text",
+					success : function(value) {
+						// location.reload();
+					},
+					error : function() {
+						console.log("실패");
+					}
+				})
 
-									console.log(menuNum);
-									console.log(cnt);
+			} else {
+				var msg = '결제에 실패하였습니다.';
+				msg += '에러내용 : ' + rsp.error_msg;
 
-									var morderData = {
-										"mcnt" : cnt,
-										"menuNum" : menuNum
-									};
-
-									$.ajax({
-										url : "morder",
-										type : "post",
-										data : {
-											paymentTime : getTimeStamp(),
-											storeNum : "2",
-											memberNum : "1",
-											paymentMethod : "card",
-											mcnt : cnt,
-											menuNum : menuNum
-										},
-										dataType : "text",
-										success : function(value) {
-											location.reload();
-										},
-										error : function() {
-											console.log("실패");
-										}
-									})
-								}
-
-							} else {
-								var msg = '결제에 실패하였습니다.';
-								msg += '에러내용 : ' + rsp.error_msg;
-
-							}
-							alert(msg);
-						})
+			}
+			alert(msg);
+		})
 	}
 </script>
 

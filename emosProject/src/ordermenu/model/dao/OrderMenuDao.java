@@ -11,6 +11,7 @@ import ordermenu.model.vo.OrderMenu;
 public class OrderMenuDao {
 
 	public int OrderMenuInsert(Connection con, ArrayList<OrderMenu> list) {
+		System.out.println("리스트 사이즈" + list.size());
 		PreparedStatement pstmt = null;
 		int result = 0;
 

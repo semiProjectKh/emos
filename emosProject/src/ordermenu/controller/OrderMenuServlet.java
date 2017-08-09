@@ -62,7 +62,7 @@ public class OrderMenuServlet extends HttpServlet {
 			
 			list.add(om);
 		}
-		
+		System.out.println("서블릿 리스트 사이즈" + list.size());
 		// 장바구니에 닮겨있는 메뉴들을 처리하기 위햔 작업
 		new OrderMenuService().orderMenuInsert(list);
 		

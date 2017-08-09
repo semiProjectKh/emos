@@ -66,6 +66,7 @@ public class OrderServlet extends HttpServlet {
 		// jsp단에서 받은 배열
 		String[] menuNum = request.getParameterValues("menuNum[]");
 		String[] menuCnt = request.getParameterValues("mcnt[]");
+		System.out.println("오더서블릿 리스트 사이즈" + menuNum.length + ", " + menuCnt.length);
 
 		Order order = new Order(storeNum, paymentTime, paymentMethod, memberNum);
 
@@ -75,7 +76,7 @@ public class OrderServlet extends HttpServlet {
 		if (result > 0) {
 			// 생성된 주문번호를 받는 변수
 			int orderNum = new OrderService().orderNumSelect(paymentTime, storeNum); 
-			
+
 			// ordermenuServlet단으로 보내주는 작업
 			view = request.getRequestDispatcher("mporder?orderNum="+orderNum+"&menuNum="+menuNum+"&menuCnt="+menuCnt);
 			view.forward(request, response);		 

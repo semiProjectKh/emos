@@ -62,7 +62,6 @@ public class MenuDao {
 					m.setMenuName(rset.getString("MENU_NAME"));
 					m.setPrice(rset.getInt("PRICE"));
 					m.setMenuType(rset.getString("MENU_TYPE"));
-					System.out.println(m.toString());
 					list.add(m);
 				}
 			}

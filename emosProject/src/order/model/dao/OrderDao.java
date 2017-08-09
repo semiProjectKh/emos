@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 
 import menu.model.vo.Menu;
 import order.model.vo.Order;
@@ -36,18 +37,17 @@ public class OrderDao {
 	}
 
 	public int orderNumSelect(Connection con, Date paymentTime, int storeNum) {
-		PreparedStatement pstmt = null;
+		Statement stmt = null;
 		ResultSet rset = null;
 		int orderNum = 0;
 		
-		String query = "SELECT * FROM ORD_TABLE WHERE ORDER_TIME = ? AND STORE_NUM = ?";
+		String query = "SELECT MAX(ORDER_NUM) FROM ORD_TABLE";
 		
 		try {
-			pstmt = con.prepareStatement(query);
-			pstmt.setDate(1, paymentTime);
-			pstmt.setInt(2, storeNum);
+			stmt = con.createStatement();
 			
-			rset = pstmt.executeQuery();
+			
+			rset = stmt.executeQuery(query);
 			
 			if (rset.next()) {
 				orderNum = rset.getInt(1);
@@ -56,7 +56,7 @@ public class OrderDao {
 			e.printStackTrace();
 		} finally {
 			close(rset);
-			close(pstmt);
+			close(stmt);
 		}
 		
 		return orderNum;

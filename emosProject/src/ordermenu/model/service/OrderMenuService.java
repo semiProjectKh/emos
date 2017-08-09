@@ -15,9 +15,8 @@ public class OrderMenuService {
 
 	public int orderMenuInsert(ArrayList<OrderMenu> list) {
 		Connection con = getConnection();
-
+		System.out.println("서비스 리스트 사이즈" + list.size());
 		int result = new OrderMenuDao().OrderMenuInsert(con, list);
-
 		if (result > 0)
 			commit(con);
 		else

@@ -68,4 +68,13 @@ public class MenuService {
 		return result;
 			
 	}
+
+	public ArrayList typeList(int storeNum) {
+		Connection con = getConnection();
+		
+		ArrayList typeListArr = new MenuDao().typeList(con, storeNum);
+		
+		return typeListArr;
+	}
+
 }
