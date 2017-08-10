@@ -3,8 +3,10 @@
 <%@ page import="menu.model.vo.Menu, java.util.ArrayList"%>
 
 <%
-	//네비게이션 바의 이름을 받아오는 리스트
+	// 카테고리 처리를 위한 카테고리 이름을 받아오는 리스트
 	ArrayList typeArr = (ArrayList) request.getAttribute("listType");
+
+	// 등록된 메뉴를 받아오는 리스트
 	ArrayList<Menu> list = (ArrayList<Menu>) request.getAttribute("list");
 %>
 <!DOCTYPE html>
