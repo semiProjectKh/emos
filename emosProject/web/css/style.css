@@ -133,63 +133,6 @@ section {
 
 /*
             =====================
-            ==      modal      ==
-            =====================
-            */
-
-.w3-button>span {
-    font-size: 120px;
-}
-
-.w3-container,
-.w3-container>span,
-.w3-container>p {
-    color: black;
-}
-
-.w3-container,
-.w3-container>p {
-    padding: 10px;
-}
-
-.w3-modal-content {
-    border-radius: 8px;
-    background: rgb(255, 255, 100);
-    margin-top: 180px;
-    animation-duration: 0.3s;
-    animation-timing-function: ease;
-}
-
-#id01 .w3-modal-content {
-    width: 750px;
-    height: 200px;
-}
-
-#search {
-    width: 700px;
-}
-
-#id02 .w3-modal-content {
-    width: 400px;
-    height: 150px;
-}
-
-.mainbtn {
-    text-align: center;
-    font-size: 110px;
-    opacity: 0.8;
-    top: px;
-    color: white;
-}
-
-.mainbtn:hover {
-    font-size: 120px;
-    opacity: 1;
-}
-
-
-/*
-            =====================
             ==      login      ==
             =====================
             */
@@ -233,6 +176,62 @@ section {
 
 .w3-third {
     padding: 7px;
+}
+
+/*
+            =====================
+            ==      modal      ==
+            =====================
+            */
+
+.w3-button>span {
+    font-size: 120px;
+}
+
+.w3-container,
+.w3-container>span,
+.w3-container>p {
+    color: black;
+}
+
+.w3-container,
+.w3-container>p {
+    padding: 10px;
+}
+
+.w3-modal-content {
+    border-radius: 8px;
+    background: #f1f1f1;
+    margin-top: 100px;
+    animation-duration: 0.3s;
+    animation-timing-function: ease;
+}
+
+#id01 .w3-modal-content {
+    width: 750px;
+    height: 200px;
+}
+
+#search {
+    width: 700px;
+}
+
+#id02 .w3-modal-content {
+    width: 400px;
+    height:200px;
+}
+
+.mainbtn {
+    text-align: center;
+    font-size: 110px;
+    opacity: 0.8;
+    top: px;
+    color: white;
+}
+
+.mainbtn:hover {
+    font-size: 120px;
+    opacity: 1;
 }
 
 
