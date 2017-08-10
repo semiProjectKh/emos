@@ -3,8 +3,9 @@
 <%@ page import="menu.model.vo.Menu, java.util.ArrayList"%>
 
 <%
+	//네비게이션 바의 이름을 받아오는 리스트
+	ArrayList typeArr = (ArrayList) request.getAttribute("listType");
 	ArrayList<Menu> list = (ArrayList<Menu>) request.getAttribute("list");
-	String[] typeArr = {"메인메뉴", "사이드메뉴", "음료"};
 %>
 <!DOCTYPE html>
 <html>
@@ -49,17 +50,17 @@
 					class="glyphicon glyphicon-user inMType"></i></span> <select
 					class="form-control" id="mtype" name="mtype<%=i%>">
 					<%
-						for (String type : typeArr) {
+						for (int j=0; j<typeArr.size(); j++) {
 					%>
 
 					<%
-						if (m.getMenuType().equals(type)) {
+						if (m.getMenuType().equals(typeArr.get(j))) {
 					%>
-					<option value="<%= type %>" selected><%= type %></option>
+					<option value="<%= typeArr.get(j) %>" selected><%= typeArr.get(j) %></option>
 					<%
 						} else {
 					%>
-					<option value="<%= type %>"><%= type %></option>
+					<option value="<%= typeArr.get(j) %>"><%= typeArr.get(j) %></option>
 					<%
 						}
 					%>
