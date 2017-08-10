@@ -305,7 +305,7 @@ input[type=number]::-webkit-inner-spin-button {
 					},
 					dataType : "text",
 					success : function(value) {
-						// location.reload();
+						location.reload();
 					},
 					error : function() {
 						console.log("실패");
