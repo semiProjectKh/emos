@@ -181,8 +181,9 @@ input[type=number]::-webkit-inner-spin-button {
 								"<td><input type='number' name='mcnt' min='1' value='1' style='width:40px' class='spinner'></td><td><a class='glyphicon glyphicon-remove' onclick='deleteTr(this);'></a></td>");
 			} else {
 				var pp = $('#cartTable > tbody').children('tr').eq(ii)
-						.children('td').children('input');
+						.children('td').children('input[type=number]');
 				pp.val(parseInt(pp.val()) + 1);
+				console.log(pp.parent().html());
 			}
 		}
 

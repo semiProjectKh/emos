@@ -55,11 +55,11 @@
 					<%
 						if (m.getMenuType().equals(type)) {
 					%>
-					<option value="<%=m.getMenuType()%>" selected><%=m.getMenuType()%></option>
+					<option value="<%= type %>" selected><%= type %></option>
 					<%
 						} else {
 					%>
-					<option value="<%=m.getMenuType()%>"><%=m.getMenuType()%></option>
+					<option value="<%= type %>"><%= type %></option>
 					<%
 						}
 					%>

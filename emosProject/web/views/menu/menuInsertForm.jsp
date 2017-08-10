@@ -28,31 +28,37 @@
 			console.log($('#numOfInput').val()); */
 		})
 	})
+	
+	function addCategory() {
+		$('#mytpe').append("<option>")
+	}
 </script>
 <title>메뉴 추가</title>
-
+<style>
+	.marR10 {
+		margin-left : 10px;
+	}
+</style>
 </head>
 <body>
 	<div>
 		<h1 align="center">메뉴 추가</h1>
 	</div>
+
+	
 	<form action="/emos/mninsert">
 		<div id="form1">
-			<div id="form2" class="row">
-				<div class=" col-xs-3">
-					<span class="input-group-addon"><i
+			<div id="form2">
+				<div class="input-group col-xs-8">
+					<span class="input-group-addon marR10"><i
 						class="glyphicon glyphicon-user"></i></span> <input id="menuname1"
 						type="text" class="form-control inputMenu" name="menuname1"
 						placeholder="메뉴이름">
-				</div>
-				<div class="col-xs-3">
-					<span class="input-group-addon"><i
+					<span class="input-group-addon marR10"><i
 						class="glyphicon glyphicon-user"></i></span> <input id="price"
 						type="number" class="form-control" name="price1"
 						placeholder="메뉴가격" value="0" step="100">
-				</div>
-				<div class=" col-xs-3">
-					<span class="input-group-addon"><i
+					<span class="input-group-addon marR10"><i
 						class="glyphicon glyphicon-user"></i></span> <select class="form-control"
 						id="mtype" name="mtype1">
 						<option>메인메뉴</option>
@@ -60,6 +66,7 @@
 						<option>음료</option>
 					</select>
 				</div>
+				<div class="col-xs-4"> <input type="text" id="category" placeholder="카테고리를 추가해주세요"><button class="btn btn-default glyphicon glyphicon-plus" onclick="addCategory()"></button></div>
 			</div>
 		</div>
 		<br> <br>
