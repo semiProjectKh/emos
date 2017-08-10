@@ -43,9 +43,8 @@ public class MemberpwSearchServlet extends HttpServlet {
 		String email = sb.toString();
 		
 		Member m = new MemberService().pwSearch(userId, userName, email);
-		
 		RequestDispatcher views = null;
-	
+			
 			views = request.getRequestDispatcher("views/member/pwsearch.jsp");
 			request.setAttribute("pwsearch", m);
 			views.forward(request, response);

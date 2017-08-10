@@ -38,12 +38,14 @@ public class MyinfoServlet extends HttpServlet {
 		if(result == 1){
 			ArrayList<Reply> list = new ReplyService().recentTop5(userId);
 		
-			if(list != null && list.size() > 0){
+			if(list != null){
 				views = request.getRequestDispatcher("views/member/myinfo.jsp");
 				request.setAttribute("replylist", list);
 				views.forward(request, response);
 			}else{
-				
+				views = request.getRequestDispatcher("views/member/myinfo.jsp");
+				request.setAttribute("replylist", list);
+				views.forward(request, response);
 			}
 		}
 		
@@ -55,7 +57,9 @@ public class MyinfoServlet extends HttpServlet {
 				request.setAttribute("detailList", list);
 				views.forward(request, response);
 			}else{
-			
+				views = request.getRequestDispatcher("views/reply/detailReply.jsp");
+				request.setAttribute("detailList", list);
+				views.forward(request, response);
 			}
 		}
 		

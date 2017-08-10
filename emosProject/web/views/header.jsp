@@ -26,6 +26,22 @@
 	function update() {
 		location.href = "/emos/views/member/update.jsp";
 	}
+	
+	function this_it(form) {
+
+		if (!form.id.value) {
+			alert("아이디를 입력해주세요");
+			form.id.focus();
+			return false;
+		}
+
+		if (!form.pw.value) {
+			alert("비밀번호를 입력해주세요");
+			form.pw.focus();
+			return false;
+		}
+	}
+	
 </script>
 </head>
 <body>
@@ -57,17 +73,17 @@
                         <div class="w3-modal-content w3-animate-opacity">
                             <div class="w3-container"> 
                                 <span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                                <form id="login01" class="w3-display-topmiddle" action="elogin" method="post">
-                                    <input type="text" id="id" class="w3-display-topleft" placeholder="아이디 입력">
+                                <form id="login01" class="w3-display-topmiddle" action="/emos/ablogin" method="post" onsubmit="return this_it(this)">
+                                    <input type="text" id="id" name= "id" class="w3-display-topleft" placeholder="아이디 입력">
                                     
-                                    <input type="password" id="pw" class="w3-display-bottomleft"  placeholder="비번 입력">
+                                    <input type="password" id="pw" name= "pw" class="w3-display-bottomleft"  placeholder="비번 입력">
                                     
-                                    <button class="w3-button w3-display-right" onclick="submit()" style="color:white;background: #0c0642;height: 60px;text-align: center;">로그인</button>
+                                    <button class="w3-button w3-display-right" style="color:white;background: #0c0642;height: 60px;text-align: center;">로그인</button>
                                 </form>                               
                                 <div class="w3-display-bottommiddle" id="loginservice">
                                 <a href="views/member/enroll/enroll.jsp" class="w3-button w3-indigo">회원가입</a>
-                                <a href="#" class="w3-button w3-green">아이디 찾기</a>
-                                <a href="#" class="w3-button w3-teal">비밀번호 찾기</a>
+                                <a href="#" onclick="window.open('/emos/views/member/idfind.html', '팝업', 'left= 20, top= 20, height=300, width=500')" class="w3-button w3-green">아이디 찾기</a>
+                                <a href="#" onclick="window.open('/emos/views/member/pwfind.html', '팝업', 'left= 20, top= 20, height=300, width=500')" class="w3-button w3-teal">비밀번호 찾기</a>
                                 </div>
                             </div>
                         </div>

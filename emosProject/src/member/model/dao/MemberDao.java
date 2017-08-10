@@ -174,11 +174,11 @@ public class MemberDao {
 		return member;
 	}
 
-	public Member idsearch(Connection con, String userId, String userName, String email) {
+	public Member pwsearch(Connection con, String userId, String userName, String email) {
 		Member member = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-
+		System.out.println(userId + "," + userName + "," + email);
 		String query = "select user_pwd from member where user_id = ? and user_name = ? and email = ?";
 		
 		try {
@@ -192,7 +192,7 @@ public class MemberDao {
 			 if(rset != null)
 				 if(rset.next()) {
 					 member = new Member();
-					 member.setUserId(rset.getString("user_pwd"));
+					 member.setUserPwd(rset.getString("user_pwd"));
 				 }
 				 
 		} catch (Exception e) {

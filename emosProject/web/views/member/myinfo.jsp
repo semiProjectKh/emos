@@ -48,10 +48,14 @@
 				<div class="panel-body">
 					
 					<ul style="padding-left: 5px" class="none_li" id="f">
-						<% for(Reply r : reply) {%>
+						<% if(reply.size()>0){
+							for(Reply r : reply) {%>
 
-						<li><%= r.getContent() %></li>
+						<li><%= r.getContent() %> &nbsp; &nbsp; <%= r.getReplyDate() %></li>
 
+						<%	}
+						}else{%>
+							<li>댓글 목록이 없습니다.</li>
 						<%} %>
 					</ul>
 					

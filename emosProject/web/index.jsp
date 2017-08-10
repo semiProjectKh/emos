@@ -125,12 +125,12 @@
                             <div class="w3-container"> 
                                 <span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-display-topright">&times;</span>
 
-                                <form id="login01" class="w3-display-topmiddle" action="ablogin" method="post">
+                                <form id="login01" class="w3-display-topmiddle" action="ablogin" method="post" onsubmit="return this_it(this)">
                                     <input type="text" id="id" name="id" class="w3-display-topleft" placeholder="아이디 입력">
                                     
                                     <input type="password" id="pw" name="pw" class="w3-display-bottomleft"  placeholder="비밀번호 입력">
                                     
-                                    <input type="submit" class="w3-button w3-display-right" style="color:white;background: #0c0642;height: 60px;text-align: center;" value="로그인">
+                                    <button id="logincheck" class="w3-button w3-display-right" style="color:white;background: #0c0642;height: 60px;text-align: center;">로그인</button>
                                 </form>                               
 
                                 <div class="w3-display-bottommiddle" id="loginservice">
@@ -162,6 +162,22 @@
         </div>
     </footer>
 </body>
+<script type="text/javascript">
+function this_it(form) {
+	
+	if(!form.id.value){
+		alert("아이디를 입력해주세요");
+		form.id.focus();
+		return false;
+	}	
+	
+	if(!form.pw.value){
+		alert("비밀번호를 입력해주세요");
+		form.pw.focus();
+		return false;
+	}	
+}
+</script>
 
 </html>
 

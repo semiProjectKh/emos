@@ -85,7 +85,7 @@ public class MemberService {
 
 	public Member pwSearch(String userId, String userName, String email) {
 		Connection con = getConnection();
-		Member pwSearch = new MemberDao().idsearch(con, userId, userName, email);
+		Member pwSearch = new MemberDao().pwsearch(con, userId, userName, email);
 		
 		close(con);
 		

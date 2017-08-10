@@ -23,13 +23,17 @@ img {
 </style>
 <title>비밀번호 찾기</title>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script type="text/javascript">
+ var a = "<%= member.getUserPwd() %>";
+ console.log(a);
+</script>
 </head>
 <body>
 	<table width="100%" cellpadding="0" cellspacing="0" border="0"
 		style="margin-top: 8px">
 		<tr>
 			<td>
-				<% if (member == null) {%>
+				<% if (member.getUserPwd() == null) {%>
 				<table width="429px;" cellpadding="0" cellspacing="0"
 					border="0" align="center">
 					<Tr>
@@ -79,15 +83,9 @@ img {
 													href="#"
 													class="w3-button w3-white w3-border" onclick="window.close()">확인</a></td>
 											</tr>
-
-
 										</table>
 										<%} %>
 									</td>
-								</tr>
-								<tr>
-									<td align="right"><img id="ment"
-										src="/member/images/id_ment.jpg"></td>
 								</tr>
 							</table>
 						</td>

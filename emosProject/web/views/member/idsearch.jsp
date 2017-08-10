@@ -29,7 +29,7 @@ img {
 		style="margin-top: 8px">
 		<tr>
 			<td>
-				<% if (member == null) {%>
+				<% if (member.getUserId() == null) {%>
 				<table width="429px;" cellpadding="0" cellspacing="0"
 					border="0" align="center">
 					<Tr>
@@ -84,10 +84,6 @@ img {
 										</table>
 										<%} %>
 									</td>
-								</tr>
-								<tr>
-									<td align="right"><img id="ment"
-										src="/member/images/id_ment.jpg"></td>
 								</tr>
 							</table>
 						</td>
