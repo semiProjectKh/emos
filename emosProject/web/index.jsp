@@ -66,7 +66,7 @@
                     <li><span class="glyphicon glyphicon-plus w3-center" aria-hidden="true"><a href="/emos/views/member/enroll.jsp" style="text-decoration:none"> 회원가입 </a></span></li>
                 <%}else{ %>
                 
-                    <li><span class="glyphicon glyphicon-home" aria-hidden="true" onclick=""style="width:150px;"><a href="/emos/einfo?num=1&userid=<%=member.getUserId() %>" style="text-decoration:none"> 마이페이지</a></span></li>
+                    <li><span class="glyphicon glyphicon-home" aria-hidden="true" onclick=""style="width:150px;"><a href="/emos/einfo?num=1&userid=<%=member.getUserId() %>&usernum=<%=member.getUserNum() %>" style="text-decoration:none"> 마이페이지</a></span></li>
                     <li><span class="glyphicon glyphicon-remove-circle" aria-hidden="true" onclick=""><a href="/emos/elogout" style="text-decoration:none"> 로그아웃</a></span></li>
                 <%} %>
                 </ul>
@@ -177,6 +177,8 @@ function this_it(form) {
 		return false;
 	}	
 }
+
+p
 </script>
 
 </html>

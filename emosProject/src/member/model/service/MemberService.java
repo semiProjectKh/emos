@@ -6,6 +6,7 @@ import static common.JDBCTemplate.getConnection;
 import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import member.model.dao.MemberDao;
 import member.model.vo.Member;
@@ -90,5 +91,14 @@ public class MemberService {
 		close(con);
 		
 		return pwSearch;
+	}
+	
+	public ArrayList<Member> paylist (int userNum) {
+		Connection con = getConnection();
+		ArrayList<Member> pay = new MemberDao().paylist(con, userNum);
+		
+		close(con);
+		
+		return pay;
 	}
 }

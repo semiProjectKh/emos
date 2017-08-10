@@ -13,6 +13,9 @@ public class Member implements java.io.Serializable {
 	private Date birth;
 	private Date enrollDate;
 	private String gender;
+	private String storeName;
+	private int price;
+	private Date orderTime;
 	private int verse;
 	
 	public Member() {}
@@ -53,6 +56,39 @@ public class Member implements java.io.Serializable {
 		this.phone = phone;
 		this.userPwd = userPwd;
 		this.email = email;
+	}
+	
+	
+	
+	public Member(String storeName, int price, Date orderTime) {
+		super();
+		this.storeName = storeName;
+		this.price = price;
+		this.orderTime = orderTime;
+	}
+
+	public String getStoreName() {
+		return storeName;
+	}
+
+	public void setStoreName(String storeName) {
+		this.storeName = storeName;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public Date getOrderTime() {
+		return orderTime;
+	}
+
+	public void setOrderTime(Date orderTime) {
+		this.orderTime = orderTime;
 	}
 
 	public int getUserNum() {

@@ -49,7 +49,7 @@
 							이 름&nbsp;&nbsp; <input type="text" name="username" id="username">&nbsp;
 							아이디 <input type="text" name="id" id="userid"
 								placeholder="영문 숫자 8글자 이상">
-								<div id="checkname"></div><div id="checkid"></div>
+								<div id="checkname" style="position:absolute;left:305px;top:383px"></div><div id="checkid" style="position:absolute;right:310px;top:383px"></div>
 						</p>
 						<p>
 							비밀번호&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="password"
@@ -244,5 +244,5 @@
 	<%@ include file="../footer.jsp"%>
 
 </body>
-
+<script src="/emos/js/enroll.js"></script>
 </html>

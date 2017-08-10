@@ -74,9 +74,9 @@ public class ReplyService {
 		return listCount;
 	}
 
-	public ArrayList<Reply> recentTop5(String userId) {
+	public ArrayList<Reply> recentTop4(String userId) {
 		Connection con = getConnection();
-		ArrayList<Reply> list = new ReplyDao().recentTop5(con, userId);
+		ArrayList<Reply> list = new ReplyDao().recentTop4(con, userId);
 		close(con);
 		return list;
 	}

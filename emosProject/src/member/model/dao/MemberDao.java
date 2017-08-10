@@ -5,6 +5,7 @@ import static common.JDBCTemplate.close;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import member.model.vo.Member;
 
@@ -203,6 +204,39 @@ public class MemberDao {
 		}
 		
 		return member;
+	}
+
+	public ArrayList<Member> paylist(Connection con, int userNum) {
+		ArrayList<Member> payList = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select store_name, price * ea, order_time from ord_menu m, ord_table t, store s where s.STORE_NUM = t.STORE_NUM and t.USER_NUM = ?"; 
+		try {
+			  pstmt = con.prepareStatement(query);
+			  pstmt.setInt(1, userNum);
+			  rset = pstmt.executeQuery();
+			  
+			  if(rset != null) {
+				  payList = new ArrayList<Member>();
+				  while (rset.next()) {
+					  Member m = new Member();
+					  m.setStoreName((rset.getString("store_name")));
+					  m.setPrice(rset.getInt("price*ea"));
+					  m.setOrderTime(rset.getDate("order_time"));
+					  
+					  payList.add(m);
+					  
+				  }
+			  }
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return payList;
 	}
 
 }

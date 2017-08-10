@@ -29,7 +29,7 @@ img {
 		style="margin-top: 8px">
 		<tr>
 			<td>
-				<% if (member.getUserId() == null) {%>
+				<% if (member == null) {%>
 				<table width="429px;" cellpadding="0" cellspacing="0"
 					border="0" align="center">
 					<Tr>

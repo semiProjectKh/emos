@@ -1,8 +1,9 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="reply.model.vo.Reply, java.util.*"%>
+<%@ page import="reply.model.vo.Reply, java.util.*, member.model.vo.Member"%>
 <%
 	ArrayList<Reply> reply = (ArrayList<Reply>)request.getAttribute("replylist");
+	ArrayList<Member> pay = (ArrayList<Member>)request.getAttribute("paylist");
 %>
 
 <%@ include file="../header.jsp" %>
@@ -47,7 +48,7 @@
 				<div class="panel-heading w3-blue">댓글목록</div>
 				<div class="panel-body">
 					
-					<ul style="padding-left: 5px" class="none_li" id="f">
+					<%-- <ul style="padding-left: 5px" class="none_li" id="f">
 						<% if(reply.size()>0){
 							for(Reply r : reply) {%>
 
@@ -57,8 +58,17 @@
 						}else{%>
 							<li>댓글 목록이 없습니다.</li>
 						<%} %>
-					</ul>
-					
+					</ul> --%>
+					<table class="w3-table w3-bordered" style="font-size:9.5pt">
+					<tr><th>내용</th><th>작성일</th></tr>
+					<% if(reply.size()>0){
+							for(Reply r : reply) {%>
+					<tr><td><%= r.getContent() %></td><td><%= r.getReplyDate() %></td></tr>
+					<%	}
+					 }else{%>
+							<tr><td colspan=2>댓글 목록이 없습니다.</td></tr>
+						<%} %>
+					</table>
 					<button onclick="detailcontent();">상세보기</button>
 				</div>
 			</div>
@@ -68,12 +78,16 @@
 			<div class="panel panel-default">
 				<div class="panel-heading  w3-cyan">최근 결제 목록</div>
 				<div class="panel-body">
-					<ul style="padding-left: 5px" class="none_li">
-						<li>이메일 : <%=member.getEmail()%></li>
-						<li>전화 : <%=member.getEmail()%></li>
-						<li>이메일 : <%=member.getEmail()%></li>
-					</ul>
-					<button>상세보기</button>
+					<table class="w3-table w3-bordered" style="font-size:10pt">
+					<tr><th>매장명</th><th>결제금액</th><th>결제일</th></tr>
+					<% if(pay.size()>0){
+							for(Member p : pay) {%>
+					<tr><td><%= p.getStoreName() %></td><td><%= p.getPrice() %>원</td><td><%= p.getOrderTime() %></td></tr>
+					<%	}
+					}else{%>
+							<tr><td colspan=3>결제 내역이 없습니다.</td></tr>
+						<%} %>
+					</table>
 				</div>
 			</div>
 		</div>

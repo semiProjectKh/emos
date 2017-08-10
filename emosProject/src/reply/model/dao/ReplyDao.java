@@ -225,12 +225,12 @@ public class ReplyDao {
 		return listCount;
 	}
 
-	public ArrayList<Reply> recentTop5(Connection con, String userId) {
+	public ArrayList<Reply> recentTop4(Connection con, String userId) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Reply> list = null;
 		
-		String query = "select * from (select * from reply where user_id = ? order by reply_date desc) where rownum < 6";
+		String query = "select * from (select * from reply where user_id = ? order by reply_date desc) where rownum < 5";
 		
 		
 		try {

@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import member.model.service.MemberService;
+import member.model.vo.Member;
 import reply.model.service.ReplyService;
 import reply.model.vo.Reply;
 
@@ -19,56 +21,72 @@ import reply.model.vo.Reply;
 @WebServlet("/einfo")
 public class MyinfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public MyinfoServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public MyinfoServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		response.setContentType("text/html; charset=8");
-		
+
 		String userId = request.getParameter("userid");
 		int result = Integer.parseInt(request.getParameter("num"));
-		
+		int userNum = Integer.parseInt(request.getParameter("usernum"));
+
+
 		RequestDispatcher views = null;
-		if(result == 1){
-			ArrayList<Reply> list = new ReplyService().recentTop5(userId);
-		
-			if(list != null){
+		if (result == 1) {
+			ArrayList<Reply> list = new ReplyService().recentTop4(userId);
+			ArrayList<Member> pay = new MemberService().paylist(userNum);
 				views = request.getRequestDispatcher("views/member/myinfo.jsp");
 				request.setAttribute("replylist", list);
+				request.setAttribute("paylist", pay);
 				views.forward(request, response);
-			}else{
-				views = request.getRequestDispatcher("views/member/myinfo.jsp");
-				request.setAttribute("replylist", list);
-				views.forward(request, response);
-			}
+			
 		}
-		
-		if(result == 2){
+
+		if (result == 2) {
 			ArrayList<Reply> list = new ReplyService().myReply(userId);
-		
-			if(list != null && list.size() > 0){
+			
+			if (list != null && list.size() > 0) {
 				views = request.getRequestDispatcher("views/reply/detailReply.jsp");
 				request.setAttribute("detailList", list);
 				views.forward(request, response);
-			}else{
+			} else {
 				views = request.getRequestDispatcher("views/reply/detailReply.jsp");
 				request.setAttribute("detailList", list);
 				views.forward(request, response);
 			}
 		}
-		
+
+		/*if (payNum == 3) {
+
+			ArrayList<Member> pay = new MemberService().paylist(userNum);
+
+			if (pay != null) {
+				views = request.getRequestDispatcher("views/member/myinfo.jsp");
+				request.setAttribute("paylist", pay);
+				views.forward(request, response);
+			} else {
+				views = request.getRequestDispatcher("views/member/myinfo.jsp");
+				request.setAttribute("paylist", pay);
+				views.forward(request, response);
+			}
+		}*/
+
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
